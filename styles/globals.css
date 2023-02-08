@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+
+@layer components {
+    .link {
+        @apply cursor-pointer hover:border hover:border-white p-1 px-2 rounded-md whitespace-nowrap text-sm
+    }
+
+    .button {
+        @apply p-2 text-xs md:text-sm bg-[#FFD814] border-[#FCD200] shadow-sm rounded-3xl hover:bg-[#dfbd11]
+    }
+}
+
+.tintBackground {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 0%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.2s;
+  }
+  
+  .tintBackground.active {
+    background: rgba(0, 0, 0, 0.8);
+    width: 100%;
+  }
+  
+  .sideNavigation {
+    position: absolute;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    z-index: 10;
+    background: #e5e7eb;
+    transition: left .22s;
+  }
+  
+  .category{
+    height: 100%;
+    background-color: #fff;
+  }
+  
+  .sideNavigation.active{
+    left: 0;
+  }
+  
+  .sideNavNameHead {
+    height: 128px;
+    width: 300px;
+    background-color: #232f3e;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    /* align-content: center; */
+  }
+  
