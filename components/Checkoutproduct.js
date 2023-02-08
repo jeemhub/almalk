@@ -1,7 +1,6 @@
 import Image from "next/future/image";
 import React from "react";
 import StarRatings from 'react-star-ratings';
-import  Currency  from 'react-currency-formatter';
 
 function Checkoutproduct({key,id,title,price,image}) {
   return (
