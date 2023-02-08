@@ -82,7 +82,7 @@ function Adsproduct({ images }) {
               <div className="flex text-[#0F1111] text-xs font-bold mt-2">
                 Is owner:{" "}
                 <div className="ml-3 text-sm text-[#565959] font-normal">
-                  {router.query.isOwner}
+                {router.query.isOwner === "true" ? "Yes" : "No"}
                 </div>
               </div>
               <div className="flex text-[#0F1111] text-xs font-bold mt-2">
@@ -172,7 +172,7 @@ function Adsproduct({ images }) {
             <div className="flex text-[#0F1111] text-xs font-bold mt-2">
               Is owner:{" "}
               <div className="ml-3 text-sm text-[#565959] font-normal">
-                {router.query.isOwner}
+                {router.query.isOwner === "true" ? "Yes" : "No"}
               </div>
             </div>
           </div>
