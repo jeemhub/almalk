@@ -1,6 +1,5 @@
 import Image from 'next/future/image'
 import StarRatings from 'react-star-ratings';
-import Currency from "react-currency-formatter"
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../slice/cartSlice'
 
@@ -35,7 +34,7 @@ function Product( { category, id, image, description, rating, price, title } ) {
         
 
         <div className='mb-5 cursor-pointer'>
-            <Currency quantity={price} currency='USD' />
+           
         </div>
 
         {/* here i need to add function >> if prime true in database show it */}
