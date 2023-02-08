@@ -10,7 +10,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-export default function Home({ electroniccatnolim, dataSingleAds }) {
+export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) {
   console.log(electroniccatnolim);
   var SingleAdsImage = 0;
   const router = useRouter();
@@ -32,7 +32,7 @@ export default function Home({ electroniccatnolim, dataSingleAds }) {
 
       <main className="max-w-screen-2xl mx-auto">
         {/* Banner */}
-        <Banner />
+        <Banner bannerdata={bannerdata.vipAds} />
         {/* home products */}
         {/* mobile banner cat */}
         {/* <div className='tablet:hidden flex flex-nowrap overflow-x-scroll gap-0 scrollbar-hide z-40 -mt-[50px] md:-mt-[150px]'>
@@ -157,11 +157,17 @@ export const getServerSideProps = async (context) => {
   const resSingleAds = await fetch(
     "http://ec2-52-23-248-118.compute-1.amazonaws.com:3000/diamond-ads"
   );
+
+  const bannerdata = await fetch(
+    "http://ec2-52-23-248-118.compute-1.amazonaws.com:3000/vip-ads"
+    ).then((res) => res.json());
+
   const dataSingleAds = await resSingleAds.json();
   return {
     props: {
       electroniccatnolim,
       dataSingleAds: dataSingleAds.diamondAds,
+      bannerdata,
     },
   };
 };

@@ -3,16 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Image from "next/image";
 
-function Banner() {
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    fetch("http://ec2-52-23-248-118.compute-1.amazonaws.com:3000/vip-ads")
-      .then(response => response.json())
-      .then(data => setImages(data.vipAds))
-      .catch(error => console.error(error));
-  }, []);
-console.log(images)
+function Banner({ bannerdata }) {
   return (
     <section className="relative mt-2 shadow-2xl max-w-full mx-auto h-[100%]">
       <Carousel
@@ -24,11 +15,10 @@ console.log(images)
         interval={5000}
         swipeable={true}
       >
-        {images.map(ad => (
+        {bannerdata.map((ad) => (
           <div
             className="cursor-pointer w-[100vh] h-[25vh] ssm:h-[25vh] sm:h-[25vh] mdb:h-[30vh] md:h-[30vh] lg:h-[50vh] "
             key={ad._id}
-            
           >
             <Image
               objectFit="fill"
@@ -57,13 +47,10 @@ console.log(images)
               </div>
             </div>
             </h3> */}
-            
           </div>
         ))}
       </Carousel>
     </section>
-    
-    
   );
 }
 
