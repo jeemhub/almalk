@@ -54,8 +54,8 @@ useEffect(() => {
       <div className="bg-[#fff] text-[#111] p-5 mt-2">
         <div className="font-bold text-xl">Departments</div>
         {categories.map((category) => (
-          <>
-          <div className="flex flex-row mt-2">
+          
+          <div className="flex flex-row mt-2" key={category._id}>
           <Link key={category._id} href={{
             pathname: '/categorys/[cat]',
             query: { cat: `${category.name}` },
@@ -66,7 +66,7 @@ useEffect(() => {
         </div>
         </Link>
           </div>
-        </>
+        
       ))}
         
         
