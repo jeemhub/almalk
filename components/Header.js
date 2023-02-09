@@ -40,9 +40,8 @@ function Header() {
       
       <TintBackground act={sideBar} button={setBarState} />
           </div>
-        <div className=" ml-2 tablet:link mt-1 flex items-center flex-grow sm:flex-grow-0">
+        <div className=" ml-2 tablet:link mt-1 flex items-center flex-grow sm:flex-grow-0" onClick={() => router.push('/')}>
           <Image
-          onClick={() => router.push('/')}
             src="/Images/amazon.webp"
             className="cursor-pointer ml-10"
             height={24}
