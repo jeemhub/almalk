@@ -55,7 +55,7 @@ function Header() {
         {/* pc search bar */}
         {/* <div className="flex absolute mt-28 w-[90%] right-0 left-0 m-auto sm:relative sm:mt-0 sm:flex items-center h-12 rounded-md flex-grow cursor-pointer"> */}
         <div className="hidden sm:mt-0 sm:flex items-center h-12 rounded-md flex-grow cursor-pointer px-5">
-            <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" />
+            <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" aria-label="Search" />
             <SearchIcon className="h-12 p-4 bg-[#febd69] hover:bg-[#F3A847] rounded-r-md" />
         </div>
 
