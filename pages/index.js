@@ -26,6 +26,11 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
     <div className="bg-gray-100">
       <Head>
         <title>Almalek</title>
+        <meta
+          name="description"
+          content="Bullish is the premier platform for buying and selling products. Browse our wide selection of products and find the perfect item for you."
+          key="desc"
+        />
       </Head>
 
       <Header />

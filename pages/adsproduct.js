@@ -6,6 +6,7 @@ import Share_drop_down from "../components/Sharebutton";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useRouter } from "next/router";
+import { Head } from 'next/head';
 
 function Adsproduct({ images }) {
   const router = useRouter();
@@ -37,6 +38,20 @@ function Adsproduct({ images }) {
 
   return (
     <div className="bg-[#e5e7eb] tablet:bg-white">
+       <Head>
+        <title>Almalek</title>
+        <meta
+          name="description"
+          content={router.query.title}
+          key="desc"
+        />
+        <meta
+          name="description"
+          content={router.query.details}
+          key="desc2"
+        />
+      </Head>
+    <Header />
       <Header />
       {/* banner ads */}
       <div className="w-full h-14 bg-black text-white text-center flex">
