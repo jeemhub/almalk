@@ -57,7 +57,9 @@ function Productslider({ electroniccat, title }) {
     electroniccat.items.length >0 && <div className='relative flex bg-white w-[97%] mx-auto mt-3 tablet:mt-10 h-72 rounded-xl shadow-sm'>
     <div className='flex flex-row'>
     <div className='absolute mt-3 text-lg ml-5 font-bold'>{title} </div>
-    <div className='absolute mt-3 text-lg font-bold right-0 mr-5 text-blue-800 hover:border-b-2 border-blue-900'>رؤية المزيد</div>
+    <div className='absolute mt-3 text-lg font-bold right-0 mr-5 text-blue-800 hover:border-b-2 border-blue-900' onClick={()=> (router.push({
+      pathname: `/categorys/[cat]`,
+      query: { cat: `${title}` }}))}>رؤية المزيد</div>
     </div>
     
     <div ref={rowRef} className='flex my-auto overflow-x-scroll scrollbar-hide will-change-scroll space-x-3 tablet:space-x-10 tablet:snap-x ml-5 mr-5'>
