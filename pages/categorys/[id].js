@@ -22,6 +22,28 @@ useEffect(() => {
   fetchData();
 }, [page, id]);
 
+
+function handleClicked(title,images,details,price,currency,location,isOwner,statuss,createdAt) {
+  router.push({
+    pathname: '/adsproduct',
+    query: {
+      title: title,
+      images: images,
+      details: details,
+      price: price,
+      currency:currency,
+      location:location,
+      isOwner:isOwner,
+      status:statuss,
+      createdAt:createdAt,
+
+
+
+    }
+  })
+}
+
+
   return (
     <>
     <Header />
@@ -32,7 +54,7 @@ useEffect(() => {
     ) : (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
       {items.map(item => (
-        <div key={item._id} className="bg-white rounded-lg shadow-lg p-6">
+        <div key={item._id} className="bg-white rounded-lg shadow-lg p-6" onClick={()=> handleClicked(item.title, item.images,item.details,item.price, item.currency, item.location, item.isOwner, item.status, item.createdAt)}>
           <img className="h-48 w-full object-cover object-center" src={item.images[0]} alt={item.title} />
           <h2 className="mt-2 text-lg font-medium leading-tight text-gray-800">{item.title}</h2>
           <p className="mt-2 text-sm font-medium text-gray-700 truncate">{item.details}</p>
