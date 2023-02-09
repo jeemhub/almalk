@@ -45,11 +45,6 @@ function Adsproduct({ images }) {
           content={router.query.title}
           key="desc"
         />
-        <meta
-          name="description"
-          content={router.query.details}
-          key="desc2"
-        />
       </Head>
     <Header />
       <Header />
