@@ -64,7 +64,7 @@ function handleClicked(title,images,details,price,currency,location,isOwner,stat
      
     </div>
     )}
-    <div className='flex mt-8'>
+    <div className='flex mt-8 mb-10'>
       <div className="flex space-x-3 mx-auto">
         <button
           onClick={() => page > 1 && setPage(page - 1)}
