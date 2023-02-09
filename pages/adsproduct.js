@@ -6,7 +6,7 @@ import Share_drop_down from "../components/Sharebutton";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useRouter } from "next/router";
-import { Head } from 'next/head';
+import Head from 'next/head';
 
 function Adsproduct({ images }) {
   const router = useRouter();
@@ -44,6 +44,11 @@ function Adsproduct({ images }) {
           name="description"
           content={router.query.title}
           key="desc"
+        />
+        <meta
+          name="description"
+          content={router.query.details}
+          key="desc2"
         />
       </Head>
     <Header />
