@@ -114,6 +114,7 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
                           <img
                             className="object-cover min-h-[400px]"
                             src={dataSingleAds[SingleAdsImage].images[0]}
+                            alt={dataSingleAds[SingleAdsImage].title}
                           />
                           <div className="absolute flex flex-col md:top-8/12 left-0 bottom-1">
                             <h1
