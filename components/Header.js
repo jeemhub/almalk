@@ -60,12 +60,12 @@ function Header() {
         </p>
         <div className="z-50">
           <SideNavigation act={sideBar} button={setBarState} session={session} />
-
-          <TintBackground act={sideBar} button={setBarState} />
-        </div>
+      
+      <TintBackground act={sideBar} button={setBarState} />
+          </div>
         <div className=" ml-2 tablet:link mt-1 flex items-center flex-grow sm:flex-grow-0">
           <Image
-            onClick={() => router.push('/')}
+          onClick={() => router.push('/')}
             src="/Images/amazon.webp"
             className="cursor-pointer ml-10"
             height={24}
@@ -78,34 +78,18 @@ function Header() {
         {/* pc search bar */}
         {/* <div className="flex absolute mt-28 w-[90%] right-0 left-0 m-auto sm:relative sm:mt-0 sm:flex items-center h-12 rounded-md flex-grow cursor-pointer"> */}
         <div className="hidden sm:mt-0 sm:flex items-center h-12 rounded-md flex-grow cursor-pointer px-5">
-          <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" />
+            <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" />
+            <SearchIcon className="h-12 p-4 bg-[#febd69] hover:bg-[#F3A847] rounded-r-md" />
+            {isAuthenticated ? (<>
+            <button onClick={() => router.push('/additem')}  className="h-12 p-2 bg-[#febd69] ml-2 hover:bg-[#F3A847] rounded-md">Add Item +</button>
 
-          <SearchIcon className="h-12 p-4 bg-[#febd69] hover:bg-[#F3A847] rounded-r-md" />
-          {isAuthenticated ? (<>
-          
-            <div onClick={() => router.push('/additem')} className="h-12 p-2  w-[200px] bg-[#febd69] flex justify-center items-center  hover:bg-[#F3A847] ml-5  text-lg rounded-md"><span className="mr-2 text-lg">Add advertisement</span> <span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-
-          </span>
-          </div>
-          </>) : (<></>)}
-
-
+        </>) : (<></>)}
         </div>
+        
 
         {/* account & list & card */}
         <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
           {/* pc login */}
-
-
-
-
-
-
-
-
 
 
           {isAuthenticated ? (
