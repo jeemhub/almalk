@@ -18,6 +18,8 @@
     "@stripe/stripe-js": "^1.37.0",
     "axios": "^0.27.2",
     "firebase": "^9.9.4",
+    "formik": "^2.2.9",
+    "js-cookie": "^3.0.1",
     "next": "12.2.5",
     "next-auth": "^4.10.3",
     "react": "17.0.2",
@@ -30,7 +32,8 @@
     "react-slick": "^0.29.0",
     "react-star-ratings": "^2.3.0",
     "stripe": "^10.11.0",
-    "tailwind-scrollbar-hide": "^1.1.7"
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "yup": "^1.0.0"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.2",

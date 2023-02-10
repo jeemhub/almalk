@@ -3,7 +3,9 @@
 @tailwind utilities;
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
-
+body{
+  background-color: #F2F2F3;
+}
 @layer components {
     .link {
         @apply cursor-pointer hover:border hover:border-white p-1 px-2 rounded-md whitespace-nowrap text-sm
