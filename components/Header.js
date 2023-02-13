@@ -38,6 +38,7 @@ function Header() {
   }
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [Searchtext, setSearchtext] = useState('');
 
   useEffect(() => {
     const token = Cookies.get('loggedin');
@@ -78,8 +79,12 @@ function Header() {
         {/* pc search bar */}
         {/* <div className="flex absolute mt-28 w-[90%] right-0 left-0 m-auto sm:relative sm:mt-0 sm:flex items-center h-12 rounded-md flex-grow cursor-pointer"> */}
         <div className="hidden sm:mt-0 sm:flex items-center h-12 rounded-md flex-grow cursor-pointer px-5">
-            <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" />
-            <SearchIcon className="h-12 p-4 bg-[#febd69] hover:bg-[#F3A847] rounded-r-md" />
+            <input 
+            onChange={(e)=>{setSearchtext(e.currentTarget.value)}}
+            className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" />
+            <SearchIcon
+            onClick={()=>{router.push(`/search/${Searchtext}`)}}
+            className="h-12 p-4 bg-[#febd69] hover:bg-[#F3A847] rounded-r-md" />
             {isAuthenticated ? (<>
             <button onClick={() => router.push('/additem')}  className="h-12 p-2 bg-[#febd69] ml-2 hover:bg-[#F3A847] rounded-md">Add Item +</button>
 
@@ -117,9 +122,13 @@ function Header() {
       <div className="bg-[#232F3E]">
         <div className="flex w-[95%] mx-auto items-center h-[44px] rounded-md flex-grow cursor-pointer sm:hidden">
 
-          <input className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" placeholder="Search Amazon" />
+          <input 
+                      onChange={(e)=>{setSearchtext(e.currentTarget.value)}}
+          className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4" type="text" placeholder="Search Amazon" />
 
-          <SearchIcon className="h-[44px] p-2 bg-[#febd69] hover:bg-[#F3A847] rounded-r-md" />
+          <SearchIcon
+           onClick={()=>{router.push(`/search/${Searchtext}`)}}
+          className="h-[44px] p-2 bg-[#febd69] hover:bg-[#F3A847] rounded-r-md" />
           {isAuthenticated ? (<>
             <button onClick={() => router.push('/additem')}  className="h-[44px] p-2 bg-[#febd69] ml-2 hover:bg-[#F3A847] rounded-md">Add Item +</button>
 

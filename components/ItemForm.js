@@ -62,7 +62,7 @@ const ItemForm = () => {
         }
         const geCategories = async () => {
             const response = await fetch(
-                `http://ec2-52-23-248-118.compute-1.amazonaws.com:3000/categories`
+                `http://almalk.org:3000/categories`
             );
             const data = await response.clone().json();
             setCategoryList(data);
@@ -93,7 +93,7 @@ const ItemForm = () => {
                     } formData.append("currency", currency);
 
                     const res = await fetch(
-                        "http://ec2-52-23-248-118.compute-1.amazonaws.com:3000/item",
+                        "http://almalk.org:3000/item",
                         {
                             method: "POST",
                             headers: {

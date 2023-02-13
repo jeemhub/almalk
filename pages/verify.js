@@ -11,7 +11,7 @@ export default function Verify() {
     const handelSubmit = (event) => {
       console.log(email, otp);
       event.preventDefault();
-      fetch("http://ec2-52-23-248-118.compute-1.amazonaws.com:3000/verify", {
+      fetch("http://almalk.org:3000/verify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

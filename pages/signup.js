@@ -50,7 +50,7 @@ export default function SignUp() {
       validationSchema={ErrorSchema}
       onSubmit={(value) => {
         //const data = {"email": "mohsinali@gmail.com","password":"11111qqqqq","role": "company"};
-        fetch('http://ec2-52-23-248-118.compute-1.amazonaws.com:3000/signup/email', {
+        fetch('http://almalk.org:3000/signup/email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

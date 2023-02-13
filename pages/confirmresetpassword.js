@@ -11,7 +11,7 @@ export default function ConfirmResetPassword() {
   const handelSubmit = (event) => {
     event.preventDefault();
     fetch(
-      `http://ec2-52-23-248-118.compute-1.amazonaws.com:3000/reset/${parseInt(
+      `http://almalk.org:3000/reset/${parseInt(
         otp,
         10
       )}`,
@@ -47,7 +47,7 @@ export default function ConfirmResetPassword() {
 
   const handelResend = (event) => {
     event.preventDefault();
-    fetch(`http://ec2-52-23-248-118.compute-1.amazonaws.com:3000/resend-otp`, {
+    fetch(`http://almalk.org:3000/resend-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

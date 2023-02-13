@@ -14,7 +14,7 @@ useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
     if (id) {
-      const response = await axios.get(`http://ec2-52-23-248-118.compute-1.amazonaws.com:3000/items/category/${id}/${page}`);
+      const response = await axios.get(`http://almalk.org:3000/items/category/${id}/${page}`);
       setItems(response.data);
     }
     setLoading(false);
