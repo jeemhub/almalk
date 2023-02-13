@@ -54,7 +54,7 @@ export default function Verify() {
 
             <div>
               <label className="block mb-1  font-semibold">
-                To verify your email, we've sent a One Time Password (OTP) to
+                To verify your email, we have sent a One Time Password (OTP) to
                 {email}(Change){" "}
               </label>
 
@@ -75,7 +75,7 @@ export default function Verify() {
             Create Account
           </button>
           <div>
-              <button className="text-center text-blue-500" onclick={handelResend}>Resend OTP</button>
+              <button className="text-center text-blue-500" onClick={handelResend}>Resend OTP</button>
           </div>
         </div>
       </form>
