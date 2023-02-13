@@ -2,8 +2,7 @@ import React from 'react'
 import Header from '../components/Header'
 import ItemForm from '../components/ItemForm'
 
-export default function 
-() {
+function additem() {
   return (
     <div>
         <Header />
@@ -12,3 +11,5 @@ export default function
     </div>
   )
 }
+
+export default additem
