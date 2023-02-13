@@ -5,7 +5,7 @@ const Loader = () => {
     return (
         <div className="flex justify-center items-center h-screen">
   <div>
-    <div class={styles.circleLoader}>
+    <div className={styles.circleLoader}>
       <div></div>
       <div></div>
       <div></div>
