@@ -138,13 +138,13 @@ const ItemForm = () => {
                     </div>
                 )}
                 <div className="mb-6 text-2xl text-center font-bold">
-                    Add Item
+                    Publish new item
                 </div>
                 <div className="mb-3  2xl:flex 2xl:justify-between  2xl:mx-auto  2xl:w-[100%]">
                     <div className="mb-3  2xl:flex 2xl:justify-center  2xl:mx-auto 2xl:flex-col 2xl:w-[45%]">
 
                         <label className="block font-medium mb-2 text-gray-700" htmlFor="title">
-                            Title
+                            product name
                         </label>
                         <input
                             className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.title ? " border-red-500" : ""
@@ -335,7 +335,7 @@ const ItemForm = () => {
                                 className="block font-medium mb-2 text-gray-700"
                                 htmlFor="isOwner"
                             >
-                                Is Owned
+                                Are you the owner of this item
                             </label>
                             <input
                                 className=" mt-1"
@@ -352,7 +352,7 @@ const ItemForm = () => {
                     className="bg-[#DB9E43] hover:bg-yellow-700 text-white font-medium py-3 ml-4 px-4 rounded"
                     type="submit"
                 >
-                    Add Item
+                    Publish
                 </button>
 
             </form>
