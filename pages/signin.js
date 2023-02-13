@@ -159,7 +159,7 @@ export default function SignIn() {
                 </Link>
 
                 <p className="my-2">
-                  Don't have an account?
+                  Dont have an account?
                   <Link
                     href="/signup"
                     className="text-[#0000EE] hover:no-underline hover:text-[#c45500]"
