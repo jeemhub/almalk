@@ -16,7 +16,7 @@ useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
     if (id) {
-      const response = await axios.get(`http://almalk.org:3000/search/${id}/${page}`);
+      const response = await axios.get(`http://app.almalk.org:3000/search/${id}/${page}`);
       setItems(response.data);
     }
     setLoading(false);
