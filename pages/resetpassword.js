@@ -10,7 +10,7 @@ export default function ResetPassword() {
 
   const handelSubmit = (event) => {
     event.preventDefault();
-    fetch("http://almalk.org:3000/reset/email", {
+    fetch("http://app.almalk.org:3000/reset/email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
