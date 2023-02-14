@@ -9,7 +9,7 @@ const Verify = () => {
   const handelSubmit = (event) => {
     console.log(email, otp);
     event.preventDefault();
-    fetch("http://almalk.org:3000/verify", {
+    fetch("http://app.almalk.org:3000/verify", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
