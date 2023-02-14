@@ -39,7 +39,7 @@ export default function SignIn() {
         console.log(value);
         setLoadding(true)
 
-        fetch("http://almalk.org:3000/login", {
+        fetch("http://app.almalk.org:3000/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
