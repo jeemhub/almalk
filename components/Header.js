@@ -42,7 +42,7 @@ function Header() {
     setIsAuthenticated(false);
   };
   const handleSearch = async () => {
-    const res = await fetch(`http://app.almalk.org:3000/search/${searchText}`);
+    const res = await fetch(`https://app.almalk.org:3000/search/${searchText}`);
     const data = await res.json();
     setSearchResults(data);
   };
