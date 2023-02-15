@@ -18,7 +18,7 @@ export default function SideNavigation(props) {
       const router = useRouter()
 const [categories, setCategories] = useState([]);
 useEffect(() => {
-    fetch("http://app.almalk.org:3000/categories")
+    fetch("https://app.almalk.org:3000/categories")
       .then((response) => response.json())
       .then((data) => setCategories(data));
   }, []);
