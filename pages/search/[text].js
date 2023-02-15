@@ -16,7 +16,7 @@ useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
     if (id) {
-      const response = await axios.get(`http://app.almalk.org:3000/search/${id}/${page}`);
+      const response = await axios.get(`https://app.almalk.org:3000/search/${id}/${page}`);
       setItems(response.data);
     }
     setLoading(false);
@@ -87,7 +87,7 @@ function handleClicked(title,images,details,price,currency,location,isOwner,stat
 };
 // export const getServerSideProps = async (context) => {
 //   const text = context.query.text;
-//   const res = await fetch(`http://almalk.org:3000/search/${text}`);
+//   const res = await fetch(`https://almalk.org:3000/search/${text}`);
 //   const data = await res.json();
 //   return {
 //     props: {
