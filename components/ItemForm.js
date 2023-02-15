@@ -62,7 +62,7 @@ const ItemForm = () => {
         }
         const geCategories = async () => {
             const response = await fetch(
-                `http://app.almalk.org:3000/categories`
+                `https://app.almalk.org:3000/categories`
             );
             const data = await response.clone().json();
             setCategoryList(data);
