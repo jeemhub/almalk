@@ -42,7 +42,7 @@ export default (props) => {
     }
     export async function getServerSideProps(context) {
        
-        const resSlider=await fetch('https://app.almalk.org:3000/diamond-ads');
+        const resSlider=await fetch('http://app.almalk.org:3000/diamond-ads');
         const dataSlider=await resSlider.json();
        
       return {

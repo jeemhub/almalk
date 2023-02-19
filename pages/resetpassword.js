@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 export default function ResetPassword() {
+  const { t, i18n } = useTranslation();
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
@@ -10,7 +12,7 @@ export default function ResetPassword() {
 
   const handelSubmit = (event) => {
     event.preventDefault();
-    fetch("https://app.almalk.org:3000/reset/email", {
+    fetch("http://app.almalk.org:3000/reset/email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,19 +45,18 @@ export default function ResetPassword() {
         <div className="bg-white px-10 py-8 mobile:w-[90%] mobile:mx-auto rounded-xl w-screen mobile:shadow-none shadow-md max-w-sm">
           {/*           <img
                 className="h-14 mb-4 mx-auto"
-                src="https://www.synointcdn.com/wp-content/uploads/2019/04/Amazon-Logo-PNG.png"
+                src="http://www.synointcdn.com/wp-content/uploads/2019/04/Amazon-Logo-PNG.png"
                 alt=""
               /> */}
           <h1 className="text-center text-6xl font-semibold">Logo</h1>
           <div className="space-y-4">
             <h1 className="text-center text-2xl mt-2 font-semibold ">
-              Password assistance
+              {t("PasswordAssistance")}
             </h1>
 
             <div>
               <label className="block mb-1  font-semibold">
-                Enter the email address or mobile phone number associated with
-                your account.{" "}
+                {t("Entertheemailaddressormobilephonenumberassociatedwithyouraccount")}{" "}
               </label>
 
               <input
@@ -72,7 +73,7 @@ export default function ResetPassword() {
             type="submit"
             className="mt-4 mb-4 w-full  bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] font-semibold py-3 rounded-md  tracking-wide"
           >
-            Continue
+            {t("Continue")}
           </button>
           <div>
 

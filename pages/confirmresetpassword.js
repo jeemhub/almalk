@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 export default function ConfirmResetPassword() {
+  const { t, i18n } = useTranslation();
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [error, setError] = useState(null);
@@ -11,7 +13,7 @@ export default function ConfirmResetPassword() {
   const handelSubmit = (event) => {
     event.preventDefault();
     fetch(
-      `https://app.almalk.org:3000/reset/${parseInt(
+      `http://app.almalk.org:3000/reset/${parseInt(
         otp,
         10
       )}`,
@@ -47,7 +49,7 @@ export default function ConfirmResetPassword() {
 
   const handelResend = (event) => {
     event.preventDefault();
-    fetch(`https://app.almalk.org:3000/resend-otp`, {
+    fetch(`http://app.almalk.org:3000/resend-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,13 +79,13 @@ export default function ConfirmResetPassword() {
         <div className="bg-white px-10 py-8 mobile:w-[100%] mobile:mx-auto rounded-xl w-screen mobile:shadow-none shadow-md max-w-sm">
           {/*           <img
                 className="h-14 mb-4 mx-auto"
-                src="https://www.synointcdn.com/wp-content/uploads/2019/04/Amazon-Logo-PNG.png"
+                src="http://www.synointcdn.com/wp-content/uploads/2019/04/Amazon-Logo-PNG.png"
                 alt=""
               /> */}
           <h1 className="text-center text-6xl font-semibold">Logo</h1>
           <div className="space-y-4">
             <h1 className="text-center text-2xl mt-2 font-semibold ">
-              Verification required
+              {t("VerificationRequired")}
             </h1>
             {error && (
               <div
@@ -94,7 +96,7 @@ export default function ConfirmResetPassword() {
               </div>
             )}
             <div>
-              <label className="block mb-1  font-semibold">Enter OTP</label>
+              <label className="block mb-1  font-semibold">{t("Enter")} OTP</label>
 
               <input
                 type="number"
@@ -107,7 +109,7 @@ export default function ConfirmResetPassword() {
             </div>
             <div>
               <label className="block mb-1  font-semibold">
-                Enter New Password
+                {t("EnterNewPassword")}
               </label>
 
               <input
@@ -124,7 +126,7 @@ export default function ConfirmResetPassword() {
             type="submit"
             className="mt-4 mb-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] font-semibold py-3 rounded-md  tracking-wide"
           >
-            Continue
+            {t("Continue")}
           </button>
           <div>
             <div className="text-center">
@@ -132,7 +134,7 @@ export default function ConfirmResetPassword() {
                 className="text-blue-600 text-center"
                 onClick={handelResend}
               >
-                Resend OTP{" "}
+                {t("Resend")} OTP{" "}
               </button>
             </div>
           </div>

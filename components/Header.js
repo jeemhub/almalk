@@ -15,8 +15,11 @@ import { selectItems } from "./../slice/cartSlice";
 import SideNavigation from "./SideNavigation";
 import TintBackground from "./TintBackground";
 import Cookies from "js-cookie";
+import { useTranslation } from "react-i18next";
 
 function Header() {
+  const { t, i18n } = useTranslation();
+
   const { data: session } = useSession();
   const router = useRouter();
   const items = useSelector(selectItems);
@@ -42,7 +45,7 @@ function Header() {
     setIsAuthenticated(false);
   };
   const handleSearch = async () => {
-    const res = await fetch(`https://app.almalk.org:3000/search/${searchText}`);
+    const res = await fetch(`http://app.almalk.org:3000/search/${searchText}`);
     const data = await res.json();
     setSearchResults(data);
   };
@@ -52,28 +55,35 @@ function Header() {
     router.push(`/search/${encodeURIComponent(searchText)}`);
   };
 
-  function handleClicked(title,images,details,price,currency,location,isOwner,statuss,createdAt) {
+  function handleClicked(
+    title,
+    images,
+    details,
+    price,
+    currency,
+    location,
+    isOwner,
+    statuss,
+    createdAt
+  ) {
     router.push({
-      pathname: '/adsproduct',
+      pathname: "/adsproduct",
       query: {
         title: title,
         images: images,
         details: details,
         price: price,
-        currency:currency,
-        location:location,
-        isOwner:isOwner,
-        status:statuss,
-        createdAt:createdAt,
-  
-  
-  
-      }
-    })
+        currency: currency,
+        location: location,
+        isOwner: isOwner,
+        status: statuss,
+        createdAt: createdAt,
+      },
+    });
   }
 
   const handleKeyUp = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSeeMore();
       setSearchResults([]);
     } else {
@@ -129,7 +139,7 @@ function Header() {
                 onClick={() => router.push("/additem")}
                 className="h-12 p-2 bg-[#febd69] ml-5 hover:bg-[#F3A847] rounded-md hidden tablet:flex"
               >
-                Add Item +
+                {t("additem")}+
               </button>
             </>
           ) : (
@@ -138,6 +148,36 @@ function Header() {
           {/* account & list & card */}
           <div className="text-white flex items-center text-xs space-x-6 mx-3 whitespace-nowrap">
             {/* pc login */}
+            {i18n.language == "en" && (
+              <button
+                onClick={() => {
+                  i18n.changeLanguage("ar");
+                }}
+                className="text-white text-md font-bold border rounded-md p-2"
+              >
+                AR
+              </button>
+            )}
+            {i18n.language == "ar" && (
+              <button
+                onClick={() => {
+                  i18n.changeLanguage("kr");
+                }}
+                className="text-white text-md font-bold border rounded-md p-2"
+              >
+                KR
+              </button>
+            )}
+            {i18n.language == "kr" && (
+              <button
+                onClick={() => {
+                  i18n.changeLanguage("en");
+                }}
+                className="text-white text-md font-bold border rounded-md p-2"
+              >
+                EN
+              </button>
+            )}
             {isAuthenticated ? (
               <div
                 className="relative link flex items-center"
@@ -158,7 +198,7 @@ function Header() {
                   />
                 </svg>
                 <p className="hidden font-extrabold md:text-sm md:inline ml-1">
-                  Sign Out
+                  {t("signoutF")}
                 </p>
               </div>
             ) : (
@@ -168,7 +208,7 @@ function Header() {
               >
                 <UserCircleIcon className="h-10" />
                 <p className="hidden font-extrabold md:text-sm md:inline ml-1">
-                  Sign in
+                  {t("signin")}
                 </p>
               </div>
             )}
@@ -181,7 +221,19 @@ function Header() {
                 <div
                   key={index}
                   className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                  onClick={()=> handleClicked(result.title, result.images,result.details,result.price, result.currency, result.location, result.isOwner, result.status, result.createdAt)}
+                  onClick={() =>
+                    handleClicked(
+                      result.title,
+                      result.images,
+                      result.details,
+                      result.price,
+                      result.currency,
+                      result.location,
+                      result.isOwner,
+                      result.status,
+                      result.createdAt
+                    )
+                  }
                 >
                   <p className="text-black">{result.title}</p>
                 </div>
@@ -191,7 +243,7 @@ function Header() {
                 className="px-4 py-2 cursor-pointer hover:bg-gray-100"
                 onClick={handleSeeMore}
               >
-                <p className="text-blue-500">See more</p>
+                <p className="text-blue-500">{t("seemore")}</p>
               </div>
             </div>
           )}
@@ -212,14 +264,14 @@ function Header() {
               className="h-[44px] p-2 bg-[#febd69] hover:bg-[#F3A847] rounded-r-md"
               onClick={handleSearch}
             />
-            
+
             {isAuthenticated ? (
               <>
                 <button
                   onClick={() => router.push("/additem")}
                   className="h-[44px] p-2 bg-[#febd69] ml-2 hover:bg-[#F3A847] rounded-md"
                 >
-                  Add Item +
+                  {t("additem")}+
                 </button>
               </>
             ) : (
@@ -234,7 +286,19 @@ function Header() {
                 <div
                   key={index}
                   className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                  onClick={()=> handleClicked(result.title, result.images,result.details,result.price, result.currency, result.location, result.isOwner, result.status, result.createdAt)}
+                  onClick={() =>
+                    handleClicked(
+                      result.title,
+                      result.images,
+                      result.details,
+                      result.price,
+                      result.currency,
+                      result.location,
+                      result.isOwner,
+                      result.status,
+                      result.createdAt
+                    )
+                  }
                 >
                   <p className="text-black">{result.title}</p>
                 </div>
@@ -244,7 +308,7 @@ function Header() {
                 className="px-4 py-2 cursor-pointer hover:bg-gray-100"
                 onClick={handleSeeMore}
               >
-                <p className="text-blue-500">See more</p>
+                <p className="text-blue-500">{t("seemore")}</p>
               </div>
             </div>
           )}
@@ -256,15 +320,14 @@ function Header() {
             className="link hidden tablet:flex items-center"
           >
             <MenuIcon className="h-6 mr-1" />
-            All Departments
+            {t("alldepartments")}
           </p>
-          <p className="link">Today`s Deals</p>
-          <p className="link">Customer Service</p>
-          <p className="link">Registry</p>
-          <p className="link">Gift Cards</p>
-          <p className="link">Sell</p>
+          <p className="link">{t("TodaysDeals")}</p>
+          <p className="link">{t("customerservice")}</p>
+          <p className="link">{t("Registry")}</p>
+          <p className="link">{t("giftcards")}</p>
+          <p className="link">{t("sell")}</p>
         </div>
-        
       </header>
     </>
   );

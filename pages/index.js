@@ -9,8 +9,10 @@ import Productslider from "./../components/Productslider";
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useTranslation } from 'react-i18next';
 
 export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) {
+  const { t, i18n } = useTranslation();
   console.log(electroniccatnolim);
   var SingleAdsImage = 0;
   const router = useRouter();
@@ -158,15 +160,15 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
 
 export const getServerSideProps = async (context) => {
   const electroniccatnolim = await fetch(
-    "https://app.almalk.org:3000/home"
+    "http://app.almalk.org:3000/home"
   ).then((res) => res.json());
 
   const resSingleAds = await fetch(
-    "https://app.almalk.org:3000/diamond-ads"
+    "http://app.almalk.org:3000/diamond-ads"
   );
 
   const bannerdata = await fetch(
-    "https://app.almalk.org:3000/vip-ads"
+    "http://app.almalk.org:3000/vip-ads"
     ).then((res) => res.json());
 
   const dataSingleAds = await resSingleAds.json();

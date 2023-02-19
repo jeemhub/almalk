@@ -1,5 +1,6 @@
 import React from "react";
 import { Menu, Transition } from "@headlessui/react";
+import { useTranslation } from "react-i18next";
 import { Fragment } from "react";
 import { useState } from "react";
 import {
@@ -12,6 +13,7 @@ function classNames(...classes) {
 }
 
 export default function Share_drop_down() {
+  const { t, i18n } = useTranslation();
     const [copied, setCopied] = useState(false);
     function copy() {
         const el = document.createElement("input");
@@ -56,7 +58,7 @@ export default function Share_drop_down() {
                   "flex px-4 py-2 text-sm text-black"
                 )} onClick={copy}
               >
-            Copy Link
+            {t("CopyLink")}
               </a>
             )}
           </Menu.Item>
@@ -69,7 +71,7 @@ export default function Share_drop_down() {
                   "block px-4 py-2 text-sm text-black"
                 )}
               >
-                Share To Tweter
+                {t("ShareToTweter")}
               </a>
             )}
           </Menu.Item>
@@ -82,7 +84,7 @@ export default function Share_drop_down() {
                   "block px-4 py-2 text-sm text-black"
                 )}
               >
-                Share To Facebook
+                {t("ShareToFacebook")}
               </a>
             )}
           </Menu.Item>

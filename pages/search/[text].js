@@ -16,7 +16,7 @@ useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
     if (id) {
-      const response = await axios.get(`https://app.almalk.org:3000/search/${id}/${page}`);
+      const response = await axios.get(`http://app.almalk.org:3000/search/${id}/${page}`);
       setItems(response.data);
     }
     setLoading(false);
@@ -50,7 +50,7 @@ function handleClicked(title,images,details,price,currency,location,isOwner,stat
     <Header/>
     {loading ? (
       <div className="flex items-center justify-center h-64">
-        <div className="text-center text-2xl text-gray-500">Loading...</div>
+        <div className="text-center text-2xl text-gray-500">{t("Loading")}</div>
       </div>
     ) : (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
@@ -72,13 +72,13 @@ function handleClicked(title,images,details,price,currency,location,isOwner,stat
           className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded"
           disabled={page === 1}
         >
-          Prev Page
+          {t("PrevPage")}
         </button>
         <button
           onClick={() => items.length === 20 && setPage(page + 1)}
           className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
         >
-          Next Page
+          {t("NextPage")}
         </button>
       </div>
     </div>
@@ -87,7 +87,7 @@ function handleClicked(title,images,details,price,currency,location,isOwner,stat
 };
 // export const getServerSideProps = async (context) => {
 //   const text = context.query.text;
-//   const res = await fetch(`https://almalk.org:3000/search/${text}`);
+//   const res = await fetch(`http://almalk.org:3000/search/${text}`);
 //   const data = await res.json();
 //   return {
 //     props: {

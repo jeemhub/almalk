@@ -3,11 +3,13 @@ import styles from "../styles/Contactform.module.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
 import * as Yup from "yup";
 //import { Route, Routes, useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
+  const { t, i18n } = useTranslation();
   const router = useRouter();
 
   const [error, setError] = useState(null)
@@ -50,7 +52,7 @@ export default function SignUp() {
       validationSchema={ErrorSchema}
       onSubmit={(value) => {
         //const data = {"email": "mohsinali@gmail.com","password":"11111qqqqq","role": "company"};
-        fetch('https://app.almalk.org:3000/signup/email', {
+        fetch('http://app.almalk.org:3000/signup/email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -87,13 +89,13 @@ export default function SignUp() {
           <Form className=' bg-white mt-4 px-10 py-8 shadow-md mb-[50px] mobile:mt-[80px] rounded-xl mobile:mx-auto mx-auto w-[30%] mobile:w-[90%] '  >
               {/*           <img
                 className="h-14 mb-4 mx-auto"
-                src="https://www.synointcdn.com/wp-content/uploads/2019/04/Amazon-Logo-PNG.png"
+                src="http://www.synointcdn.com/wp-content/uploads/2019/04/Amazon-Logo-PNG.png"
                 alt=""
               /> */}
               <h1 className="text-center text-6xl font-semibold">Logo</h1>
               <div className="space-y-4">
                 <h1 className="text-center text-2xl mt-2 font-semibold ">
-                  Register
+                  {t("Register")}
                 </h1>
                 {error && (
                   <div
@@ -104,7 +106,7 @@ export default function SignUp() {
                   </div>
                 )}
                 <div>
-                  <label className="block mb-1  font-semibold">Your Name</label>
+                  <label className="block mb-1  font-semibold">{t("YourName")}</label>
 
                   <Field
                     type="text"
@@ -125,7 +127,7 @@ export default function SignUp() {
                 </div>
                 <div>
                   <label className="block mb-1  font-semibold">
-                    Mobile Number Or Email
+                    {t("MobileNumberOrEmail")}
                   </label>
                   <Field
                     type="text"
@@ -143,7 +145,7 @@ export default function SignUp() {
                   )}
                 </div>
                 <div>
-                  <label className="block mb-1 font-semibold">Password</label>
+                  <label className="block mb-1 font-semibold"> {t("Password")}</label>
                   <Field
                     type="password"
                     className={
@@ -163,7 +165,7 @@ export default function SignUp() {
                 </div>
                 <div>
                   <label className="block mb-1 font-semibold">
-                    Re-Enter Password
+                   {t("ReEnterPassword")}
                   </label>
                   <Field
                     type="password"
@@ -184,12 +186,12 @@ export default function SignUp() {
                   )}
                 </div>
                 <div>
-                  <label className="block mb-1 font-semibold ">Role</label>
+                  <label className="block mb-1 font-semibold ">{t("Role")}</label>
                   <Field as="select" className="border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left" name="role">
                     <option></option>
 
-                    <option value="company">company</option>
-                    <option value="regular">regular</option>
+                    <option value="company">{t("company")}</option>
+                    <option value="regular">{t("regular")}</option>
                   </Field>
                   {touched.role && errors.role && (
                     <p className="text-red-700  text-xs">{errors.role}</p>
@@ -200,10 +202,10 @@ export default function SignUp() {
                 type="submit"
                 className="mt-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] ] font-semibold py-3 rounded-md  tracking-wide"
               >
-                Continue
+                {t("Continue")}
               </button>
               <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                <p className="text-center font-semibold mx-4 mb-0">OR</p>
+                <p className="text-center font-semibold mx-4 mb-0">{t("OR")}</p>
               </div>
 
               <button className="flex-1 w-full my-2 hover:text-[#c45500] px-2 py-4 text-sm font-semibold  bg-white border border-gray-500 rounded-lg  hover:bg-indigo-50">
@@ -232,7 +234,7 @@ export default function SignUp() {
                     d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
                   />
                 </svg>
-                <span className="ml-3 ">Continue with google</span>
+                <span className="ml-3 ">{t("ContinueWithGoogle")}</span>
               </button>
 
               <button className="flex-1 hover:text-[#c45500] px-2 py-4 text-sm font-semibold border border-gray-500 bg-white  rounded-lg w-full  hover:bg-indigo-50">
@@ -255,17 +257,17 @@ export default function SignUp() {
                 </svg>
 
                 <span className="ml-3 hover:text-[#c45500]">
-                  Continue With Facebook
+                  {t("ContinueWithFacebook")}
                 </span>
               </button>
 
               <p className="my-2 text-center">
-                Already have an account?
+                {t("AlreadyHaveAnAccount")}
                 <Link
                   href="/signin"
                   className="text-[#0000EE] hover:no-underline hover:text-[#c45500]"
                 >
-                  <a className='text-blue-700'>Sign in</a>
+                  <a className='text-blue-700'>{t("signin")}</a>
                 </Link>
               </p>
           </Form>

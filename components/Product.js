@@ -2,8 +2,10 @@ import Image from 'next/future/image'
 import StarRatings from 'react-star-ratings';
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../slice/cartSlice'
+import { useTranslation } from "react-i18next";
 
 function Product( { category, id, image, description, rating, price, title } ) {
+  const { t, i18n } = useTranslation();
     const dispatch = useDispatch()
     const addItemToCart = () => {
         const Product = {
@@ -40,9 +42,9 @@ function Product( { category, id, image, description, rating, price, title } ) {
         {/* here i need to add function >> if prime true in database show it */}
             <div className='flex items-center space-x-2 -mt-5'>
                 <Image className='w-14' src='/Images/Prime.webp' width={56} height={56} alt='prime' />
-                <p className='text-xs text-gray-500'>Free Delivery</p>
+                <p className='text-xs text-gray-500'>{t("FreeDelivery")}</p>
             </div>
-        <button onClick={addItemToCart} className='mt-auto button cursor-pointer'>Add to cart</button>
+        <button onClick={addItemToCart} className='mt-auto button cursor-pointer'>{t("Addtocart")}</button>
         </div>
         
     </div>

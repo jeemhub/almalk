@@ -6,8 +6,10 @@ import styles from "../styles/Contactform.module.css";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import Loader from "../components/Loader";
+import { useTranslation } from "react-i18next";
 
 export default function SignIn() {
+  const { t, i18n } = useTranslation();
   //const [email, setEmail] = useState("");
   //const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -39,7 +41,7 @@ export default function SignIn() {
         console.log(value);
         setLoadding(true)
 
-        fetch("https://app.almalk.org:3000/login", {
+        fetch("http://app.almalk.org:3000/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -92,7 +94,7 @@ export default function SignIn() {
 
               <div className="space-y-4">
                 <h1 className="text-center text-2xl font-semibold my-4">
-                  Sing in
+                 {t("signout")}
                 </h1>
                 <div className="my-4">
                   {error && (
@@ -105,7 +107,7 @@ export default function SignIn() {
                   )}
                   <div>
                     <label className="block mb-1  font-semibold">
-                      Mobile Number Or Email
+                      {t("MobileNumberOrEmail")}
                     </label>
                     <Field
                       type="email"
@@ -126,7 +128,7 @@ export default function SignIn() {
                   </div>
                   <div>
                     <label className="block mb-1  font-semibold">
-                      Password
+                      {t("Password")}
                     </label>
                     <Field
                       type="password"
@@ -150,21 +152,21 @@ export default function SignIn() {
                   type="submit"
                   className="mt-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c98e37]  font-semibold py-3 rounded-md  tracking-wide"
                 >
-                  Continue
+                  {t("Continue")}
                 </button>
                 <Link href="/resetpassword" className="text-red-500 mt-2">
                   
-                  <a className='text-red-500'>Forgot your password?</a>
+                  <a className='text-red-500'>{t("Forgotyourpassword")}</a>
 
                 </Link>
 
                 <p className="my-2">
-                  Dont have an account?
+                  {t("DontHaveAnAccount")}
                   <Link
                     href="/signup"
                     className="text-[#0000EE] hover:no-underline hover:text-[#c45500]"
                   >
-                    <a className='text-blue-700'>Sign up</a>
+                    <a className='text-blue-700'>{t("signup")}</a>
 
                   </Link>
                 </p>

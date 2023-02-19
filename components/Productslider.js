@@ -3,10 +3,12 @@ import Image from "next/future/image";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 
 
 
 function Productslider({ electroniccat, title }) {
+  const { t, i18n } = useTranslation();
   const router = useRouter()
   const [isClient, setIsClient] = useState(false)
 
@@ -59,7 +61,7 @@ function Productslider({ electroniccat, title }) {
     <div className='absolute mt-3 text-lg ml-5 font-bold'>{title} </div>
     <div className='absolute mt-3 text-lg font-bold right-0 mr-5 text-blue-800 hover:border-b-2 border-blue-900' onClick={()=> (router.push({
       pathname: `/categorys/[cat]`,
-      query: { cat: `${title}` }}))}>رؤية المزيد</div>
+      query: { cat: `${title}` }}))}>{t("seemore")}</div>
     </div>
     
     <div ref={rowRef} className='flex my-auto overflow-x-scroll scrollbar-hide will-change-scroll space-x-3 tablet:space-x-10 tablet:snap-x ml-5 mr-5'>

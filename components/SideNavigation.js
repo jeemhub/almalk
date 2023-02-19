@@ -7,8 +7,10 @@ import User_drop_down from './Dropdown';
 import { useRouter } from "next/router";
 import Link from 'next/link';
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SideNavigation(props) {
+  const { t, i18n } = useTranslation();
     if (typeof window !== 'undefined') {
         document.querySelector("body").style.overflow = props.act?"hidden":"";
       } else {
@@ -18,7 +20,7 @@ export default function SideNavigation(props) {
       const router = useRouter()
 const [categories, setCategories] = useState([]);
 useEffect(() => {
-    fetch("https://app.almalk.org:3000/categories")
+    fetch("http://app.almalk.org:3000/categories")
       .then((response) => response.json())
       .then((data) => setCategories(data));
   }, []);
@@ -27,7 +29,7 @@ useEffect(() => {
     <div className={props.act ? "sideNavigation active":"sideNavigation"}>
       <div className="sideNavNameHead">
         <div className="pl-5 pt-12 text-white">
-        <div className="text-xl font-bold">Browse</div>
+        <div className="text-xl font-bold">{t("Browse")}</div>
         <div className="block text-3xl -mt-2">Almalek</div>
         </div>
         <CloseIcon
@@ -52,7 +54,7 @@ useEffect(() => {
         </Link>
       </div> */}
       <div className="bg-[#fff] text-[#111] p-5 mt-2">
-        <div className="font-bold text-xl">Departments</div>
+        <div className="font-bold text-xl">{t("Departments")}</div>
         {categories.map((category) => (
           
           <div className="flex flex-row mt-2" key={category._id}>

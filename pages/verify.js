@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Verify = () => {
+  const { t, i18n } = useTranslation();
   const [otp, setOtp] = useState("");
   const [error, setError] = useState(null);
   const email = typeof localStorage !== 'undefined' ? localStorage.getItem('email') : '';
   console.log("email", email);
 
   const handelSubmit = (event) => {
+    
     console.log(email, otp);
     event.preventDefault();
-    fetch("https://app.almalk.org:3000/verify", {
+    fetch("http://app.almalk.org:3000/verify", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,11 +45,11 @@ const Verify = () => {
           <h1 className="text-center text-6xl font-semibold">Logo</h1>
           <div className="space-y-4">
             <h1 className="text-center text-2xl mt-2 font-semibold ">
-              Verify email address
+             {t("VerifyEmailAddress")}
             </h1>
             <div>
               <label className="block mb-1  font-semibold">
-                To verify your email, we have sent a One Time Password (OTP) to
+                {t("ToverifyyouremailwehavesentaOneTimePassword")} (OTP) {t("to")}
                 {email}(Change){" "}
               </label>
               <input
@@ -62,11 +65,11 @@ const Verify = () => {
             type="submit"
             className="mt-4 mb-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] font-semibold py-3 rounded-md  tracking-wide"
           >
-            Create Account
+            {t("CreateAccount")}
           </button>
           <div>
             <button className="text-center text-blue-500" onClick={handelResend}>
-              Resend OTP
+              {t("Resend")} OTP
             </button>
           </div>
         </div>

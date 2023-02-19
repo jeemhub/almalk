@@ -7,8 +7,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useRouter } from "next/router";
 import Head from 'next/head';
+import { useTranslation } from "react-i18next";
 
 function Adsproduct({ images }) {
+  const { t, i18n } = useTranslation();
   const router = useRouter();
 
   const imagespc = images.map((image) => ({
@@ -79,35 +81,35 @@ function Adsproduct({ images }) {
 
             {/* Product details  */}
             <div className="mt-5">
-              <div className="font-bold text-lg">Product details</div>
+              <div className="font-bold text-lg">{t("Productdetails")}</div>
 
               <div className="flex text-[#0F1111] text-xs font-bold mt-2">
-                location:{" "}
+                {t("Location")}:{" "}
                 <div className="ml-3 text-sm text-[#565959] font-normal">
                   {router.query.location}
                 </div>
               </div>
               <div className="flex text-[#0F1111] text-xs font-bold mt-2">
-                Status:{" "}
+                {t("Status")}:{" "}
                 <div className="ml-3 text-sm text-[#565959] font-normal">
                   {router.query.status}
                 </div>
               </div>
               <div className="flex text-[#0F1111] text-xs font-bold mt-2">
-                Is owner:{" "}
+                {t("Isowner")}:{" "}
                 <div className="ml-3 text-sm text-[#565959] font-normal">
                 {router.query.isOwner === "true" ? "Yes" : "No"}
                 </div>
               </div>
               <div className="flex text-[#0F1111] text-xs font-bold mt-2">
-                Price:{" "}
+                {t("Price")}:{" "}
                 <div className="ml-3 text-sm text-[#565959] font-normal">
                   {router.query.currency === "USD" && "$"} {router.query.price}{" "}
                   {router.query.currency === "IQD" && "IQD"}
                 </div>
               </div>
               <div className="flex text-[#0F1111] text-xs font-bold mt-2">
-                Details:{" "}
+                {t("details")}:{" "}
                 <div className="text-[#0F1111] text-sm mt-5">
                   {router.query.details}
                 </div>
@@ -158,7 +160,7 @@ function Adsproduct({ images }) {
           {/* orignal price */}
           <div className="p-3">
             <div className="flex text-base text-[#565959]">
-              Price:{" "}
+            {t("Price")}:{" "}
               <div className="ml-2">
                 {router.query.currency === "USD" && "$"} {router.query.price}{" "}
                 {router.query.currency === "IQD" && "IQD"}
@@ -169,22 +171,22 @@ function Adsproduct({ images }) {
         <div className="bg-[#fff] mt-2">
           {/* Product details  */}
           <div className="mt-2 p-5">
-            <div className="font-bold text-lg">Product details</div>
+            <div className="font-bold text-lg">{t("Productdetails")} </div>
 
             <div className="flex text-[#0F1111] text-xs font-bold mt-2">
-              location:{" "}
+            {t("Location")}:{" "}
               <div className="ml-3 text-sm text-[#565959] font-normal">
                 {router.query.location}
               </div>
             </div>
             <div className="flex text-[#0F1111] text-xs font-bold mt-2">
-              Status:{" "}
+            {t("Status")}:{" "}
               <div className="ml-3 text-sm text-[#565959] font-normal">
                 {router.query.status}
               </div>
             </div>
             <div className="flex text-[#0F1111] text-xs font-bold mt-2">
-              Is owner:{" "}
+            {t("Isowner")}:{" "}
               <div className="ml-3 text-sm text-[#565959] font-normal">
                 {router.query.isOwner === "true" ? "Yes" : "No"}
               </div>
@@ -193,7 +195,7 @@ function Adsproduct({ images }) {
         </div>
         <div className="bg-[#fff] mt-2">
           <div className="p-5">
-            <div>About this item</div>
+            <div>{t("Aboutthisitem")}</div>
             <div className="text-[#0F1111] text-sm mt-5">
               {router.query.details}
             </div>

@@ -10,8 +10,10 @@ import "react-multi-carousel/lib/styles.css";
 import { useState } from 'react';
 import { addToCart } from '../../slice/cartSlice'
 import { useRouter } from 'next/router'
+import { useTranslation } from "react-i18next";
 
 function Product({api2}) {
+  const { t, i18n } = useTranslation();
     const router = useRouter()
     const title = api2.title
     const image = api2.image
@@ -129,7 +131,7 @@ function Product({api2}) {
                 </div>
                 {/* brand */}
                 <div>
-                    <div className='flex cursor-pointer text-[#007185] hover:text-[#B12704] hover:underline hover:underline-offset-2 text-sm'>Brand: <div className='ml-2'>{api2.category}</div></div>
+                    <div className='flex cursor-pointer text-[#007185] hover:text-[#B12704] hover:underline hover:underline-offset-2 text-sm'>{t("Brand")} <div className='ml-2'>{api2.category}</div></div>
                 </div>
                 {/* rating */}
                 <div className='flex'>
@@ -141,7 +143,7 @@ function Product({api2}) {
                         starDimension="19px"
                         starSpacing="1px"
                     />
-                    <h4 className='text-[#007185] pl-2 text-sm mt-1 lining-nums cursor-pointer hover:text-[#B12704] hover:underline hover:underline-offset-2'>{api2.rating.count} ratings</h4>
+                    <h4 className='text-[#007185] pl-2 text-sm mt-1 lining-nums cursor-pointer hover:text-[#B12704] hover:underline hover:underline-offset-2'>{api2.rating.count} {t("ratings")}</h4>
                 </div>
                 {/* amazon choise */}
                 <div>
@@ -151,68 +153,68 @@ function Product({api2}) {
                     
                  
                     <div className='flex text-base text-[#565959]'>
-                        List Price: <div className='ml-2'>${api2.price}</div>
+                        {t("ListPrice")} <div className='ml-2'>${api2.price}</div>
                     </div>
                 
                 {/* color selected */}
                 <div>
-                    Style: {stylepc}
+                    {t("Style")} {stylepc}
                 </div>
                 {/* image boxes for color change */}
                 <div className='flex flex-wrap'>
                     <div onClick={(e) => handleClickpc(e)} className='border-2 w-28 h-12 flex cursor-pointer'>
                         <Image className='w-[50%] h-full object-contain' alt={api2.id} src={api2.image} height={100} width={100}></Image>
                         <div className='inline-block -space-y-1'>
-                        <div className=''>Black</div>
+                        <div className=''>{t("Black")}</div>
                         <div className=''>${api2.price}</div>
                         </div>
                     </div>
                     <div  onClick={(e) => handleClickpc(e)} className='border-2 w-28 h-12 flex cursor-pointer'>
                         <Image className='w-[50%] h-full object-contain' alt={api2.id} src={api2.image} height={100} width={100}></Image>
                         <div className='inline-block  -space-y-1'>
-                        <div className=''>white</div>
+                        <div className=''>{t("white")}</div>
                         <div className=''>${api2.price}</div>
                         </div>
                     </div>
                     <div  onClick={(e) => handleClickpc(e)} className='border-2 w-28 h-12 flex cursor-pointer'>
                         <Image className='w-[50%] h-full object-contain' alt={api2.id} src={api2.image} height={100} width={100}></Image>
                         <div className='inline-block  -space-y-1'>
-                        <div className=''>yelow</div>
+                        <div className=''>{t("yellow")}</div>
                         <div className=''>${api2.price}</div>
                         </div>
                     </div>
                     <div  onClick={(e) => handleClickpc(e)} className='border-2 w-28 h-12 flex cursor-pointer'>
                         <Image className='w-[50%] h-full object-contain' alt={api2.id} src={api2.image} height={100} width={100}></Image>
                         <div className='inline-block  -space-y-1'>
-                        <div className=''>pink</div>
+                        <div className=''>{t("pink")}</div>
                         <div className=''>${api2.price}</div>
                         </div>
                     </div>
                     <div  onClick={(e) => handleClickpc(e)} className='border-2 w-28 h-12 flex cursor-pointer'>
                         <Image className='w-[50%] h-full object-contain' alt={api2.id} src={api2.image} height={100} width={100}></Image>
                         <div className='inline-block  -space-y-1'>
-                        <div className=''>brown</div>
+                        <div className=''>{t("brown")}</div>
                         <div className=''>${api2.price}</div>
                         </div>
                     </div>
                     <div  onClick={(e) => handleClickpc(e)} className='border-2 w-28 h-12 flex cursor-pointer'>
                         <Image className='w-[50%] h-full object-contain' alt={api2.id} src={api2.image} height={100} width={100}></Image>
                         <div className='inline-block  -space-y-1'>
-                        <div className=''>blue</div>
+                        <div className=''>{t("blue")}</div>
                         <div className=''>${api2.price}</div>
                         </div>
                     </div>
                     <div  onClick={(e) => handleClickpc(e)} className='border-2 w-28 h-12 flex cursor-pointer'>
                         <Image className='w-[50%] h-full object-contain' alt={api2.id} src={api2.image} height={100} width={100}></Image>
                         <div className='inline-block  -space-y-1'>
-                        <div className=''>dark</div>
+                        <div className=''>{t("dark")}</div>
                         <div className=''>${api2.price}</div>
                         </div>
                     </div>
                     <div  onClick={(e) => handleClickpc(e)} className='border-2 w-28 h-12 flex cursor-pointer'>
                         <Image className='w-[50%] h-full object-contain' alt={api2.id} src={api2.image}  height={100} width={100}></Image>
                         <div className='inline-block  -space-y-1'>
-                        <div className=''>silver</div>
+                        <div className=''>{t("silver")}</div>
                         <div className=''>${api2.price}</div>
                         </div>
                     </div>
@@ -220,13 +222,13 @@ function Product({api2}) {
                 {/* Product details  */}
                 <div className='mt-5'>
                     <div className='font-bold text-lg'>
-                        Product details
+                      {t("Productdetails")}
                     </div>
                     <div className='flex text-[#0F1111] text-xs font-bold mt-5'>
-                        Brand: <div className='ml-3 text-sm text-[#565959] font-normal'>{api2.category}</div>
+                     {t("Brand")}<div className='ml-3 text-sm text-[#565959] font-normal'>{api2.category}</div>
                     </div>
                     <div className='flex text-[#0F1111] text-xs font-bold mt-2'>
-                        Style: <div className='ml-3 text-sm text-[#565959] font-normal'>{stylepc}</div>
+                     {t("Style")}<div className='ml-3 text-sm text-[#565959] font-normal'>{stylepc}</div>
                     </div>
                     {/* <div className='flex text-[#0F1111] text-xs font-bold mt-2'>
                         Electric fan design: <div className='ml-3 text-sm text-[#565959] font-normal'>Table Fan</div>
@@ -252,15 +254,15 @@ function Product({api2}) {
                 <div className='w-[250px] border-2 h-full'>
                     <div className='mt-5 text-lg text-[#B12704] ml-5'>
                         ${api2.price}
-                    </div>
+                    </div>                                                     
                     <div className='ml-5 mt-2'>
                     Delivery Tue, Sep 27. Order within 22 hrs 37 mins
                     </div>
                     <div className='text-[#007600] text-lg ml-5'>
-                    In Stock.
+                    {t("InStock")}
                     </div>
-                    <button onClick={addItemToCart} className='mt-5 flex mx-auto w-[90%] button cursor-pointer'><div className='mx-auto'>Add to cart</div></button>
-                    <button onClick={addItemToCartandbuy} className='mt-5 flex mx-auto w-[90%] button bg-[#FFA41C] border-[#FF8F00] hover:bg-[#FF8F00] cursor-pointer'><div className='mx-auto'>Buy Now</div></button>
+                    <button onClick={addItemToCart} className='mt-5 flex mx-auto w-[90%] button cursor-pointer'><div className='mx-auto'>{t("Addtocart")}</div></button>
+                    <button onClick={addItemToCartandbuy} className='mt-5 flex mx-auto w-[90%] button bg-[#FFA41C] border-[#FF8F00] hover:bg-[#FF8F00] cursor-pointer'><div className='mx-auto'>{t("BuyNow")}</div></button>
                 </div>
             </div>
             
@@ -274,7 +276,7 @@ function Product({api2}) {
         {/* brand and ratings */}
         <div className='bg-[#FFF] h-full'>
         <div>
-        <div className='flex ml-2 cursor-pointer text-[#007185] hover:text-[#B12704] hover:underline hover:underline-offset-2 text-sm'>Brand: <div className='ml-2'>{api2.category}</div>
+        <div className='flex ml-2 cursor-pointer text-[#007185] hover:text-[#B12704] hover:underline hover:underline-offset-2 text-sm'>{t("Brand")}<div className='ml-2'>{api2.category}</div>
         <div className='flex absolute right-2'>
         <StarRatings
                         rating={parseFloat(api2.rating.rate)}
@@ -284,7 +286,7 @@ function Product({api2}) {
                         starDimension="15px"
                         starSpacing="1px"
                     />
-                    <h4 className='text-[#007185] pl-2 text-xs mt-1 lining-nums cursor-pointer hover:text-[#B12704] hover:underline hover:underline-offset-2'>{api2.rating.count} ratings</h4>
+                    <h4 className='text-[#007185] pl-2 text-xs mt-1 lining-nums cursor-pointer hover:text-[#B12704] hover:underline hover:underline-offset-2'>{api2.rating.count} {t("ratings")}</h4>
         </div>
         </div>
         </div>
@@ -325,39 +327,39 @@ function Product({api2}) {
     </div>
     {/* color */}
     <div className='bg-[#fff] mt-2 pb-5'>
-        <div className='ml-2 pt-5 mb-5'>Style: {style}</div>
+        <div className='ml-2 pt-5 mb-5'> {t("Style")} {style}</div>
         <Carousel className='z-40' responsive={responsive2}>
 
             <div onClick={(e) => handleClick(e)} className='w-[120px] h-full border-2 hover:border-[#e77600]'>
                 <Image className='w-[120px] h-[120px] object-contain' alt={api2.id} src={api2.image} width={200} height={200}></Image>
                 <div className='ml-2'>
-                <div className='font-bold text-base'>black</div>
+                <div className='font-bold text-base'>{t("Black")}</div>
                 <div>${api2.price}</div>
-                <div className='text-[#008a00]'>in stock</div>
+                <div className='text-[#008a00]'> {t("InStock")}</div>
                 </div>
             </div>
             <div onClick={(e) => handleClick(e)} className='w-[120px] h-full border-2 hover:border-[#e77600]'>
             <Image className='w-[120px] h-[120px] object-contain' alt={api2.id} src={api2.image} width={200} height={200}></Image>
                 <div className='ml-2'>
-                <div className='font-bold text-base'>white</div>
+                <div className='font-bold text-base'>{t("white")}</div>
                 <div>${api2.price}</div>
-                <div className='text-[#008a00]'>in stock</div>
+                <div className='text-[#008a00]'> {t("InStock")}</div>
                 </div>
             </div>
             <div onClick={(e) => handleClick(e)} className='w-[120px] h-full border-2 hover:border-[#e77600]'>
             <Image className='w-[120px] h-[120px] object-contain' alt={api2.id} src={api2.image} width={200} height={200}></Image>
                 <div className='ml-2'>
-                <div className='font-bold text-base'>yelow</div>
+                <div className='font-bold text-base'>{t("yellow")}</div>
                 <div>${api2.price - 10}</div>
-                <div className='text-[#008a00]'>in stock</div>
+                <div className='text-[#008a00]'> {t("InStock")}</div>
                 </div>
             </div>
             <div onClick={(e) => handleClick(e)} className='w-[120px] h-full border-2 hover:border-[#e77600]'>
             <Image className='w-[120px] h-[120px] object-contain' alt={api2.id} src={api2.image} width={200} height={200}></Image>
                 <div className='ml-2'>
-                <div className='font-bold text-base'>pink</div>
+                <div className='font-bold text-base'>{t("pink")}</div>
                 <div>${api2.price + 20}</div>
-                <div className='text-[#008a00]'>in stock</div>
+                <div className='text-[#008a00]'> {t("InStock")}</div>
                 </div>
             </div>
         </Carousel>
@@ -368,7 +370,7 @@ function Product({api2}) {
         
                  
                     <div className='flex text-base text-[#565959]'>
-                        List Price: <div className='ml-2'>${api2.price}</div>
+                    {t("ListPrice")} <div className='ml-2'>${api2.price}</div>
                     </div>
                 
                 {/* delivery date */}
@@ -377,25 +379,25 @@ function Product({api2}) {
                     </div>
                 {/* in stock or not */}
                     <div className='text-[#007600] text-lg'>
-                    In Stock.
+                    {t("InStock")}
                     </div>
                 {/* add to cart button */}
-                    <button onClick={addItemToCart} className='mt-5 flex mx-auto w-[100%] h-12 button cursor-pointer text-xl rounded-xl'><div className='mx-auto'>Add to cart</div></button>
+                    <button onClick={addItemToCart} className='mt-5 flex mx-auto w-[100%] h-12 button cursor-pointer text-xl rounded-xl'><div className='mx-auto'>{t("Addtocart")}</div></button>
           {/* buy now button */}
-                    <button onClick={addItemToCartandbuy} className='mt-5 flex mx-auto w-[100%] h-12 button bg-[#FFA41C] border-[#FF8F00] hover:bg-[#FF8F00] cursor-pointer text-xl rounded-xl'><div className='mx-auto'>Buy Now</div></button>
+                    <button onClick={addItemToCartandbuy} className='mt-5 flex mx-auto w-[100%] h-12 button bg-[#FFA41C] border-[#FF8F00] hover:bg-[#FF8F00] cursor-pointer text-xl rounded-xl'><div className='mx-auto'>{t("BuyNow")}</div></button>
         </div>
     </div>
     <div className='bg-[#fff] mt-2'>
         {/* Product details  */}
         <div className='mt-2 p-5'>
                     <div className='font-bold text-lg'>
-                        Product details
+                    {t("Productdetails")}
                     </div>
                     <div className='flex text-[#565959] text-base mt-5'>
-                        Brand: <div className='ml-3 text-base text-[#0F1111] font-medium'>{api2.category}</div>
+                    {t("Brand")} <div className='ml-3 text-base text-[#0F1111] font-medium'>{api2.category}</div>
                     </div>
                     <div className='flex text-[#565959] text-base mt-2'>
-                        Style: <div className='ml-3 text-base text-[#0F1111] font-medium'>{style}</div>
+                    {t("Style")}<div className='ml-3 text-base text-[#0F1111] font-medium'>{style}</div>
                     </div>
                     {/* <div className='flex text-[#565959] text-xs mt-2'>
                         Electric fan design: <div className='ml-3 text-base text-[#0F1111] font-medium'>Table Fan</div>
@@ -411,7 +413,7 @@ function Product({api2}) {
     <div className='bg-[#fff] mt-2'>
         <div className="p-5">
         <div>
-            About this item
+            {t("Aboutthisitem")}
         </div>
     <div className='text-[#0F1111] text-sm mt-5'>
                     {api2.description}
@@ -428,7 +430,7 @@ export default Product
 
 export const getServerSideProps = async (context) => {
     const { id } = context.query;
-    const api2 = await fetch(`https://fakestoreapi.com/products/${id}`).then(
+    const api2 = await fetch(`http://fakestoreapi.com/products/${id}`).then(
         (res) => res.json()
       )
 

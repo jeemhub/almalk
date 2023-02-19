@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 import { signOut } from "next-auth/react";
 import {
   UserIcon,
@@ -11,6 +12,7 @@ function classNames(...classes) {
 }
 
 export default function User_drop_down({ session }) {
+  const { t, i18n } = useTranslation();
   return (
     <div className="z-40 hover:bg-opacity-70">
     <Menu as="div" className="ml-auto relative">
@@ -22,7 +24,7 @@ export default function User_drop_down({ session }) {
               {session ? `Hello, ${session.user.name}` : 'Hello, sign in'}
               
             </p>
-            <p className="font-extrabold md:text-sm">Account & Lists</p>
+            <p className="font-extrabold md:text-sm">{t("Account")} & {t("Lists")}</p>
             </div>
             {/* mobile login icon */}
             <div className="link tablet:hidden">
@@ -52,7 +54,7 @@ export default function User_drop_down({ session }) {
                   "block px-4 py-2 text-sm text-black"
                 )}
               >
-                Your Profile
+                {t("yourprofile")}
               </a>
             )}
           </Menu.Item>
@@ -65,7 +67,7 @@ export default function User_drop_down({ session }) {
                   "block px-4 py-2 text-sm text-black"
                 )}
               >
-                Settings
+                {t("Settings")}
               </a>
             )}
           </Menu.Item>
@@ -78,7 +80,7 @@ export default function User_drop_down({ session }) {
                   "block px-4 py-2 text-sm text-black"
                 )}
               >
-                Sign out
+               {t("signout")}
               </a>
             )}
           </Menu.Item>
