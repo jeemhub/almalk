@@ -198,7 +198,7 @@ function Header() {
                   />
                 </svg>
                 <p className="hidden font-extrabold md:text-sm md:inline ml-1">
-                  {t("signoutF")}
+                  {t("signout")}
                 </p>
               </div>
             ) : (

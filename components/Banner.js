@@ -21,7 +21,7 @@ function Banner({ bannerdata }) {
             key={ad._id}
           >
             <Image
-              objectFit="fill"
+              objectFit="cover"
               layout="fill"
               loading="lazy"
               src={ad.images[0]}
