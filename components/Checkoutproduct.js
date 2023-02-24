@@ -1,8 +1,11 @@
 import Image from "next/future/image";
 import React from "react";
 import StarRatings from 'react-star-ratings';
+import { useTranslation } from 'react-i18next';
 
 function Checkoutproduct({key,id,title,price,image}) {
+  const { t, i18n } = useTranslation();
+
   return (
     <div className="flex border-b border-b-[#DDD] pb-5" key={id}>
       {/* image */}

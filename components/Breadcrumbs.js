@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 
 const Breadcrumbs = () => {
+    const { t, i18n } = useTranslation();
+
     const router = useRouter();
 
     const getPathSegments = () => {

@@ -2,9 +2,12 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
+
 // eslint-disable-next-line import/no-anonymous-default-export, react/display-name
 export default () => {
   const router = useRouter();
+  const { t, i18n } = useTranslation();
 
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);

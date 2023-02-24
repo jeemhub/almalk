@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { BsFillPersonFill } from "react-icons/bs";
 import { signOut } from "next-auth/react";
 import {
   UserIcon,
@@ -11,7 +12,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function User_drop_down({ session }) {
+export default function User_drop_down({ session , children}) {
   const { t, i18n } = useTranslation();
   return (
     <div className="z-40 hover:bg-opacity-70">
@@ -47,27 +48,16 @@ export default function User_drop_down({ session }) {
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-50 focus:outline-none">
           <Menu.Item>
             {({ active }) => (
+              // eslint-disable-next-line @next/next/no-html-link-for-pages
               <a
-                href="#"
+                href="/usersettings"
                 className={classNames(
                   active ? "bg-[#febd69]" : "",
-                  "block px-4 py-2 text-sm text-black"
+                  "px-6 py-2 text-sm text-black flex items-center font-bold"
                 )}
               >
-                {t("yourprofile")}
-              </a>
-            )}
-          </Menu.Item>
-          <Menu.Item>
-            {({ active }) => (
-              <a
-                href="#"
-                className={classNames(
-                  active ? "bg-[#febd69]" : "",
-                  "block px-4 py-2 text-sm text-black"
-                )}
-              >
-                {t("Settings")}
+                <BsFillPersonFill className="text-2xl"/>
+                User Settings
               </a>
             )}
           </Menu.Item>
@@ -80,7 +70,7 @@ export default function User_drop_down({ session }) {
                   "block px-4 py-2 text-sm text-black"
                 )}
               >
-               {t("signout")}
+               {children}
               </a>
             )}
           </Menu.Item>

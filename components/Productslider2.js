@@ -2,11 +2,13 @@ import { useRef, useState } from 'react';
 import Image from "next/future/image";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 
 
 function Productslider2({ api2, title }) {
-  
+  const { t, i18n } = useTranslation();
+
   const rowRef = useRef(null);
   const [isMoved, setIsMoved] = useState(false);
   const handleClick = (direction) => {

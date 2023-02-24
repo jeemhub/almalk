@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Image from "next/image";
+import { useTranslation } from 'react-i18next';
 
 function Banner({ bannerdata }) {
+  const { t, i18n } = useTranslation();
+
   return (
     <section className="relative mt-2 shadow-2xl max-w-full mx-auto h-[100%]">
       <Carousel

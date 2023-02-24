@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Homeproductfeed from "./Homeproductfeed";
 import { useRouter } from "next/router";
+import { useTranslation } from 'react-i18next';
 
 function Productfeed({ electroniccat, typename }) {
+  const { t, i18n } = useTranslation();
+
  const router = useRouter()
   //get window size
   const [size, setSize] = useState({ width: -1, height: -1 });
