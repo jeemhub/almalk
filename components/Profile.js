@@ -6,7 +6,9 @@ import { AiOutlineCamera } from "react-icons/ai";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { useTranslation } from 'react-i18next';
-
+import FormData from 'form-data';
+import Loader from './Loader';
+import styles from "../styles/Loader.module.css";
 export default function Profile() {
   const router = useRouter();
   const { t, i18n } = useTranslation();
@@ -14,6 +16,8 @@ export default function Profile() {
   const token = Cookies.get("loggedin");
   const [userdata, setuserdata] = useState();
   const [file, setFile] = useState(null);
+  const [loading, setloading] = useState(false);
+ 
 
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
@@ -27,27 +31,61 @@ export default function Profile() {
     if (!file) {
       return;
     }
-    const form = new FormData();
-
+    setloading(true);
+     const form = new FormData();
     form.append('picture', file);
-    try {
-      const response = await fetch('http://app.almalk.org:3000/user/picture', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          "x-access-token": JSON.parse(token),
-        },
-        body: form
-      });
-    
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    setFile(null)
+     const response = await fetch('http://app.almalk.org:3000/user/picture', {
+      method: 'POST',
+      headers: {
+        'x-access-token': JSON.parse(token),
+      },
+      body: form,
+    });
+    const data=await response.json();
+    console.log(data)
+    setloading(false)
+    router.reload(window.location.pathname);
   };
-
+  function showphoto(){
+    
+    if (!userdata || !userdata.picture){
+      return(
+      <Image
+      width={200}
+      height={200}
+      className="h-24 w-24 md:h-32 md:w-32 rounded-full object-cover"
+      src={profileimage}
+      alt="Profile Picture"
+      /> )
+    }else{
+      if(loading){
+        return(
+          <Image
+          width={200}
+          height={200}
+          className="h-24 w-24 md:h-32 md:w-32 rounded-full object-cover brightness-50"
+          src={`https://codellab.s3.amazonaws.com/${userdata.picture}`}
+          alt="Profile Picture"
+          /> 
+        )
+      }
+      return(
+        <Image
+        width={200}
+        height={200}
+        className="h-24 w-24 md:h-32 md:w-32 rounded-full object-cover"
+        src={`https://codellab.s3.amazonaws.com/${userdata.picture}`}
+        alt="Profile Picture"
+        /> 
+        
+        
+        )
+    }
+    
+  }
   useEffect(() => {
+  
     if (token) {
       const getdata = async () => {
         const res = await fetch("http://app.almalk.org:3000/user", {
@@ -58,31 +96,43 @@ export default function Profile() {
           },
         });
         const data = await res.json();
-
         setuserdata(data);
-        console.log(data);
+        
       };
       getdata();
+      
     } else {
       router.push("/signin");
     }
+
   }, [token]);
 
   return (
     <>
-   
+
       <div className="mx-auto max-w-md  sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-8 md:space-y-0 md:space-x-8 my-8">
           <div className="flex-shrink-0 relative ">
-            {file && console.log(file)}
-            <Image
-              className="h-24 w-24 md:h-32 md:w-32 rounded-full"
-              src={profileimage}
-              alt="Profile Picture"
-            />
+        {loading &&
+          <div className="flex justify-center items-center h-24 w-32 pl-16 pt-20 md:h-32 md:w-32 absolute z-50">
+        <div>
+          <div className={styles.circleLoader}>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>  </div>
+          }
+          {showphoto()}
             {!file && 
             <AiOutlineCamera className="absolute z-20 left-2/3 top-3/4 bg-blue-600 text-white text-5xl cursor-pointer p-2 rounded-full" />
             }
+           
             <form onSubmit={(e)=>{handleFormSubmit(e)}}>
               {!file && 
               <input
