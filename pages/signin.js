@@ -10,8 +10,7 @@ import { useTranslation } from "react-i18next";
 
 export default function SignIn() {
   const { t, i18n } = useTranslation();
-  //const [email, setEmail] = useState("");
-  //const [password, setPassword] = useState("");
+
   const [error, setError] = useState(null);
   const router = useRouter();
   const [loadding, setLoadding] = useState(false)

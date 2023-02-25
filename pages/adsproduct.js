@@ -84,7 +84,7 @@ function Adsproduct({ images }) {
 
             {/* pc products */}
             <div className="hidden tablet:block max-w-screen-2xl mx-auto bg-[#fff]">
-                <div className='flex-2 mobile:w-[95%] mobile:mx-auto mb-[-30px] text-[#333]'>
+                <div className='flex-2 w-[98%] mx-auto mb-[-30px] text-[#333]'>
                     <h1 className='text-[18px] font-medium text-sm text-[#333] h-[#18px] py-3 text-ellipsis '>
 
 
@@ -95,7 +95,7 @@ function Adsproduct({ images }) {
                 </div>
                 <div className="flex h-full space-x-5 mx-auto mt-10">
                     {/* image gallery */}
-                    <div className="flex-auto  w-[650px]">
+                    <div className="flex-auto ml-3 w-[650px]">
                         <ImageGallery items={imagespc} showFullscreenButton={false} renderItem={renderCustomItem}
                             showPlayButton={false} />
                     </div>
@@ -114,7 +114,7 @@ function Adsproduct({ images }) {
 
                         {/* Product details  */}
 
-                        <div className='w-[60%] mobile:mt-3 mobile:w-[95%] mobile:mx-auto flex-col'>
+                        <div className='w-[50%] mobile:mt-3 mobile:w-[95%] mobile:mx-auto flex-col'>
                             <div>
                                 <h1 className='text-lg font-bold text-[#039] mb-2'>100T</h1>
                             </div>
@@ -301,7 +301,6 @@ function Adsproduct({ images }) {
                 <div className="bg-[#FFF] h-full">
                     <div className='flex-2 mobile:w-[95%] mobile:mx-auto text-[#333]'>
                         <h1 className='text-[18px] font-medium text-sm text-[#333] h-[#18px] py-3 text-ellipsis '>
-
 
 
 
@@ -531,12 +530,12 @@ function Adsproduct({ images }) {
 
             </div>
 
-            <div className="border-b-[2px] border-solid border-[#ffc000] w-[92%]  mx-auto mt-5">
+            <div className="border-b-[2px] border-solid border-[#ffc000] w-[97%]  mx-auto mt-5">
                     <button type="button" onClick={() => handleTabClick(0)} className={activeTab == 0 ? "bg-yellow-400 py-2 px-2 ml-2 w-[115px] rounded-md shadow-md rounded-b-none h-[37px] border-[1px] border-b-0 text-[#333]  font-bold bg-gradient-to-t from-[#F3A847] to-[#ffc000]" : "py-2 ml-7 h-[37px] rounded-md shadow-md rounded-b-none font-bold text-[#1064bc] border-[1px] border-[#c0c0c0] bg-gradient-to-t from-[#fff] to-[#e4e2e2] px-2 "}>Ads Details</button>
 
                     <button type="button " onClick={() => handleTabClick(1)} className={activeTab == 1 ? "bg-yellow-400 py-2 px-2 ml-7  rounded-md shadow-md rounded-b-none h-[37px] border-[1px] border-b-0 text-[#333]  font-bold bg-gradient-to-t from-[#F3A847] to-[#ffc000]" : "py-2 ml-7 h-[37px] rounded-md shadow-md rounded-b-none font-bold text-[#1064bc] border-[1px] border-[#c0c0c0] bg-gradient-to-t from-[#fff] to-[#e4e2e2] px-2 "}>Location And Street View</button>
                 </div>
-                <div className='border-[2px] mt-0 w-[92%]  mx-auto'>
+                <div className='border-[2px] mt-0 w-[97%]  mx-auto'>
                     {activeTab === 0 &&
                         <>
                             <div className='w-full  border-b-[1px] border-solid p-1  bg-gradient-to-t from-[#fff] to-[#e4e2e2] border-[#dedede]'>
