@@ -37,7 +37,6 @@ export default function SignIn() {
       }}
       validationSchema={ErrorSchema}
       onSubmit={(value) => {
-        console.log(value);
         setLoadding(true)
 
         fetch("http://app.almalk.org:3000/login", {
@@ -71,7 +70,7 @@ export default function SignIn() {
 
             }
 
-            console.log("Success:", data);
+            //console.log("Success:", data);
 
 
           })

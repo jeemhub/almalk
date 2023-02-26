@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) {
   const { t, i18n } = useTranslation();
-  console.log(electroniccatnolim);
+  //console.log(electroniccatnolim);
   var SingleAdsImage = 0;
   const router = useRouter();
 
@@ -86,7 +86,7 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
         <div>
           {electroniccatnolim.map((categoryData, index) => {
             if (categoryData.items.length > 0) {
-              console.log(dataSingleAds[SingleAdsImage]?._id);
+              //console.log(dataSingleAds[SingleAdsImage]?._id);
               return (
                 <>
                   <Productslider
@@ -172,11 +172,14 @@ export const getServerSideProps = async (context) => {
     ).then((res) => res.json());
 
   const dataSingleAds = await resSingleAds.json();
+  //console.log("dataSingleAds",dataSingleAds)
+
   return {
     props: {
       electroniccatnolim,
       dataSingleAds: dataSingleAds.diamondAds,
       bannerdata,
     },
+    
   };
 };

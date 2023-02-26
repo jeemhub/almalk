@@ -29,25 +29,25 @@ function Productslider({ electroniccat, title }) {
   };
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
-  function handleClicked(title,images,details,price,currency,location,isOwner,statuss,createdAt) {
-    router.push({
-      pathname: '/adsproduct',
-      query: {
-        title: title,
-        images: images,
-        details: details,
-        price: price,
-        currency:currency,
-        location:location,
-        isOwner:isOwner,
-        status:statuss,
-        createdAt:createdAt,
+  // function handleClicked(title,images,details,price,currency,location,isOwner,statuss,createdAt) {
+  //   router.push({
+  //     pathname: '/adsproduct',
+  //     query: {
+  //       title: title,
+  //       images: images,
+  //       details: details,
+  //       price: price,
+  //       currency:currency,
+  //       location:location,
+  //       isOwner:isOwner,
+  //       status:statuss,
+  //       createdAt:createdAt,
 
 
 
-      }
-    })
-  }
+  //     }
+  //   })
+  // }
   useEffect(() => {
     setIsClient(true)
   }, [])
@@ -73,7 +73,7 @@ function Productslider({ electroniccat, title }) {
             onClick={() => handleClick("left")}
           />
           {electroniccat.items.map((item, index) => (
-       <div key={item._id} className="w-48 h-56 tablet:w-60 tablet:h-64 relative flex flex-col" onClick={()=> handleClicked(item.title, item.images,item.details,item.price, item.currency, item.location, item.isOwner, item.status, item.createdAt)}>
+       <div key={item._id} className="w-48 h-56 tablet:w-60 tablet:h-64 relative flex flex-col" onClick={()=> router.push(`/adsproduct/${item._id}`)}>
         
        <Image className="snap-start bg-origin-padding border-none cursor-pointer w-40 h-40 tablet:w-48 tablet:h-48 object-fill pt-10 pb-2" src={item.images[0]} alt={item._id} width={200} height={200} key={item._id} ></Image>
        

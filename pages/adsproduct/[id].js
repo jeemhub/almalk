@@ -1,19 +1,52 @@
-import React, { useState } from "react";
-import Header from "../components/Header";
+import React, { useEffect, useState } from "react";
+//import Header from "../components/Header";
+import Header from '../../components/Header'
 import ImageGallery from "react-image-gallery";
 import Image from "next/image";
-import Share_drop_down from "../components/Sharebutton";
+import Share_drop_down from "../../components/Sharebutton";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useRouter } from "next/router";
 import Head from 'next/head';
 import { useTranslation } from "react-i18next";
-import  Breadcrumbs  from "../components/Breadcrumbs";
+import Breadcrumbs from "../../components/Breadcrumbs";
 
-function Adsproduct({ images }) {
+function Adsproduct({ data }) {
     const { t, i18n } = useTranslation();
     const router = useRouter();
+    const [images, setImages] = useState([])
+    const [ownerName, setOwnerName] = useState(null)
+    const [ownerPicture, setOwnerpicture] = useState(null)
 
+
+    const { id } = router.query;
+    let options = { month: "long", day: "numeric", year: "numeric" };
+
+    useEffect(() => {
+        setImages(data.images)
+        fetch(`http://app.almalk.org:3000/user/profile/${data.owner}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Data:', data);
+                // Do something with the data
+                if (data.name) {
+                    setOwnerName(data.name);
+                }
+                if (data.picture) {
+                    setOwnerpicture(data.picture);
+                }
+
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle errors
+            });
+    }, []);
     const imagespc = images.map((image) => ({
         original: image,
         thumbnail: image,
@@ -76,7 +109,7 @@ function Adsproduct({ images }) {
             <Header />
             {/* banner ads */}
             <div></div>
-            <Breadcrumbs />
+            {/* <Breadcrumbs /> */}
 
             <div className="w-full h-14 bg-black text-white text-center flex">
                 <div className="my-auto mx-auto">ads space here</div>
@@ -85,11 +118,11 @@ function Adsproduct({ images }) {
             {/* pc products */}
             <div className="hidden tablet:block max-w-screen-2xl mx-auto bg-[#fff]">
                 <div className='flex-2 w-[98%] mx-auto mb-[-30px] text-[#333]'>
-                    <h1 className='text-[18px] font-medium text-sm text-[#333] h-[#18px] py-3 text-ellipsis '>
+                    <h1 className='  text-xl font-bold text-[#333] h-[#18px] py-3 text-ellipsis '>
 
 
 
-                        THE ONLY ADDRESS OF COMFORT HEYKEL SUIT APART 0554 666 60 98
+                        {data.details}
 
                     </h1>
                 </div>
@@ -116,133 +149,105 @@ function Adsproduct({ images }) {
 
                         <div className='w-[50%] mobile:mt-3 mobile:w-[95%] mobile:mx-auto flex-col'>
                             <div>
-                                <h1 className='text-lg font-bold text-[#039] mb-2'>100T</h1>
+                                <h1 className='text-lg font-bold text-[#039] mb-2'>{data.title}</h1>
                             </div>
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                 <div className='font-medium text-sm  w-[50%]'>
-                                    İlan No
+                                    Price
                                 </div>
                                 <div className='text-red-500 w-[50%]'>
-                                    1239090293
+                                    {data.price}  {data.currency}
                                 </div>
                             </div>
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                 <div className='font-medium text-sm w-[50%]'>
-                                    Listing Date
+                                    Location
                                 </div>
                                 <div className='text-slate-800 text-xs w-[50%]'>
-                                    February 16, 2023
+                                    {data.location}
 
                                 </div>
                             </div>
+                            
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                 <div className='font-medium text-sm w-[50%]'>
-                                    Property Type
+                                    create at
                                 </div>
                                 <div className='text-slate-800 text-xs w-[50%]'>
-                                    Daily rent
-
-                                </div>
-                            </div>
-
-                            <div className='flex justify-between  py-1 border-dotted border-b-[1px]'>
-                                <div className='font-medium text-sm w-[50%]'>
-                                    m² (Gross)
-                                </div>
-                                <div className='text-slate-800 text-xs w-[50%]'>
-                                    90
+                                    {new Date(data.createdAt).toLocaleDateString("en-US", options)}
 
                                 </div>
                             </div>
 
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                 <div className='font-medium text-sm w-[50%]'>
-                                    m² (Net)
+                                    expire at
                                 </div>
                                 <div className='text-slate-800 text-xs w-[50%]'>
-                                    80
-
-                                </div>
-                            </div>
-
-
-                            <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                                <div className='font-medium text-sm  w-[50%]'>
-                                    Number of rooms
-                                </div>
-                                <div className='text-slate-800 text-xs w-[50%]'>
-                                    Studio (1+0)
+                                    {new Date(data.expireAds).toLocaleDateString("en-US", options)}
 
                                 </div>
                             </div>
 
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                 <div className='font-medium text-sm w-[50%]'>
-                                    Floor location
+                                    Type
                                 </div>
                                 <div className='text-slate-800 text-xs w-[50%]'>
-                                    2
+                                    {data.type}
 
                                 </div>
                             </div>
 
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                 <div className='font-medium text-sm w-[50%]'>
-                                    Number of Floors
+                                    Status
                                 </div>
                                 <div className='text-slate-800 text-xs w-[50%]'>
-                                    4
-
-                                </div>
-                            </div>
-                            <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                                <div className='font-medium text-sm w-[50%]'>
-                                    Number of bathrooms
-                                </div>
-                                <div className='text-slate-800 text-xs w-[50%]'>
-                                    2
+                                    {data.status}
 
                                 </div>
                             </div>
 
-                            <div className='flex  justify-between py-1 border-dotted border-b-[1px]'>
-                                <div className='font-medium text-sm w-[50%]'>
-                                    Inside the Site
-                                </div>
-                                <div className='text-slate-800 text-xs w-[50%]'>
-                                    No
+                            {data.requiredFields && (
+                                <>
+                                    {data.requiredFields.map((field) => {
+                                        return (
+                                            <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
+                                                <div className='font-medium text-sm w-[50%]'>
+                                                    {field.fieldName}
+                                                </div>
+                                                <div className='text-slate-800 text-xs w-[50%]'>
+                                                    {field.fieldValue}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </>
+                            )}
 
-                                </div>
-                            </div>
-                            <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                                <div className='font-medium text-sm w-[50%]'>
-                                    Site Name
-                                </div>
-                                <div className='text-slate-800 text-xs w-[50%]'>
-                                    Unspecified
 
-                                </div>
-                            </div>
 
-                            <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                                <div className='font-medium text-sm w-[40%]'>
-                                    From who
-                                </div>
-                                <div className='self-start text-slate-800 text-xs w-[50%]'>
-                                    From the Real Estate Office
 
-                                </div>
-                            </div>
 
 
 
                         </div>
-                        <div className=' flex-col ml-2 mobile:mt-5 mobile:ml-0 mobile:w-full w-[50%]'>
+                        <div className=' flex-col ml-2 mobile:mt-5 mobile:ml-0 mobile:w-full mr-2 w-[50%]'>
                             <div className='w-[100%]  h-fit  border-[1px] p-2'>
                                 <div className="bg-[#efefef] w-full h-full justify-center items-center p-3 flex-col">
                                     <div className='flex justify-between items-center pb-[9px] border-solid border-b-[2px] border-[#ccc]'>
-                                        <img src="https://image5.sahibinden.com/stores/logos/02/06/19/671b272f33b668722242be2826613de3e5582921.png" className='w-[108] h-[40px] flex-2' />
-                                        <a href='#' className='text-[#00339f] flex-1 ml-4'>HEYKEL SUİT APART</a>
+                                        {ownerPicture ? (
+                                            <>
+                                                <img src={`https://codellab.s3.amazonaws.com/${ownerPicture}`} className='w-[108] h-[40px] flex-2' />
+
+                                            </>
+                                        ) : (
+                                            <>
+                                                <img src="https://image5.sahibinden.com/stores/logos/02/06/19/671b272f33b668722242be2826613de3e5582921.png" className='w-[108] h-[40px] flex-2' />
+                                            </>
+                                        )}
+                                        <a href='#' className='text-[#00339f] flex-1 ml-4'>{ownerName}</a>
 
                                     </div>
                                     <h1 className='font-bold py-1'>Ercan Erdal
@@ -254,11 +259,11 @@ function Adsproduct({ images }) {
                                     </div>
                                     <div className='bg-[#fff] rounded-md shadow-sm border-[1px] flex-col border-solid border-[c0c0c0] p-2 mt-2'>
                                         <div className='mb-1 flex'>
-                                            <span className='font-bold'>Pocket</span> <span className='ml-8 text-sm '>0 (541) 131 23 53</span>
+                                            <span className='font-bold'>Pocket</span> <span className='ml-8 text-sm '>{data.phone}</span>
                                         </div>
-                                        <div className='mb-1 flex'>
+                                        {/* <div className='mb-1 flex'>
                                             <span className='font-bold'>Work</span> <span className='ml-10 text-sm '>0 (541) 131 23 53</span>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <h3 className='text-center text-xs mt-2  text-[#039]'><a href='#'>Send Message</a></h3>
                                 </div>
@@ -347,123 +352,89 @@ function Adsproduct({ images }) {
                     {/* Product Imfo */}
                     <div className='w-[50%] mobile:mt-3 mobile:w-[95%] mobile:mx-auto flex-col'>
                         <div>
-                            <h1 className='text-lg font-bold text-[#039] mb-2'>100T</h1>
+                            <h1 className='text-lg font-bold text-[#039] mb-2'>{data.title}</h1>
                         </div>
                         <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                             <div className='font-medium text-sm  w-[50%]'>
-                                İlan No
+                                Price
                             </div>
                             <div className='text-red-500 w-[50%]'>
-                                1239090293
+                                {data.price}  {data.currency}
                             </div>
                         </div>
                         <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                             <div className='font-medium text-sm w-[50%]'>
-                                Listing Date
+                                Location
                             </div>
                             <div className='text-slate-800 text-xs w-[50%]'>
-                                February 16, 2023
+                                {data.location}
 
                             </div>
                         </div>
                         <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                             <div className='font-medium text-sm w-[50%]'>
-                                Property Type
+                                created At
                             </div>
                             <div className='text-slate-800 text-xs w-[50%]'>
-                                Daily rent
+                                {new Date(data.createdAt).toLocaleDateString("en-US", options)}
+
+
+                            </div>
+                        </div>
+
+                        <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
+                            <div className='font-medium text-sm w-[50%]'>
+                                expired At
+                            </div>
+                            <div className='text-slate-800 text-xs w-[50%]'>
+                                {new Date(data.expireAds).toLocaleDateString("en-US", options)}
+
 
                             </div>
                         </div>
 
                         <div className='flex justify-between  py-1 border-dotted border-b-[1px]'>
                             <div className='font-medium text-sm w-[50%]'>
-                                m² (Gross)
+                                Type
                             </div>
                             <div className='text-slate-800 text-xs w-[50%]'>
-                                90
+                                {data.type}
 
                             </div>
                         </div>
 
                         <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                             <div className='font-medium text-sm w-[50%]'>
-                                m² (Net)
+                                Status
                             </div>
                             <div className='text-slate-800 text-xs w-[50%]'>
-                                80
+                                {data.status}
 
                             </div>
                         </div>
 
 
-                        <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                            <div className='font-medium text-sm  w-[50%]'>
-                                Number of rooms
-                            </div>
-                            <div className='text-slate-800 text-xs w-[50%]'>
-                                Studio (1+0)
 
-                            </div>
-                        </div>
 
-                        <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                            <div className='font-medium text-sm w-[50%]'>
-                                Floor location
-                            </div>
-                            <div className='text-slate-800 text-xs w-[50%]'>
-                                2
+                        {data.requiredFields && (
+                            <>
+                                {data.requiredFields.map((field) => {
+                                    return (
+                                        <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
+                                            <div className='font-medium text-sm  w-[50%]'>
+                                                {field.fieldName}
+                                            </div>
+                                            <div className='text-slate-800 text-xs w-[50%]'>
+                                                {field.fieldValue}
 
-                            </div>
-                        </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </>
+                        )}
 
-                        <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                            <div className='font-medium text-sm w-[50%]'>
-                                Number of Floors
-                            </div>
-                            <div className='text-slate-800 text-xs w-[50%]'>
-                                4
 
-                            </div>
-                        </div>
-                        <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                            <div className='font-medium text-sm w-[50%]'>
-                                Number of bathrooms
-                            </div>
-                            <div className='text-slate-800 text-xs w-[50%]'>
-                                2
-
-                            </div>
-                        </div>
-
-                        <div className='flex  justify-between py-1 border-dotted border-b-[1px]'>
-                            <div className='font-medium text-sm w-[50%]'>
-                                Inside the Site
-                            </div>
-                            <div className='text-slate-800 text-xs w-[50%]'>
-                                No
-
-                            </div>
-                        </div>
-                        <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                            <div className='font-medium text-sm w-[50%]'>
-                                Site Name
-                            </div>
-                            <div className='text-slate-800 text-xs w-[50%]'>
-                                Unspecified
-
-                            </div>
-                        </div>
-
-                        <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                            <div className='font-medium text-sm w-[50%]'>
-                                From who
-                            </div>
-                            <div className='self-start text-slate-800 text-xs w-[50%]'>
-                                From the Real Estate Office
-
-                            </div>
-                        </div>
 
 
 
@@ -472,8 +443,18 @@ function Adsproduct({ images }) {
                         <div className='w-[100%]  h-fit  rounded-sm p-2'>
                             <div className="bg-[#dfdede] w-full h-full justify-center items-center p-3 flex-col">
                                 <div className='flex justify-between items-center pb-[9px] border-solid border-b-[2px] border-[#ccc]'>
-                                    <img src="https://image5.sahibinden.com/stores/logos/02/06/19/671b272f33b668722242be2826613de3e5582921.png" className='w-[108] h-[40px] flex-2' />
-                                    <a href='#' className='text-[#00339f] flex-1 ml-4'>HEYKEL SUİT APART</a>
+
+                                    {ownerPicture ? (
+                                        <>
+                                            <img src={`https://codellab.s3.amazonaws.com/${ownerPicture}`} className='w-[108] h-[40px] flex-2' />
+
+                                        </>
+                                    ) : (
+                                        <>
+                                            <img src="https://image5.sahibinden.com/stores/logos/02/06/19/671b272f33b668722242be2826613de3e5582921.png" className='w-[108] h-[40px] flex-2' />
+                                        </>
+                                    )}
+                                    <a href='#' className='text-[#00339f] flex-1 ml-4'>{ownerName}</a>
 
                                 </div>
                                 <h1 className='font-bold py-1'>Ercan Erdal
@@ -485,11 +466,11 @@ function Adsproduct({ images }) {
                                 </div>
                                 <div className='bg-[#fff] rounded-md shadow-sm border-[1px] flex-col border-solid border-[c0c0c0] p-2 mt-2'>
                                     <div className='mb-1 flex'>
-                                        <span className='font-bold'>Pocket</span> <span className='ml-8 text-sm '>0 (541) 131 23 53</span>
+                                        <span className='font-bold'>Pocket</span> <span className='ml-8 text-sm '>{data.phone}</span>
                                     </div>
-                                    <div className='mb-1 flex'>
+                                    {/* <div className='mb-1 flex'>
                                         <span className='font-bold'>Work</span> <span className='ml-10 text-sm '>0 (541) 131 23 53</span>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <h3 className='text-center text-xs mt-2  text-[#039]'><a href='#'>Send Message</a></h3>
                             </div>
@@ -531,54 +512,62 @@ function Adsproduct({ images }) {
             </div>
 
             <div className="border-b-[2px] border-solid border-[#ffc000] w-[97%]  mx-auto mt-5">
-                    <button type="button" onClick={() => handleTabClick(0)} className={activeTab == 0 ? "bg-yellow-400 py-2 px-2 ml-2 w-[115px] rounded-md shadow-md rounded-b-none h-[37px] border-[1px] border-b-0 text-[#333]  font-bold bg-gradient-to-t from-[#F3A847] to-[#ffc000]" : "py-2 ml-7 h-[37px] rounded-md shadow-md rounded-b-none font-bold text-[#1064bc] border-[1px] border-[#c0c0c0] bg-gradient-to-t from-[#fff] to-[#e4e2e2] px-2 "}>Ads Details</button>
+                <button type="button" onClick={() => handleTabClick(0)} className={activeTab == 0 ? "bg-yellow-400 py-2 px-2 ml-2 w-[115px] rounded-md shadow-md rounded-b-none h-[37px] border-[1px] border-b-0 text-[#333]  font-bold bg-gradient-to-t from-[#F3A847] to-[#ffc000]" : "py-2 ml-7 h-[37px] rounded-md shadow-md rounded-b-none font-bold text-[#1064bc] border-[1px] border-[#c0c0c0] bg-gradient-to-t from-[#fff] to-[#e4e2e2] px-2 "}>Ads Details</button>
 
-                    <button type="button " onClick={() => handleTabClick(1)} className={activeTab == 1 ? "bg-yellow-400 py-2 px-2 ml-7  rounded-md shadow-md rounded-b-none h-[37px] border-[1px] border-b-0 text-[#333]  font-bold bg-gradient-to-t from-[#F3A847] to-[#ffc000]" : "py-2 ml-7 h-[37px] rounded-md shadow-md rounded-b-none font-bold text-[#1064bc] border-[1px] border-[#c0c0c0] bg-gradient-to-t from-[#fff] to-[#e4e2e2] px-2 "}>Location And Street View</button>
-                </div>
-                <div className='border-[2px] mt-0 w-[97%]  mx-auto'>
-                    {activeTab === 0 &&
-                        <>
-                            <div className='w-full  border-b-[1px] border-solid p-1  bg-gradient-to-t from-[#fff] to-[#e4e2e2] border-[#dedede]'>
-                                <h1 className='font-bold ml-2'>Explantion</h1>
+                <button type="button " onClick={() => handleTabClick(1)} className={activeTab == 1 ? "bg-yellow-400 py-2 px-2 ml-7  rounded-md shadow-md rounded-b-none h-[37px] border-[1px] border-b-0 text-[#333]  font-bold bg-gradient-to-t from-[#F3A847] to-[#ffc000]" : "py-2 ml-7 h-[37px] rounded-md shadow-md rounded-b-none font-bold text-[#1064bc] border-[1px] border-[#c0c0c0] bg-gradient-to-t from-[#fff] to-[#e4e2e2] px-2 "}>Location And Street View</button>
+            </div>
+            <div className='border-[2px] mt-0 w-[97%]  mx-auto'>
+                {activeTab === 0 &&
+                    <>
+                        <div className='w-full  border-b-[1px] border-solid p-1  bg-gradient-to-t from-[#fff] to-[#e4e2e2] border-[#dedede]'>
+                            <h1 className='font-bold ml-2'>Explantion</h1>
 
-                            </div>
-                            <div className='bg-white py-5 mt-5 mobile:mt-0 pl-5 mobile:px-2 border-[1px] solid border-t-0 w-ful '>
-                                <h1 className='text-center'>
-                                    FOR YOUR HEALTH,  WE STRONGLY REQUEST YOU TO READ THE MEASURES WE TAKE REGARDING THE VIRUS (COVID  19) CAREFULLY AND WITHOUT Boring!!
+                        </div>
+                        <div className='bg-white py-5 mt-5 mobile:mt-0 pl-5 mobile:px-2 border-[1px] solid border-t-0 w-ful '>
+                            <h1 className='text-center'>
+                                FOR YOUR HEALTH,  WE STRONGLY REQUEST YOU TO READ THE MEASURES WE TAKE REGARDING THE VIRUS (COVID  19) CAREFULLY AND WITHOUT Boring!!
 
-                                </h1>
+                            </h1>
 
-                                <h1 className='text-center text-red-500'>
-                                    FOR YOUR HEALTH,  WE STRONGLY REQUEST YOU TO READ THE MEASURES WE TAKE REGARDING THE VIRUS (COVID  19) CAREFULLY AND WITHOUT Boring!!
+                            <h1 className='text-center text-red-500'>
+                                FOR YOUR HEALTH,  WE STRONGLY REQUEST YOU TO READ THE MEASURES WE TAKE REGARDING THE VIRUS (COVID  19) CAREFULLY AND WITHOUT Boring!!
 
-                                </h1>
-                                <h1 className='text-blue-700 text-center'>
+                            </h1>
+                            <h1 className='text-blue-700 text-center'>
 
-                                    DON'T RESPECT THE ADVERTISEMENTS WITHOUT PROOF AND BASIS, SUCH AS "MEASURES TAKEN" AND "WAS DONE IN DISINFECTION" Written in the Titles of the Ads!.
+                                DON'T RESPECT THE ADVERTISEMENTS WITHOUT PROOF AND BASIS, SUCH AS "MEASURES TAKEN" AND "WAS DONE IN DISINFECTION" Written in the Titles of the Ads!.
 
-                                    K!
-                                </h1>
-                            </div>
-                        </>
-                    }
-                    {activeTab === 1 && <div className='w-full  border-b-[1px] border-solid p-1 bg-gradient-to-t from-[#fff] to-[#e4e2e2] border-[#dedede]'>
-                        <h1 className='font-bold ml-2'>Location</h1>
-                    </div>}
+                                K!
+                            </h1>
+                        </div>
+                    </>
+                }
+                {activeTab === 1 && <div className='w-full  border-b-[1px] border-solid p-1 bg-gradient-to-t from-[#fff] to-[#e4e2e2] border-[#dedede]'>
+                    <h1 className='font-bold ml-2'>Location</h1>
+                </div>}
 
 
-                </div>
+            </div>
         </div>
     );
 }
 
 export default Adsproduct;
 
-export const getServerSideProps = async (context) => {
-    const images = context.query.images;
+// export const getServerSideProps = async (context) => {
+//     const images = context.query.images;
 
-    return {
-        props: {
-            images,
-        },
-    };
-};
+//     return {
+//         props: {
+//             images,
+//         },
+//     };
+// };
+
+
+export async function getServerSideProps(context) {
+    const { id } = context.query;
+    const response = await fetch(`http://app.almalk.org:3000/items/${id}`);
+    const data = await response.json();
+    return { props: { data } };
+}

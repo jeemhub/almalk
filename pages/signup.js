@@ -14,9 +14,9 @@ export default function SignUp() {
 
   const [error, setError] = useState(null)
   const ErrorSchema = Yup.object().shape({
-    first_name: Yup.string()
-      .required("Please Enter Your Name")
-      .min(1, "too Short")
+    name: Yup.string()
+      .required("Please Enter Your Full Name")
+      .min(5, "too Short")
       .max(100, "Too Long"),
 
       inviteCode: Yup.number()
@@ -49,7 +49,7 @@ export default function SignUp() {
 
     <Formik
       initialValues={{
-        first_name: "",
+        name: "",
         email: "",
         password: "",
         password2: "",
@@ -120,18 +120,18 @@ export default function SignUp() {
               <Field
                 type="text"
                 className={
-                  touched.first_name
-                    ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.first_name
+                  touched.name
+                    ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.name
                       ? `${styles.invalid}`
                       : `${styles.valid}`
                     } `
                     : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
                 }
-                name="first_name"
+                name="name"
 /*                  placeholder="Your Name " 
  */              />
-              {touched.first_name && errors.first_name && (
-                <p className="text-red-700  text-xs">{errors.first_name}</p>
+              {touched.name && errors.name && (
+                <p className="text-red-700  text-xs">{errors.name}</p>
               )}
             </div>
             <div>

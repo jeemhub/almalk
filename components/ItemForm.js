@@ -11,17 +11,20 @@ const ItemForm = () => {
     const [images, setImages] = useState([]);
     const [details, setdetails] = useState("");
     const [isOwner, setIsOwned] = useState(false);
-    const [price, setPrice] = useState("");
+    const [price, setPrice] = useState(null);
     const [location, setLocation] = useState("");
     const [status, setStatus] = useState("");
     const [currency, setCurrency] = useState("");
     const [category, setCategory] = useState("");
+    const [phone, setPhone] = useState("");
+
     const [categoryList, setCategoryList] = useState([]);
     const [errors, setErrors] = useState({});
     const [error, setError] = useState(null);
     const [requiredFields, setRequiredFields] = useState(null);
     const [inputValues, setInputValues] = useState({});
 
+    const [fields,setFields] = useState();
 
     const handleCategoryChange = (event) => {
         const categoryId = event.target.value;
@@ -38,6 +41,9 @@ const ItemForm = () => {
 
         if (!title) {
             newErrors.title = "Title is required";
+        }
+        if (!phone) {
+            newErrors.phone = "Phone Number is required";
         }
         if (!images.length) {
             newErrors.images = "At least one image is required";
@@ -83,12 +89,15 @@ const ItemForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        const fields = requiredFields.map((fieldName) => ({
-            fieldName,
-            fieldValue: inputValues[fieldName],
-        }));
-        console.log("formState submitted", fields);
+        if (requiredFields){
+            const fields = requiredFields.map((fieldName) => ({
+                fieldName,
+                fieldValue: inputValues[fieldName],
+            }));
+            setFields(fields)
+            console.log("formState submitted", fields);
+        }
+        
 
         if (!validate()) {
             return;
@@ -96,7 +105,7 @@ const ItemForm = () => {
 
         if (token) {
             const postData = async () => {
-                
+
                 try {
                     const formData = new FormData();
                     formData.append("title", title);
@@ -106,6 +115,7 @@ const ItemForm = () => {
                     formData.append("isOwner", isOwner);
                     formData.append("status", status);
                     formData.append("category", category);
+                    formData.append("phone", phone);
                     formData.append("requiredFields", JSON.stringify(fields))
                     for (const image of images) {
                         formData.append("images", image);
@@ -128,6 +138,7 @@ const ItemForm = () => {
                         setError("You have to be logged in");
                         console.log("run 2")
                     }
+                    router.push(`/adsproduct/${data.item._id}`);
                 } catch (error) {
                     console.error("error", error);
                     console.log("run 3")
@@ -212,7 +223,7 @@ const ItemForm = () => {
 
                 <div className="mb-3  2xl:flex 2xl:justify-between  2xl:mx-auto  2xl:w-[100%]">
 
-                <div className="mb-3  2xl:flex 2xl:justify-center  2xl:mx-auto 2xl:flex-col 2xl:w-[45%]">
+                    <div className="mb-3  2xl:flex 2xl:justify-center  2xl:mx-auto 2xl:flex-col 2xl:w-[45%]">
                         <label
                             className="block font-medium mb-2 text-gray-700"
                             htmlFor="currency"
@@ -265,7 +276,7 @@ const ItemForm = () => {
                     </div>
                 </div>
                 <div className="mb-3  2xl:flex 2xl:justify-between  2xl:mx-auto  2xl:w-[100%]">
-                <div className="mb-3  2xl:flex 2xl:justify-center  2xl:mx-auto 2xl:flex-col 2xl:w-[45%]">
+                    <div className="mb-3  2xl:flex 2xl:justify-center  2xl:mx-auto 2xl:flex-col 2xl:w-[45%]">
                         <label
                             className="block font-medium mb-2 text-gray-700"
                             htmlFor="location"
@@ -284,7 +295,29 @@ const ItemForm = () => {
                             <p className="text-red-500 text-xs italic">{errors.location}</p>
                         )}
                     </div>
-                    <div className="mb-3 2xl:flex 2xl:justify-center 2x:litems-start 2xl:mx-auto 2xl:flex-col 2xl:w-[45%]">
+                    <div className="mb-3  2xl:flex 2xl:justify-center  mx-auto 2xl:flex-col 2xl:w-[45%]">
+                    <label
+                        className="block font-medium mb-2 text-gray-700"
+                        htmlFor="phone"
+                    >
+                        {t("Phone Number")}
+                    </label>
+                    <input
+                        className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.title ? " border-red-500" : ""
+                            }`}
+                        id="phone"
+                        type="text"
+                        value={phone}
+                        onChange={(event) => setPhone(event.target.value)}
+                    />
+                    {errors.phone && (
+                        <p className="text-red-500 text-xs italic">{errors.phone}</p>
+                    )}
+                </div>
+                </div>
+
+
+                <div className="mb-3 2xl:flex 2xl:justify-center 2x:litems-start ml-5 2xl:flex-col 2xl:w-[45%]">
                         <label
                             className="block font-medium mb-2 text-gray-700"
                             htmlFor="category"
@@ -318,14 +351,13 @@ const ItemForm = () => {
                             <p className="text-red-500 text-xs italic">{errors.category}</p>
                         )}
                     </div>
-                </div>
 
 
 
                 {requiredFields && (
                     <div className="flex flex-wrap ">
                         {requiredFields.map((cat, index) => (
-                            <div key={index} className="w-[45%] mobile:w-[100%]  mx-auto">
+                            <div key={index} className="w-[45%]  mobile:w-[100%] mb-3  mx-auto">
                                 <label
                                     className="block font-medium mb-2 text-gray-700"
                                     htmlFor={cat}
@@ -340,11 +372,14 @@ const ItemForm = () => {
                                     onChange={(e) =>
                                         setInputValues({ ...inputValues, [cat]: e.target.value })
                                     }
-                                /> 
+                                />
                             </div>
                         ))}
                     </div>
                 )}
+
+
+
 
 
 
