@@ -314,7 +314,7 @@ function Adsproduct({ data }) {
                     {/* title */}
                     <div className="ml-2 flex">
                         <div className="my-auto mx-auto text-left font-medium text-lg">
-                            THE ONLY ADDRESS OF COMFORT HEYKEL SUIT APART 0554 666 60 98
+                            T{data.details}
                             {/* {router.query.title} */}
                         </div>
                     </div>
