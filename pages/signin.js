@@ -10,7 +10,8 @@ import { useTranslation } from "react-i18next";
 
 export default function SignIn() {
   const { t, i18n } = useTranslation();
-
+  //const [email, setEmail] = useState("");
+  //const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const router = useRouter();
   const [loadding, setLoadding] = useState(false)
@@ -37,6 +38,7 @@ export default function SignIn() {
       }}
       validationSchema={ErrorSchema}
       onSubmit={(value) => {
+        console.log(value);
         setLoadding(true)
 
         fetch("http://app.almalk.org:3000/login", {
@@ -70,7 +72,7 @@ export default function SignIn() {
 
             }
 
-            //console.log("Success:", data);
+            console.log("Success:", data);
 
 
           })

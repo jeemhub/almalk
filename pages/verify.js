@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/router";
 
 const Verify = () => {
   const { t, i18n } = useTranslation();
   const [otp, setOtp] = useState("");
   const [error, setError] = useState(null);
   const email = typeof localStorage !== 'undefined' ? localStorage.getItem('email') : '';
-  const router = useRouter();
+  console.log("email", email);
 
   const handelSubmit = (event) => {
     
@@ -30,7 +29,6 @@ const Verify = () => {
           console.log(data.message);
           console.log("error", error);
         }
-        router.push('/sigin')
         console.log("Success:", data);
       })
       .catch((error) => {
