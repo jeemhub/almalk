@@ -13,10 +13,12 @@ function Adsproduct({ images }) {
   const { t, i18n } = useTranslation();
   const router = useRouter();
 
-  const imagespc = images.map((image) => ({
+  const imagespc = Array.isArray(images) ? images.map((image) => ({
     original: image,
     thumbnail: image,
-  }));
+  })) : [{ original: images, thumbnail: images }];
+  
+  const imagespcfix = Array.isArray(images) ? images : [images];
 
   const responsive = {
     superLargeDesktop: {
@@ -137,7 +139,7 @@ function Adsproduct({ images }) {
             </div>
             <div className="h-[30vh]">
               <Carousel className="z-35" responsive={responsive}>
-                {images.map((image, index) => (
+                {imagespcfix.map((image, index) => (
                   <div
                     className="w-screen relative flex h-44 justify-center"
                     key={index}

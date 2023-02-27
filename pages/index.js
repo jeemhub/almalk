@@ -13,20 +13,17 @@ import { useTranslation } from 'react-i18next';
 
 export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) {
   const { t, i18n } = useTranslation();
-  console.log(electroniccatnolim);
+  //console.log(electroniccatnolim);
   var SingleAdsImage = 0;
   const router = useRouter();
 
   function Goto(id, data) {
-
     for (let i = 0; i < data.length; i++) {
       if (data[i].title == id) {
         router.push(`/singleads/${data[i]._id}`);
-
       }
     }
   }
-
   return (
     <div className="bg-gray-100">
       <Head>
@@ -89,7 +86,7 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
         <div>
           {electroniccatnolim.map((categoryData, index) => {
             if (categoryData.items.length > 0) {
-              console.log(dataSingleAds[SingleAdsImage]?._id);
+              //console.log(dataSingleAds[SingleAdsImage]?._id);
               return (
                 <>
                   <Productslider
@@ -175,9 +172,7 @@ export const getServerSideProps = async (context) => {
     ).then((res) => res.json());
 
   const dataSingleAds = await resSingleAds.json();
-
-
-  
+  //console.log("dataSingleAds",dataSingleAds)
 
   return {
     props: {
@@ -185,5 +180,6 @@ export const getServerSideProps = async (context) => {
       dataSingleAds: dataSingleAds.diamondAds,
       bannerdata,
     },
+    
   };
 };
