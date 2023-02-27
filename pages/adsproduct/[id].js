@@ -17,40 +17,41 @@ function Adsproduct({ data }) {
     const [images, setImages] = useState([])
     const [ownerName, setOwnerName] = useState(null)
     const [ownerPicture, setOwnerpicture] = useState(null)
+    const [Imagespc, setImagespc] = useState([]);
 
 
     const { id } = router.query;
     let options = { month: "long", day: "numeric", year: "numeric" };
-
+console.log(data)
     useEffect(() => {
-        setImages(data.images)
+        setImages(data.images);
+        const imagespc = data.images.map((image) => ({
+          original: image,
+          thumbnail: image,
+        }));
+        setImagespc(imagespc);
+      
         fetch(`http://app.almalk.org:3000/user/profile/${data.owner}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Data:', data);
-                // Do something with the data
-                if (data.name) {
-                    setOwnerName(data.name);
-                }
-                if (data.picture) {
-                    setOwnerpicture(data.picture);
-                }
-
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Handle errors
-            });
-    }, []);
-    const imagespc = images.map((image) => ({
-        original: image,
-        thumbnail: image,
-    }));
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log("Data:", data);
+            if (data.name) {
+              setOwnerName(data.name);
+            }
+            if (data.picture) {
+              setOwnerPicture(data.picture);
+            }
+          })
+          .catch(error => {
+            console.error("Error:", error);
+          });
+      }, [data.images]);
+      
 
     const [activeTab, setActiveTab] = useState(0);
 
@@ -64,7 +65,7 @@ function Adsproduct({ data }) {
             <div className="image-gallery-image w-full h-[528px]">
                 <img
                     src={item.original}
-                    alt={"hghg"}
+                    alt={"images"}
                     className="object-center w-full h-full"
                 />
             </div>
@@ -111,12 +112,10 @@ function Adsproduct({ data }) {
             <div></div>
             {/* <Breadcrumbs /> */}
 
-            <div className="w-full h-14 bg-black text-white text-center flex">
-                <div className="my-auto mx-auto">ads space here</div>
-            </div>
+            
 
             {/* pc products */}
-            <div className="hidden tablet:block max-w-screen-2xl mx-auto bg-[#fff]">
+            <div className="hidden tablet:block max-w-screen-2xl mx-auto bg-[#fff] mt-5">
                 <div className='flex-2 w-[98%] mx-auto mb-[-30px] text-[#333]'>
                     <h1 className='  text-xl font-bold text-[#333] h-[#18px] py-3 text-ellipsis '>
 
@@ -129,7 +128,7 @@ function Adsproduct({ data }) {
                 <div className="flex h-full space-x-5 mx-auto mt-10">
                     {/* image gallery */}
                     <div className="flex-auto ml-3 w-[650px]">
-                        <ImageGallery items={imagespc} showFullscreenButton={false} renderItem={renderCustomItem}
+                        <ImageGallery items={Imagespc} showFullscreenButton={false} renderItem={renderCustomItem}
                             showPlayButton={false} />
                     </div>
                     {/* share button */}
@@ -153,6 +152,14 @@ function Adsproduct({ data }) {
                             </div>
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                 <div className='font-medium text-sm  w-[50%]'>
+                                    item ID 
+                                </div>
+                                <div className='text-red-500 w-[50%]'>
+                                    {data.itemNumber}
+                                </div>
+                            </div>
+                            <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
+                                <div className='font-medium text-sm  w-[50%]'>
                                     Price
                                 </div>
                                 <div className='text-red-500 w-[50%]'>
@@ -171,7 +178,7 @@ function Adsproduct({ data }) {
                             
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                 <div className='font-medium text-sm w-[50%]'>
-                                    create at
+                                    published time
                                 </div>
                                 <div className='text-slate-800 text-xs w-[50%]'>
                                     {new Date(data.createdAt).toLocaleDateString("en-US", options)}
@@ -179,15 +186,7 @@ function Adsproduct({ data }) {
                                 </div>
                             </div>
 
-                            <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                                <div className='font-medium text-sm w-[50%]'>
-                                    expire at
-                                </div>
-                                <div className='text-slate-800 text-xs w-[50%]'>
-                                    {new Date(data.expireAds).toLocaleDateString("en-US", options)}
-
-                                </div>
-                            </div>
+                            
 
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                 <div className='font-medium text-sm w-[50%]'>
@@ -213,7 +212,7 @@ function Adsproduct({ data }) {
                                 <>
                                     {data.requiredFields.map((field) => {
                                         return (
-                                            <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
+                                            <div key={field.fieldName} className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                                 <div className='font-medium text-sm w-[50%]'>
                                                     {field.fieldName}
                                                 </div>
@@ -239,27 +238,31 @@ function Adsproduct({ data }) {
                                     <div className='flex justify-between items-center pb-[9px] border-solid border-b-[2px] border-[#ccc]'>
                                         {ownerPicture ? (
                                             <>
-                                                <img src={`https://codellab.s3.amazonaws.com/${ownerPicture}`} className='w-[108] h-[40px] flex-2' />
+                                                <img src={`https://codellab.s3.amazonaws.com/${ownerPicture}`} className='w-[108] h-[40px] flex-2' alt={ownerPicture}/>
 
                                             </>
                                         ) : (
                                             <>
-                                                <img src="https://image5.sahibinden.com/stores/logos/02/06/19/671b272f33b668722242be2826613de3e5582921.png" className='w-[108] h-[40px] flex-2' />
+                                                <img src="https://image5.sahibinden.com/stores/logos/02/06/19/671b272f33b668722242be2826613de3e5582921.png" className='w-[108] h-[40px] flex-2' alt="profile"/>
                                             </>
                                         )}
                                         <a href='#' className='text-[#00339f] flex-1 ml-4'>{ownerName}</a>
 
                                     </div>
-                                    <h1 className='font-bold py-1'>Ercan Erdal
-                                    </h1>
+                                    
                                     <div className='flex mt-2'>
-                                        <h4 className='border-solid border-r-[1px] border-[#ccc] text-xs text-[#039] mr-2 pr-2'><a href='#'>All Ads</a></h4>
-                                        <h4 className='border-r-[1px] text-xs mr-2 text-[#039]'><a href='#'>Add to My Favorite Sellers</a></h4>
+                                        <h4 className='border-solid border-r-[1px] border-[#ccc] text-xs text-[#039] mr-2 pr-2' onClick={()=> (router.push({
+              pathname: `/useritems/[cat]`,
+              query: {
+                cat : data.owner,
+              }
+            }))}><a href='#'>All Ads</a></h4>
+                                        
 
                                     </div>
                                     <div className='bg-[#fff] rounded-md shadow-sm border-[1px] flex-col border-solid border-[c0c0c0] p-2 mt-2'>
                                         <div className='mb-1 flex'>
-                                            <span className='font-bold'>Pocket</span> <span className='ml-8 text-sm '>{data.phone}</span>
+                                            <span className='font-bold'>Phone Number</span> <span className='ml-8 text-sm '>{data.phone}</span>
                                         </div>
                                         {/* <div className='mb-1 flex'>
                                             <span className='font-bold'>Work</span> <span className='ml-10 text-sm '>0 (541) 131 23 53</span>
@@ -284,11 +287,11 @@ function Adsproduct({ data }) {
                                     </div>
 
                                     <div className='flex mt-2'>
-                                        <p className='text-sm'>Never pay a deposit or send money without seeing the vehicle you are interested in</p>
+                                        <p className='text-sm'>Never pay a deposit or send money without seeing the item you are interested in</p>
 
                                     </div>
 
-                                    <h3 className=' text-xs mt-2  text-[#039]'><a href='#'>Click for more informations</a></h3>
+                                    {/* <h3 className=' text-xs mt-2  text-[#039]'><a href='#'>Click for more informations</a></h3> */}
                                 </div>
                             </div>
                         </div>
@@ -314,7 +317,7 @@ function Adsproduct({ data }) {
                     {/* title */}
                     <div className="ml-2 flex">
                         <div className="my-auto mx-auto text-left font-medium text-lg">
-                            T{data.details}
+                            THE ONLY ADDRESS OF COMFORT HEYKEL SUIT APART 0554 666 60 98
                             {/* {router.query.title} */}
                         </div>
                     </div>
@@ -336,6 +339,7 @@ function Adsproduct({ data }) {
                                             layout="fill"
                                             objectFit="cover"
                                             objectPosition="center"
+                                            alt={image}
                                         ></Image>
                                     </div>
                                 ))}
@@ -373,7 +377,7 @@ function Adsproduct({ data }) {
                         </div>
                         <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                             <div className='font-medium text-sm w-[50%]'>
-                                created At
+                                published time
                             </div>
                             <div className='text-slate-800 text-xs w-[50%]'>
                                 {new Date(data.createdAt).toLocaleDateString("en-US", options)}
@@ -382,16 +386,7 @@ function Adsproduct({ data }) {
                             </div>
                         </div>
 
-                        <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                            <div className='font-medium text-sm w-[50%]'>
-                                expired At
-                            </div>
-                            <div className='text-slate-800 text-xs w-[50%]'>
-                                {new Date(data.expireAds).toLocaleDateString("en-US", options)}
-
-
-                            </div>
-                        </div>
+                        
 
                         <div className='flex justify-between  py-1 border-dotted border-b-[1px]'>
                             <div className='font-medium text-sm w-[50%]'>
@@ -420,7 +415,7 @@ function Adsproduct({ data }) {
                             <>
                                 {data.requiredFields.map((field) => {
                                     return (
-                                        <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
+                                        <div key={field.fieldName} className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                             <div className='font-medium text-sm  w-[50%]'>
                                                 {field.fieldName}
                                             </div>
@@ -457,16 +452,20 @@ function Adsproduct({ data }) {
                                     <a href='#' className='text-[#00339f] flex-1 ml-4'>{ownerName}</a>
 
                                 </div>
-                                <h1 className='font-bold py-1'>Ercan Erdal
-                                </h1>
+                               
                                 <div className='flex mt-2'>
-                                    <h4 className='border-solid border-r-[1px] border-[#ccc] text-xs text-[#039] mr-2 pr-2'><a href='#'>All Ads</a></h4>
-                                    <h4 className='border-r-[1px] text-xs mr-2 text-[#039]'><a href='#'>Add to My Favorite Sellers</a></h4>
+                                    <h4 className='border-solid border-r-[1px] border-[#ccc] text-xs text-[#039] mr-2 pr-2' onClick={()=> (router.push({
+              pathname: `/useritems/[cat]`,
+              query: {
+                cat : data.owner,
+              }
+            }))}><a href='#'>All Ads</a></h4>
+                                    
 
                                 </div>
                                 <div className='bg-[#fff] rounded-md shadow-sm border-[1px] flex-col border-solid border-[c0c0c0] p-2 mt-2'>
                                     <div className='mb-1 flex'>
-                                        <span className='font-bold'>Pocket</span> <span className='ml-8 text-sm '>{data.phone}</span>
+                                        <span className='font-bold'>Phone Number</span> <span className='ml-8 text-sm '>{data.phone}</span>
                                     </div>
                                     {/* <div className='mb-1 flex'>
                                         <span className='font-bold'>Work</span> <span className='ml-10 text-sm '>0 (541) 131 23 53</span>
@@ -491,7 +490,7 @@ function Adsproduct({ data }) {
                                 </div>
 
                                 <div className='flex mt-2'>
-                                    <p className='text-sm'>Never pay a deposit or send money without seeing the vehicle you are interested in</p>
+                                    <p className='text-sm'>Never pay a deposit or send money without seeing the item you are interested in</p>
 
                                 </div>
 
@@ -524,21 +523,21 @@ function Adsproduct({ data }) {
 
                         </div>
                         <div className='bg-white py-5 mt-5 mobile:mt-0 pl-5 mobile:px-2 border-[1px] solid border-t-0 w-ful '>
-                            <h1 className='text-center'>
-                                FOR YOUR HEALTH,  WE STRONGLY REQUEST YOU TO READ THE MEASURES WE TAKE REGARDING THE VIRUS (COVID  19) CAREFULLY AND WITHOUT Boring!!
+                            <h1 className='text-center text-xl'>
+                                {data.details}
 
                             </h1>
 
-                            <h1 className='text-center text-red-500'>
+                            {/* <h1 className='text-center text-red-500'>
                                 FOR YOUR HEALTH,  WE STRONGLY REQUEST YOU TO READ THE MEASURES WE TAKE REGARDING THE VIRUS (COVID  19) CAREFULLY AND WITHOUT Boring!!
 
                             </h1>
                             <h1 className='text-blue-700 text-center'>
 
-                                DON'T RESPECT THE ADVERTISEMENTS WITHOUT PROOF AND BASIS, SUCH AS "MEASURES TAKEN" AND "WAS DONE IN DISINFECTION" Written in the Titles of the Ads!.
+                                DONT RESPECT THE ADVERTISEMENTS WITHOUT PROOF AND BASIS, SUCH AS MEASURES TAKEN AND WAS DONE IN DISINFECTION Written in the Titles of the Ads!.
 
                                 K!
-                            </h1>
+                            </h1> */}
                         </div>
                     </>
                 }
