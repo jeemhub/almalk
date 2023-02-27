@@ -1,0 +1,10 @@
+.invalid {
+  border: 1px solid red !important;
+}
+.valid {
+  border: 1px solid rgb(13, 145, 24) ;
+}
+/* input{
+  outline: none !important;
+  box-shadow: none !important;
+} */

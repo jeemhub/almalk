@@ -36,7 +36,6 @@ function Checkout() {
     }
 
     }
-    
 
 
   return (
