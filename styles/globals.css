@@ -67,6 +67,7 @@ body{
   .image-gallery-thumbnail-image {
     width: 90px;
     height: 70px;
+    /* object-fit: contain; */
   }
   .image-gallery-image {
     height: 520px;

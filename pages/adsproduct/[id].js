@@ -10,19 +10,21 @@ import { useRouter } from "next/router";
 import Head from 'next/head';
 import { useTranslation } from "react-i18next";
 import Breadcrumbs from "../../components/Breadcrumbs";
-
+import Loader from "../../components/Loader";
 function Adsproduct({ data }) {
     const { t, i18n } = useTranslation();
     const router = useRouter();
     const [images, setImages] = useState([])
     const [ownerName, setOwnerName] = useState(null)
     const [ownerPicture, setOwnerpicture] = useState(null)
+    const [loadding, setLoadding] = useState(false)
 
 
     const { id } = router.query;
     let options = { month: "long", day: "numeric", year: "numeric" };
 
     useEffect(() => {
+        setLoadding(true)
         setImages(data.images)
         fetch(`http://app.almalk.org:3000/user/profile/${data.owner}`)
             .then(response => {
@@ -36,10 +38,13 @@ function Adsproduct({ data }) {
                 // Do something with the data
                 if (data.name) {
                     setOwnerName(data.name);
+                    setLoadding(false)
                 }
                 if (data.picture) {
+                    setLoadding(false)
                     setOwnerpicture(data.picture);
                 }
+                setLoadding(false)
 
             })
             .catch(error => {
@@ -65,7 +70,7 @@ function Adsproduct({ data }) {
                 <img
                     src={item.original}
                     alt={"hghg"}
-                    className="object-center w-full h-full"
+                    className=" object-contain w-full h-full"
                 />
             </div>
         );
@@ -92,7 +97,12 @@ function Adsproduct({ data }) {
     };
 
     return (
-        <div className="bg-[#e5e7eb] tablet:bg-white">
+        <>
+        {loadding ? (<>
+            <Loader />
+
+         </>):(<>
+            <div className="bg-[#e5e7eb] tablet:bg-white">
             <Head>
                 <title>Almalek</title>
                 <meta
@@ -334,7 +344,7 @@ function Adsproduct({ data }) {
                                         <Image
                                             src={image}
                                             layout="fill"
-                                            objectFit="cover"
+                                            objectFit="contain"
                                             objectPosition="center"
                                         ></Image>
                                     </div>
@@ -549,6 +559,9 @@ function Adsproduct({ data }) {
 
             </div>
         </div>
+          </>)}
+        
+        </>
     );
 }
 
@@ -569,5 +582,6 @@ export async function getServerSideProps(context) {
     const { id } = context.query;
     const response = await fetch(`http://app.almalk.org:3000/items/${id}`);
     const data = await response.json();
+    
     return { props: { data } };
 }
