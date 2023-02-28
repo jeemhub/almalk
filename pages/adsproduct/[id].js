@@ -322,31 +322,25 @@ function Adsproduct({ data }) {
 
                         {/* brand and ratings */}
                         <div className="bg-[#FFF] h-full">
-                            <div className='flex-2 mobile:w-[95%] mobile:mx-auto text-[#333]'>
-                                <h1 className='text-[18px] font-medium text-sm text-[#333] h-[#18px] py-3 text-ellipsis '>
-
-
-
-                                </h1>
-                            </div>
+                            
                             {/* title */}
                             <div className="ml-2 flex">
                                 <div className="my-auto mx-auto text-left font-medium text-lg">
-                                    THE ONLY ADDRESS OF COMFORT HEYKEL SUIT APART 0554 666 60 98
+                                    {data.details}
                                     {/* {router.query.title} */}
                                 </div>
                             </div>
                             {/* image galery */}
-                            <div className="mt-5 border-4 h-[35vh]">
+                            <div className="mt-8 border-4 h-[35vh]">
                                 {/* share button */}
-                                <div className="flex-auto absolute mt-2 right-3 bg-white rounded-full bg-opacity-40 z-40">
+                                <div className="flex-center mb-0 absolute mt-0 right-3 bg-white rounded-full bg-opacity-40 z-40">
                                     <Share_drop_down />
                                 </div>
                                 <div className="h-[30vh]">
                                     <Carousel className="z-35" responsive={responsive}>
                                         {images.map((image, index) => (
                                             <div
-                                                className=" w-full h-[528px] mobile:h-[300px]   mb-8 "
+                                                className=" w-full h-[528px] mobile:h-[260px]   mb-8 mt-3 "
                                                 key={index}
                                             >
                                                 <Image
