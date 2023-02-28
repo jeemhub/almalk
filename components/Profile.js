@@ -157,7 +157,7 @@ export default function Profile() {
 
           {/* mobile */}
           <div className="flex-grow self-start pl-10 md:hidden">
-            <h1 className="text-3xl md:text-4xl font-bold">Jassim</h1>
+            <h1 className="text-3xl md:text-4xl font-bold">{userdata && userdata.name}</h1>
             <p className="text-gray-500 text-sm md:text-lg">
               {userdata ? userdata.email : "email"}
             </p>
@@ -175,7 +175,7 @@ export default function Profile() {
           </div>
           {/* pc */}
           <div className="flex-grow hidden md:block">
-            <h1 className="text-3xl md:text-4xl font-bold">Jassim</h1>
+            <h1 className="text-3xl md:text-4xl font-bold">{userdata && userdata.name}</h1>
             <p className="text-gray-500 text-sm md:text-lg">
               {userdata ? userdata.email : "email"}
             </p>

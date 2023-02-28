@@ -30,7 +30,7 @@ useEffect(() => {
       <div className="sideNavNameHead">
         <div className="pl-5 pt-12 text-white">
         <div className="text-xl font-bold">{t("Browse")}</div>
-        <div className="block text-3xl -mt-2">Almalek</div>
+        <div className="block text-3xl -mt-2">Almalk</div>
         </div>
         <CloseIcon
           style={{
@@ -40,10 +40,11 @@ useEffect(() => {
             width: "35px"
           }}
           onClick={props.button}
+          className="cursor-pointer"
         />
       </div>
 
-      <div className="bg-[#fff] text-[#111] font-bold text-xl p-5" onClick={() => {router.push('/'); props.button}}>Almalek Home</div>
+      <div className="bg-[#fff] text-[#111] font-bold text-xl p-5" onClick={() => {router.push('/'); props.button}}>Almalk Home</div>
       {/* <div className="bg-[#fff] text-[#111] p-5 mt-2">
         <div className="font-bold text-xl">Trending</div>
         <Link key={'1'} href={{
@@ -54,7 +55,7 @@ useEffect(() => {
         </Link>
       </div> */}
       <div className="bg-[#fff] text-[#111] p-5 mt-2">
-        <div className="font-bold text-xl">{t("Departments")}</div>
+        <div className="font-bold text-xl">{t("Categories")}</div>
         {categories.map((category) => (
           
           <div className="flex flex-row mt-2" key={category._id}>

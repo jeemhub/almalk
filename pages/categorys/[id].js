@@ -10,19 +10,24 @@ const ItemList = ({}) => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const id = router.query.id;
-
+  const ids = router.query.id;
+  const cat = router.query.cat
+console.log(ids)
 useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
-    if (id) {
-      const response = await axios.get(`http://app.almalk.org:3000/items/category/${id}/${page}`);
+    if (ids) {
+      const response = await axios.get(`http://app.almalk.org:3000/items/category/${ids}/${page}`);
       setItems(response.data);
+    }
+    if (cat) {
+      const get_user = await axios.get(`http://app.almalk.org:3000/items/user/63f66fdcdbeb74a1c13c8e1a`)
+      setItems(get_user.data);
     }
     setLoading(false);
   };
   fetchData();
-}, [page, id]);
+}, [page, ids, cat]);
 
 
 // function handleClicked(title,images,details,price,currency,location,isOwner,statuss,createdAt,requiredFields) {

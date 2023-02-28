@@ -56,29 +56,11 @@ function Header() {
   };
 
   function handleClicked(
-    title,
-    images,
-    details,
-    price,
-    currency,
-    location,
-    isOwner,
-    statuss,
-    createdAt
+    _id
   ) {
+    setSearchResults([]);
     router.push({
-      pathname: "/adsproduct",
-      query: {
-        title: title,
-        images: images,
-        details: details,
-        price: price,
-        currency: currency,
-        location: location,
-        isOwner: isOwner,
-        status: statuss,
-        createdAt: createdAt,
-      },
+      pathname: `/adsproduct/${_id}`,
     });
   }
 
@@ -225,15 +207,7 @@ function Header() {
                   className="px-4 py-2 cursor-pointer hover:bg-gray-100"
                   onClick={() =>
                     handleClicked(
-                      result.title,
-                      result.images,
-                      result.details,
-                      result.price,
-                      result.currency,
-                      result.location,
-                      result.isOwner,
-                      result.status,
-                      result.createdAt
+                      result._id
                     )
                   }
                 >
@@ -281,7 +255,7 @@ function Header() {
             )}
           </div>
         </div>
-        <div className="h-full bg-white text-black">
+        <div className="h-full bg-white text-black flex tablet:hidden">
           {searchResults.length > 0 && (
             <div className="top-full w-full bg-white text-white shadow-lg">
               {searchResults.slice(0, 3).map((result, index) => (
@@ -290,15 +264,7 @@ function Header() {
                   className="px-4 py-2 cursor-pointer hover:bg-gray-100"
                   onClick={() =>
                     handleClicked(
-                      result.title,
-                      result.images,
-                      result.details,
-                      result.price,
-                      result.currency,
-                      result.location,
-                      result.isOwner,
-                      result.status,
-                      result.createdAt
+                      result._id
                     )
                   }
                 >
@@ -322,7 +288,7 @@ function Header() {
             className="link hidden tablet:flex items-center"
           >
             <MenuIcon className="h-6 mr-1" />
-            {t("alldepartments")}
+            {t("allcategories")}
           </p>
           <p className="link">{t("TodaysDeals")}</p>
           <p className="link">{t("customerservice")}</p>
