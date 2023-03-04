@@ -30,7 +30,7 @@ const Verify = () => {
           console.log(data.message);
           console.log("error", error);
         }
-        router.push('/sigin')
+        router.push('/signin')
         console.log("Success:", data);
       })
       .catch((error) => {

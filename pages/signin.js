@@ -82,7 +82,7 @@ export default function SignIn() {
       }}
     >
       {({ errors, touched }) => (
-        <div className="h-screen mobile:mt-[0px]  mobile:bg-slate-100 bg-slate-100 mobile:bg-inherit flex justify-center items-center w-full">
+        <div className="h-screen mobile:mt-[100px]  mobile:bg-slate-100 bg-slate-100 mobile:bg-inherit flex justify-center items-center w-full">
           {loadding ? (<>
           <Loader />
           </>):(<>
