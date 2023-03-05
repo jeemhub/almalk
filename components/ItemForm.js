@@ -81,7 +81,7 @@ const ItemForm = () => {
             router.push("/signin");
         }
         const geCategories = async () => {
-            const response = await fetch(`http://app.almalk.org:3000/categories`);
+            const response = await fetch(`${process.env.API_URL}/categories`);
             const data = await response.clone().json();
             setCategoryList(data);
         };
@@ -121,7 +121,7 @@ const ItemForm = () => {
             const postData = async () => {
                 
                 try {
-                    const res = await fetch("http://app.almalk.org:3000/item", {
+                    const res = await fetch(`${process.env.API_URL}/item`, {
                         method: "POST",
                         headers: {
                             "x-access-token": JSON.parse(token),

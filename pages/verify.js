@@ -13,7 +13,7 @@ const Verify = () => {
     
     console.log(email, otp);
     event.preventDefault();
-    fetch("http://app.almalk.org:3000/verify", {
+    fetch(`${process.env.API_URL}/verify`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

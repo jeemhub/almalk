@@ -35,7 +35,7 @@ export default function Profile() {
      const form = new FormData();
     form.append('picture', file);
     setFile(null)
-     const response = await fetch('http://app.almalk.org:3000/user/picture', {
+     const response = await fetch(`${process.env.API_URL}/user/picture`, {
       method: 'POST',
       headers: {
         'x-access-token': JSON.parse(token),
