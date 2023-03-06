@@ -39,7 +39,7 @@ export default function SignIn() {
       onSubmit={(value) => {
         setLoadding(true)
 
-        fetch("http://app.almalk.org:3000/login", {
+        fetch("http://ap.almalk.org:3000/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -62,13 +62,15 @@ export default function SignIn() {
               console.log(data.error);
               console.log("error", error);
             } else {
-              setLoadding(true)
+              setLoadding(true);
+              
               Cookies.set("loggedin", JSON.stringify(data.token));
               localStorage.setItem("token", JSON.stringify(data.token));
-
-              router.push("/");
-
+              
+              router.push("/").then(() => setLoadding(false));
+              
             }
+            
 
             //console.log("Success:", data);
 
@@ -78,7 +80,7 @@ export default function SignIn() {
             //setError(data.error);
             console.error("Error:", error);
           });
-
+          setLoadding(false)
       }}
     >
       {({ errors, touched }) => (

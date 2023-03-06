@@ -71,6 +71,11 @@ const ItemForm = () => {
             newErrors.category = "Category is required";
         }
 
+        // if (Object.keys(inputValues).length === 0) {
+        //     //console.log("inputValues.keys",inputValues.keys)
+        //     newErrors.inputValues = "At least one field must be entered";
+        // }
+
         setErrors(newErrors);
 
         return Object.keys(newErrors).length === 0;
@@ -94,12 +99,13 @@ const ItemForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
         if (!validate()) {
             return;
         }
 
         if (token) {
-            
+
             const formData = new FormData();
             formData.append("title", title);
             formData.append("price", price);
@@ -118,10 +124,11 @@ const ItemForm = () => {
                 formData.append("images", image);
             }
             setLoadding(true)
+
             const postData = async () => {
-                
+
                 try {
-                    const res = await fetch("http://app.almalk.org:3000/item", {
+                    const res = await fetch("http://ap.almalk.org:3000/item", {
                         method: "POST",
                         headers: {
                             "x-access-token": JSON.parse(token),
@@ -363,31 +370,28 @@ const ItemForm = () => {
 
 
                     {requiredFields && (
-                        <div className="flex flex-wrap ">
-                            {requiredFields.map((cat, index) => (
-                                <div key={index} className="w-[45%]  mobile:w-[100%] mb-3  mx-auto">
-                                    <label
-                                        className="block font-medium mb-2 text-gray-700"
-                                        htmlFor={cat}
-                                    >
-                                        {t(`${cat}`)}
-                                    </label>
-                                    <input
-                                        className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left`}
-                                        id={cat}
-                                        type="text"
-                                        name={cat}
-                                        onChange={(e) =>
-                                            setInputValues({ ...inputValues, [cat]: e.target.value })
-                                        }
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                        <>
+                            
+                            <div className={`flex flex-wrap ${requiredFields.length % 2 === 1 ? "justify-end" : ""}`}>
+                                {requiredFields.map((cat, index) => (
+                                    <div key={index} className={`w-[45%] mobile:w-[100%] mb-3 ${index === requiredFields.length - 1 && requiredFields.length % 2 === 1 ? "mr-auto ml-4 mobile:mx-auto" : "mx-auto"}`}>
+                                        <label className="block font-medium mb-2 text-gray-700" htmlFor={cat}>
+                                            {t(`${cat}`)}
+                                        </label>
+                                        <input
+                                            className={`border w-full border-gray-500 p-3 rounded-md focus:border-[#E77600] focus:shadow-md focus:outline-none text-left`}
+                                            id={cat}
+                                            type="text"
+                                            name={cat}
+                                            onChange={(e) =>
+                                                setInputValues({ ...inputValues, [cat]: e.target.value })
+                                            }
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </>
                     )}
-
-
-
 
 
 
@@ -452,7 +456,7 @@ const ItemForm = () => {
                     </div>
 
                     <button
-                        className="bg-[#DB9E43] hover:bg-yellow-700 text-white font-medium py-3 ml-4 px-4 rounded"
+                        className="bg-[#DB9E43] hover:bg-yellow-700 mobile:w-full mobile:mx-auto text-white font-medium py-3 ml-4 px-4 rounded"
                         type="submit"
                     >
                         {t("Publish")}

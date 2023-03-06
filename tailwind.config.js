@@ -10,7 +10,7 @@ module.exports = {
       'mobile': {'max': '480px','min': '320px'},
       
 
-      'sm': '640px',
+      'sm': {'max': '1024px','min': '768px'},
       // => @media (min-width: 640px) { ... }
 
       'md': '768px',

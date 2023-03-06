@@ -19,8 +19,6 @@ function Adsproduct({ data }) {
     const [ownerPicture, setOwnerpicture] = useState(null)
     const [Imagespc, setImagespc] = useState([]);
 
-
-    const { id } = router.query;
     let options = { month: "long", day: "numeric", year: "numeric" };
     useEffect(() => {
         setImages(data.images);
@@ -210,14 +208,20 @@ function Adsproduct({ data }) {
                                 <>
                                     {data.requiredFields.map((field) => {
                                         return (
-                                            <div key={field.fieldName} className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                                                <div className='font-medium text-sm w-[50%]'>
-                                                    {field.fieldName}
-                                                </div>
-                                                <div className='text-slate-800 text-xs w-[50%]'>
-                                                    {field.fieldValue}
-                                                </div>
-                                            </div>
+                                            <>
+                                                {field.fieldValue ? (
+                                                    <>
+                                                        <div key={field.fieldName} className='flex justify-between py-1 border-dotted border-b-[1px]'>
+                                                            <div className='font-medium text-sm w-[50%]'>
+                                                                {field.fieldName}
+                                                            </div>
+                                                            <div className='text-slate-800 text-xs w-[50%]'>
+                                                                {field.fieldValue}
+                                                            </div>
+                                                        </div>
+                                                    </>) : (<> </>)}
+
+                                            </>
                                         );
                                     })}
                                 </>
@@ -308,8 +312,6 @@ function Adsproduct({ data }) {
                     <div className='flex-2 mobile:w-[95%] mobile:mx-auto text-[#333]'>
                         <h1 className='text-[18px] font-medium text-sm text-[#333] h-[#18px] py-3 text-ellipsis '>
 
-
-
                         </h1>
                     </div>
                     {/* title */}
@@ -350,7 +352,7 @@ function Adsproduct({ data }) {
 
 
 
-                <div className='w-[50%] mobile:w-full mobile:flex-col mobile:self-center mobile:my-1 bg-white flex self-start'>
+                <div className='w-[50%] sm:flex sm:justify-between mobile:w-full mobile:flex-col mobile:self-center mobile:my-1 bg-white flex self-start'>
                     {/* Product Imfo */}
                     <div className='w-[50%] mobile:mt-3 mobile:w-[95%] mobile:mx-auto flex-col'>
                         <div>
@@ -413,15 +415,22 @@ function Adsproduct({ data }) {
                             <>
                                 {data.requiredFields.map((field) => {
                                     return (
-                                        <div key={field.fieldName} className='flex justify-between py-1 border-dotted border-b-[1px]'>
-                                            <div className='font-medium text-sm  w-[50%]'>
-                                                {field.fieldName}
-                                            </div>
-                                            <div className='text-slate-800 text-xs w-[50%]'>
-                                                {field.fieldValue}
+                                        <>
+                                            {field.fieldValue ? (<>
+                                                <div key={field.fieldName} className='flex justify-between py-1 border-dotted border-b-[1px]'>
+                                                    <div className='font-medium text-sm  w-[50%]'>
+                                                        {field.fieldName}
+                                                    </div>
+                                                    <div className='text-slate-800 text-xs w-[50%]'>
+                                                        {field.fieldValue}
 
-                                            </div>
-                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </>) : (<> </>)}
+
+
+                                        </>
                                     );
                                 })}
                             </>
