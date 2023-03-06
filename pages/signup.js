@@ -61,7 +61,7 @@ export default function SignUp() {
       onSubmit={(value) => {
         console.log("value",value)
         //const data = {"email": "mohsinali@gmail.com","password":"11111qqqqq","role": "company"};
-        fetch('http://app.almalk.org:3000/signup/email', {
+        fetch(`${process.env.API_URL}/signup/email`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

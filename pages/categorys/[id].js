@@ -17,11 +17,11 @@ useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
     if (ids) {
-      const response = await axios.get(`http://app.almalk.org:3000/items/category/${ids}/${page}`);
+      const response = await axios.get(`${process.env.API_URL}/items/category/${ids}/${page}`);
       setItems(response.data);
     }
     if (cat) {
-      const get_user = await axios.get(`http://app.almalk.org:3000/items/user/63f66fdcdbeb74a1c13c8e1a`)
+      const get_user = await axios.get(`${process.env.API_URL}/items/user/63f66fdcdbeb74a1c13c8e1a`)
       setItems(get_user.data);
     }
     setLoading(false);

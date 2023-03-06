@@ -28,7 +28,7 @@ function Adsproduct({ data }) {
         }));
         setImagespc(imagespc);
 
-        fetch(`http://ap.almalk.org:3000/user/profile/${data.owner}`)
+        fetch(`${process.env.API_URL}/user/profile/${data.owner}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
@@ -572,7 +572,7 @@ export default Adsproduct;
 
 export async function getServerSideProps(context) {
     const { id } = context.query;
-    const response = await fetch(`http://ap.almalk.org:3000/items/${id}`);
+    const response = await fetch(`${process.env.API_URL}/items/${id}`);
     const data = await response.json();
     return { props: { data } };
 }

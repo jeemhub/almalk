@@ -160,15 +160,15 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
 
 export const getServerSideProps = async (context) => {
   const electroniccatnolim = await fetch(
-    "http://ap.almalk.org:3000/home"
+    `${process.env.API_URL}/home`
   ).then((res) => res.json());
 
   const resSingleAds = await fetch(
-    "http://ap.almalk.org:3000/diamond-ads"
+   `${process.env.API_URL}/diamond-ads`
   );
 
   const bannerdata = await fetch(
-    "http://ap.almalk.org:3000/vip-ads"
+    `${process.env.API_URL}/vip-ads`
     ).then((res) => res.json());
 
   const dataSingleAds = await resSingleAds.json();
