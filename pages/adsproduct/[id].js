@@ -103,7 +103,7 @@ function Adsproduct({ data }) {
                     key="desc2"
                 />
             </Head>
-            <Header />
+            {/* <Header /> */}
             {/* banner ads */}
             <div></div>
             {/* <Breadcrumbs /> */}

@@ -55,7 +55,7 @@ function Adsproduct({ images }) {
           key="desc2"
         />
       </Head>
-    <Header />
+    {/* <Header /> */}
       {/* banner ads */}
       <div className="w-full h-14 bg-black text-white text-center flex">
         <div className="my-auto mx-auto">ads space here</div>

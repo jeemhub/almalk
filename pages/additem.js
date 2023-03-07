@@ -5,7 +5,7 @@ import ItemForm from '../components/ItemForm'
 function additem() {
   return (
     <div>
-        <Header />
+        {/* <Header /> */}
         <ItemForm />
         
     </div>

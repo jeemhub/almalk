@@ -3,6 +3,9 @@ import { SessionProvider } from "next-auth/react"
 import { Provider } from 'react-redux';
 import { store } from './../app/store';
 import './i18n';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+
 
 export default function App({
   Component,
@@ -11,7 +14,11 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
-      <Component {...pageProps} />
+
+        <Header/>
+          <Component {...pageProps} />
+
+          <Footer/>
       </Provider>
     </SessionProvider>
   )

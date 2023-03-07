@@ -35,7 +35,7 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
         />
       </Head>
 
-      <Header />
+      {/* <Header /> */}
 
       <main className="max-w-screen-2xl mx-auto">
         {/* Banner */}

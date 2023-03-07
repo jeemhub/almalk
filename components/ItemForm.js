@@ -25,6 +25,7 @@ const ItemForm = () => {
     const [loadding, setLoadding] = useState(false)
 
 
+    const regexExp = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi;
 
 
     const handleCategoryChange = (event) => {
@@ -203,7 +204,7 @@ const ItemForm = () => {
                                     }`}
                                 id="title"
                                 type="text"
-                                value={title}
+                                value={regexExp.test(title) ? '' : title}
                                 onChange={(event) => setTitle(event.target.value)}
                             />
                             {errors.title && (
@@ -217,14 +218,25 @@ const ItemForm = () => {
                             >
                                 {t("Price")}
                             </label>
-                            <input
+
+                            <CurrencyInput
+                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.price ? " border-red-500" : ""
+                                }`}
+                                id="price"
+                                defaultValue={price}
+                                decimalsLimit={2}
+                                onValueChange={(value, name) => setPrice(event.target.value)}
+
+
+                                />
+                            {/* <input
                                 className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.price ? " border-red-500" : ""
                                     }`}
                                 id="price"
                                 type="number"
                                 value={price}
                                 onChange={(event) => setPrice(event.target.value)}
-                            />
+                            /> */}
                             {errors.price && (
                                 <p className="text-red-500 text-xs italic">{errors.price}</p>
                             )}
@@ -444,13 +456,34 @@ const ItemForm = () => {
                                 >
                                     {t("Areyoutheownerofthisitem")}
                                 </label>
+                                       {/* start toggle switcher */}
+                        <div className="">
+                        <div className="flex">
+                            <label class="inline-flex relative items-center mr-5 cursor-pointer">
                                 <input
+                                    type="checkbox"
+                                    className="sr-only peer"
+                                    checked={isOwner}
+                                    readOnly
+                                />
+                                <div
+                                    onClick={() => {
+                                        setIsOwned(!isOwner); 
+                                    }}
+                                    className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-green-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"
+                                ></div>
+                               
+                            </label>
+                        </div>
+                    </div>
+                   {/* end toggle switcher */}
+                                {/* <input
                                     className=" mt-1"
                                     id="isOwner"
                                     type="checkbox"
                                     checked={isOwner}
                                     onChange={(event) => setIsOwned(event.target.checked)}
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>

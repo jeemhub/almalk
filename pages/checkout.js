@@ -40,7 +40,7 @@ function Checkout() {
 
   return (
     <div className='bg-[#EAEDED] h-[100vh]'>
-        <Header />
+        {/* <Header /> */}
         <main className='lg:flex'>
             <div className='flex-grow tablet:m-5 shadow-sm w-[100%] tablet:w-[80%]'>
             <div className='flex flex-col p-5 space-y-5 bg-[#fff]'>

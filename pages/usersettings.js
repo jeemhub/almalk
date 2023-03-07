@@ -6,7 +6,7 @@ import Profile from './../components/Profile';
 export default function usersettings() {
   return (
     <div >
-        <Header></Header>
+        {/* <Header></Header> */}
         <div className="">
              <Profile/>
         </div>

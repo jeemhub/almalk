@@ -105,7 +105,7 @@ function Product({api2}) {
 
   return (
     <div className='bg-[#e5e7eb] tablet:bg-white'>
-    <Header />
+    {/* <Header /> */}
     {/* banner ads */}
     <div className='w-full h-14 bg-black'>dfgdf</div>
     
