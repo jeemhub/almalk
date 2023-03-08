@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import Loader from "./Loader";
 import CurrencyInput from 'react-currency-input-field';
+import { useSelector } from "react-redux";
 
 
 const ItemForm = () => {
@@ -26,6 +27,7 @@ const ItemForm = () => {
     const [requiredFields, setRequiredFields] = useState(null);
     const [inputValues, setInputValues] = useState({});
     const [loadding, setLoadding] = useState(false)
+    const { isLoading, isLogged,userToken } = useSelector((state) => state.user);
 
 
     const regexExp = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi;
@@ -86,7 +88,7 @@ const ItemForm = () => {
     };
 
     useEffect(() => {
-        if (!token) {
+        if (!userToken) {
             router.push("/signin");
         }
         const geCategories = async () => {
@@ -132,7 +134,7 @@ const ItemForm = () => {
             const postData = async () => {
 
                 try {
-                    const res = await fetch("http://app.almalk.org:3000/item", {
+                    const res = await fetch("http://ap.almalk.org:3000/item", {
                         method: "POST",
                         headers: {
                             "x-access-token": JSON.parse(token),

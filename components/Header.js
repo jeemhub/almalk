@@ -24,25 +24,15 @@ function Header() {
   const router = useRouter();
   const items = useSelector(selectItems);
   //const token = Cookies.get('loggedin');
+  const {userToken } = useSelector((state) => state.user);
 
   const [sideBar, setSideBar] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  useEffect(() => {
-    const token = Cookies.get("loggedin");
-    if (token) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, []);
+
   const handelLogout = () => {
-    //Cookies.set("loggedin", "false");
     Cookies.remove("loggedin", "true");
-    // router.push("/signin");
-    setIsAuthenticated(false);
   };
   const handleSearch = async () => {
     const res = await fetch(`${process.env.API_URL}/search/${searchText}`);
@@ -115,7 +105,7 @@ function Header() {
               onClick={handleSearch}
             />
           </div>
-          {isAuthenticated ? (
+          {userToken ? (
             <>
               <button
                 onClick={() => router.push("/additem")}
@@ -160,7 +150,7 @@ function Header() {
                 EN
               </button>
             )}
-            {isAuthenticated ? (
+            {userToken ? (
                 <Dropdown>
                    <div
                 className="relative link flex items-center"
@@ -241,7 +231,7 @@ function Header() {
               onClick={handleSearch}
             />
 
-            {isAuthenticated ? (
+            {userToken ? (
               <>
                 <button
                   onClick={() => router.push("/additem")}
