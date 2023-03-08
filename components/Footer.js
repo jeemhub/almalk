@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaPinterestP, FaYoutube } from 'react-icons/fa';
 
-export class Footer extends Component {
-  render() {
+const Footer = () => {
+
     return (
       <div>
       <div class="bg-gray-100">
@@ -58,9 +58,10 @@ export class Footer extends Component {
          </div>
       </div>
    </div>
-   </div>
+     </div>
     )
+
+
   }
-}
 
 export default Footer

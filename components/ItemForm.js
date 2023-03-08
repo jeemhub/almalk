@@ -3,6 +3,9 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import Loader from "./Loader";
+import CurrencyInput from 'react-currency-input-field';
+
+
 const ItemForm = () => {
     const { t, i18n } = useTranslation();
     const router = useRouter();
