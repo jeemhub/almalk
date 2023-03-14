@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 81",
     "lint": "next lint"
   },
   "dependencies": {
@@ -29,13 +29,14 @@
     "react-currency-input-field": "^3.6.10",
     "react-dom": "17.0.2",
     "react-i18next": "^12.1.5",
-    "react-icons": "^4.8.0", 
+    "react-icons": "^4.8.0",
     "react-image-gallery": "^1.2.9",
     "react-multi-carousel": "^2.8.2",
     "react-redux": "^8.0.2",
     "react-responsive-carousel": "^3.2.23",
     "react-slick": "^0.29.0",
     "react-star-ratings": "^2.3.0",
+    "sharp": "^0.31.3",
     "stripe": "^10.11.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "yup": "^1.0.0"
