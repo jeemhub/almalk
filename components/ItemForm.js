@@ -28,10 +28,14 @@ const ItemForm = () => {
     const [inputValues, setInputValues] = useState({});
     const [loadding, setLoadding] = useState(false)
     const { isLoading, isLogged,userToken } = useSelector((state) => state.user);
+    const [isError, setIsError] = useState(false);
+
 
 
     const regexExp = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi;
 
+
+ 
 
     const handleCategoryChange = (event) => {
         const categoryId = event.target.value;
@@ -51,6 +55,10 @@ const ItemForm = () => {
         }
         if (!phone) {
             newErrors.phone = "Phone Number is required";
+           
+        }
+        if(isError){
+            newErrors.phoneLength = "Phone number must be at least 10 numbers"
         }
         if (!images.length) {
             newErrors.images = "At least one image is required";
@@ -340,10 +348,23 @@ const ItemForm = () => {
                                 id="phone"
                                 type="text"
                                 value={phone}
-                                onChange={(event) => setPhone(event.target.value)}
+                                onChange={(event) => 
+                                {
+                                    setPhone(event.target.value);
+                                    if (event.target.value.length < 10) {
+                                        setIsError(true);
+                                       
+                                        }else{
+                                            setIsError(false);
+                                        }
+                                    }
+                                }
                             />
                             {errors.phone && (
                                 <p className="text-red-500 text-xs italic">{errors.phone}</p>
+                            )}
+                            {errors.phoneLength && (
+                                <p className="text-red-500 text-xs italic">{errors.phoneLength}</p>
                             )}
                         </div>
                     </div>
