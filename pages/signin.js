@@ -16,7 +16,6 @@ export default function SignIn() {
 
   //const [error, setError] = useState(null);
   const router = useRouter();
-  const [loadding, setLoadding] = useState(false)
   const [showPassword, setShowPassword] = useState(false);
   const { userToken, isLoading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();

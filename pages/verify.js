@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
+import Loader from "../components/Loader";
 
 const Verify = () => {
   const { t, i18n } = useTranslation();
   const [otp, setOtp] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const email = typeof localStorage !== 'undefined' ? localStorage.getItem('email') : '';
   const router = useRouter();
 
@@ -13,6 +16,7 @@ const Verify = () => {
     
     console.log(email, otp);
     event.preventDefault();
+    setLoading(true)
     fetch(`${process.env.API_URL}/verify`, {
       method: "POST",
       headers: {
@@ -23,28 +27,47 @@ const Verify = () => {
         otp: parseInt(otp, 10),
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+      console.log(response.status);
+      
+      if(response.status==200){
+        router.push('/signin');
+        localStorage.removeItem('name');
+        localStorage.removeItem('email');
+        localStorage.removeItem('role');
+        localStorage.removeItem('inviteCode');
+      }
+      return response.json();
+  })
       .then((data) => {
-        if (data.message != null) {
-          setError(data.message);
-          console.log(data.message);
-          console.log("error", error);
-        }else{
-          router.push('/signin')
-        console.log("Success:", data);
-
+        if(data){
+          if (data.message != null) {
+            setLoading(false)
+          
+            setError(data.message);
+            console.log(data.message);
+            console.log("error", error);
+          }
         }
+        setLoading(false)
+
         
       })
       .catch((error) => {
         //setError(data.error);
-        console.error("Error:", data.message);
+        console.error("Error:", error);
+        setLoading(false)
+
       });
   };
 
   const handelResend = () => {};
   return (
-    <div className="h-screen mobile:mt-auto  bg-slate-50 flex justify-center items-center w-full">
+    <>
+      {loading ? (<>
+      <Loader />
+      </>):(<>
+        <div className="h-screen mobile:mt-auto  bg-slate-50 flex justify-center items-center w-full">
       <form onSubmit={handelSubmit}>
         <div className="bg-white px-10 py-8 rounded-xl w-screen shadow-lg max-w-sm">
           <h1 className="text-center text-6xl font-semibold">Logo</h1>
@@ -63,7 +86,7 @@ const Verify = () => {
                     )}
               <label className="block mb-1  font-semibold">
                 {t("ToverifyyouremailwehavesentaOneTimePassword")} (OTP) {t("to")}
-                {email}(Change){" "}
+                {email} <button className="text-blue-600" onClick={() => router.push("/signup")} >(Change Email)</button> {" "}
               </label>
               <input
                 type="number"
@@ -87,7 +110,9 @@ const Verify = () => {
           </div>
         </div>
       </form>
-    </div>
+    </div></>)}
+    </>
+
   );
 };
 

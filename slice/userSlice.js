@@ -21,7 +21,7 @@ export const login = createAsyncThunk(
         const {rejectWithValue} = thunkAPI;
 
         try {
-            const res = await fetch(`${process.env.API_URL}/login`, {
+            const res = await fetch("http://ap.almalk.org:3000/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

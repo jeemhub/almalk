@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import Loader from "../components/Loader";
 
 export default function ResetPassword() {
   const { t, i18n } = useTranslation();
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
 
 
 
   const handelSubmit = (event) => {
     event.preventDefault();
+    setLoading(true)
     fetch(`${process.env.API_URL}/reset/email`, {
       method: "POST",
       headers: {
@@ -24,6 +28,7 @@ export default function ResetPassword() {
       .then((response) => response.json())
       .then((data) => {
         if (data.message != null) {
+          setLoading(false)
           setError(data.message);
           console.log(data.message);
           console.log("error", error);
@@ -36,11 +41,14 @@ export default function ResetPassword() {
       .catch((error) => {
         //setError(data.error);
         console.error("Error:", error);
+        setLoading(false)
       });
   };
 
   return (
-    <div className="h-screen mobile:my-auto mobile:bg-inherit flex justify-center items-center   w-full">
+    <>
+    {loading ? (<><Loader /> </>):( <> 
+      <div className="h-screen mobile:my-auto mobile:bg-inherit flex justify-center items-center   w-full">
       <form onSubmit={handelSubmit}>
         <div className="bg-white px-10 py-8 mobile:w-[90%] mobile:mx-auto rounded-xl w-screen mobile:shadow-none shadow-md max-w-sm">
           {/*           <img
@@ -80,6 +88,8 @@ export default function ResetPassword() {
           </div>
         </div>
       </form>
-    </div>
+    </div></>)}
+    </>
+
   );
 }
