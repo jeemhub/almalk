@@ -40,7 +40,7 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="h-screen mobile:mt-[-100px] mobile:bg-inherit bg-slate-50 flex justify-center items-center   w-full">
+    <div className="h-screen mobile:my-auto mobile:bg-inherit flex justify-center items-center   w-full">
       <form onSubmit={handelSubmit}>
         <div className="bg-white px-10 py-8 mobile:w-[90%] mobile:mx-auto rounded-xl w-screen mobile:shadow-none shadow-md max-w-sm">
           {/*           <img
@@ -71,7 +71,7 @@ export default function ResetPassword() {
           </div>
           <button
             type="submit"
-            className="mt-4 mb-4 w-full  bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] font-semibold py-3 rounded-md  tracking-wide"
+            className="mt-4 mb-4 w-full  bg-[#DB9E43] text-white border-gray-500 hover:bg-[#c88521] font-semibold py-3 rounded-md  tracking-wide"
           >
             {t("Continue")}
           </button>

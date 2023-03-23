@@ -23,12 +23,11 @@ function Banner({ bannerdata }) {
             className="cursor-pointer w-[100vh] h-[25vh] ssm:h-[25vh] sm:h-[25vh] mdb:h-[30vh] md:h-[30vh] lg:h-[50vh] "
             key={ad._id}
           >
-            <Image
-              objectFit="cover"
-              layout="fill"
-              loading="lazy"
+            <img
+              
               src={ad.images[0]}
               alt=""
+              className="object-contain"
             />
 
             <h2 className="absolute text-sm tablet:text-4xl lg:text-4xl 1xl:text-5xl bg-black/70 rounded-xl p-2 text-white bottom-4 left-1/2 -translate-x-1/2 mb-5">

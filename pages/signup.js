@@ -2,28 +2,30 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from "../styles/Contactform.module.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
-
+import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import { useTranslation } from "react-i18next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
+import { useSelector } from 'react-redux';
 //import { Route, Routes, useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
+  const [error, setError] = useState(null)
+  const [showPassword, setShowPassword] = useState(false);
+  const { userToken, isLoading } = useSelector((state) => state.user);
   const { t, i18n } = useTranslation();
   const router = useRouter();
-
-  const [error, setError] = useState(null)
   const ErrorSchema = Yup.object().shape({
     name: Yup.string()
       .required("Please Enter Your Full Name")
       .min(5, "too Short")
       .max(100, "Too Long"),
 
-      inviteCode: Yup.number()
+    inviteCode: Yup.number()
       .integer()
       .typeError('inviteCode must be a number')
       .positive('inviteCode must be a positive number')
-      ,
+    ,
 
     email: Yup.string()
       .required("Please Enter Your Email Address")
@@ -42,8 +44,17 @@ export default function SignUp() {
 
     ),
   })
-  //const navigate = useNavigate();
 
+  useEffect(() => {
+    if (userToken) {
+      router.push("/");
+    }
+  }, []);
+
+
+  const handleToggleClick = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
 
@@ -59,7 +70,7 @@ export default function SignUp() {
       }}
       validationSchema={ErrorSchema}
       onSubmit={(value) => {
-        console.log("value",value)
+        console.log("value", value)
         //const data = {"email": "mohsinali@gmail.com","password":"11111qqqqq","role": "company"};
         fetch(`${process.env.API_URL}/signup/email`, {
           method: 'POST',
@@ -85,8 +96,8 @@ export default function SignUp() {
             console.log('Success:', data);
           })
           .catch((error) => {
-            setError(data.error);
-            console.error('Error:', error);
+            //setError(data.error);
+            //console.error('Error:', data.error);
           });
         console.log("error", error);
       }}
@@ -153,10 +164,12 @@ export default function SignUp() {
                 <p className="text-red-700  text-xs">{errors.email}</p>
               )}
             </div>
-            <div>
-              <label className="block mb-1 font-semibold"> {t("Password")}</label>
+            <div className="relative">
+              <label className="block mb-1  font-semibold">
+                {t("Password")}
+              </label>
               <Field
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 className={
                   touched.password
                     ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password
@@ -168,6 +181,14 @@ export default function SignUp() {
                 name="password"
               /* placeholder="Your Name " */
               />
+              <button
+                type="button"
+                onClick={handleToggleClick}
+                className="absolute top-[63%] right-[10px] transform -translate-y-[50%] bg-transparent border-none cursor-pointer"
+
+              >
+                {showPassword ? <RiEyeLine /> : < RiEyeOffLine />}
+              </button>
               {touched.password && errors.password && (
                 <p className="text-red-700  text-xs">{errors.password}</p>
               )}
@@ -177,7 +198,7 @@ export default function SignUp() {
                 {t("ReEnterPassword")}
               </label>
               <Field
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 className={
                   touched.password2
                     ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password2
@@ -187,7 +208,7 @@ export default function SignUp() {
                     : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
                 }
                 name="password2"
-              /* placeholder="Your Name " */
+
               />
 
               {touched.password2 && errors.password2 && (
@@ -225,7 +246,7 @@ export default function SignUp() {
           </div>
           <button
             type="submit"
-            className="mt-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] ] font-semibold py-3 rounded-md  tracking-wide"
+            className="mt-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] text-white font-semibold py-3 rounded-md  tracking-wide"
           >
             {t("Continue")}
           </button>

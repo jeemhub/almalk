@@ -74,7 +74,7 @@ export default function ConfirmResetPassword() {
       });
   };
   return (
-    <div className="h-screen mobile:mt-[-100px] mobile:bg-inherit bg-slate-50 flex justify-center items-center   w-full">
+    <div className="h-screen mobile:my-auto mobile:bg-inherit bg-slate-50 flex justify-center items-center   w-full">
       <form onSubmit={handelSubmit}>
         <div className="bg-white px-10 py-8 mobile:w-[100%] mobile:mx-auto rounded-xl w-screen mobile:shadow-none shadow-md max-w-sm">
           {/*           <img

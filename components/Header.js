@@ -23,7 +23,6 @@ function Header() {
   const { data: session } = useSession();
   const router = useRouter();
   const items = useSelector(selectItems);
-  //const token = Cookies.get('loggedin');
   const {userToken } = useSelector((state) => state.user);
 
   const [sideBar, setSideBar] = useState(false);

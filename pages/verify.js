@@ -29,9 +29,12 @@ const Verify = () => {
           setError(data.message);
           console.log(data.message);
           console.log("error", error);
-        }
-        router.push('/signin')
+        }else{
+          router.push('/signin')
         console.log("Success:", data);
+
+        }
+        
       })
       .catch((error) => {
         //setError(data.error);
@@ -41,15 +44,23 @@ const Verify = () => {
 
   const handelResend = () => {};
   return (
-    <div className="h-screen mobile:mt-[-200px] bg-slate-50 flex justify-center items-center w-full">
+    <div className="h-screen mobile:mt-auto  bg-slate-50 flex justify-center items-center w-full">
       <form onSubmit={handelSubmit}>
-        <div className="bg-white px-10 py-8 rounded-xl w-screen shadow-md max-w-sm">
+        <div className="bg-white px-10 py-8 rounded-xl w-screen shadow-lg max-w-sm">
           <h1 className="text-center text-6xl font-semibold">Logo</h1>
           <div className="space-y-4">
             <h1 className="text-center text-2xl mt-2 font-semibold ">
              {t("VerifyEmailAddress")}
             </h1>
             <div>
+            {error && (
+                      <div
+                        className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+                        role="alert"
+                      >
+                        <span className="font-medium"> {error}</span>
+                      </div>
+                    )}
               <label className="block mb-1  font-semibold">
                 {t("ToverifyyouremailwehavesentaOneTimePassword")} (OTP) {t("to")}
                 {email}(Change){" "}
@@ -65,7 +76,7 @@ const Verify = () => {
           </div>
           <button
             type="submit"
-            className="mt-4 mb-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] font-semibold py-3 rounded-md  tracking-wide"
+            className="mt-4 mb-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] text-white font-semibold py-3 rounded-md  tracking-wide"
           >
             {t("CreateAccount")}
           </button>
