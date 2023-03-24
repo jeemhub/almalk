@@ -88,7 +88,7 @@ export default function Profile() {
   
     if (token) {
       const getdata = async () => {
-        const res = await fetch("http://app.almalk.org:3000/user", {
+        const res = await fetch("http://ap.almalk.org:3000/user", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

@@ -97,8 +97,11 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
                   {SingleAdsImage < dataSingleAds.length && (
                     <div className="relative flex md:justify-between justify-center   w-[97%] mx-auto mt-3 tablet:mt-10 h-72 rounded-xl shadow-sm">
                       {SingleAdsImage < dataSingleAds.length && (
-                        <div className="md:w-[49%] h-72 rounded-lg  w-[100%] overflow-hidden relative">
+                        <div   className="md:w-[49%] h-72 rounded-lg  w-[100%] overflow-hidden relative">
                           <img
+                            onClick={(e) => {
+                              Goto(e.target.getAttribute('alt'), dataSingleAds);
+                            }}
                             className="object-cover min-h-[400px]"
                             src={dataSingleAds[SingleAdsImage].images[0]}
                             alt={dataSingleAds[SingleAdsImage].title}
@@ -117,11 +120,17 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
                         </div>
                       )}
                       {SingleAdsImage < dataSingleAds.length && (
-                        <div className="md:w-[49%] h-72 rounded-lg  w-[100%] overflow-hidden relative hidden md:block">
+                        <div  onClick={(e) => {
+                                Goto(e.target.innerHTML, dataSingleAds);
+                              }} className="md:w-[49%] h-72 rounded-lg  w-[100%] overflow-hidden relative hidden md:block">
                           <img
+                            onClick={(e) => {
+                              Goto(e.target.getAttribute('alt'), dataSingleAds);
+                            }}
                             className="object-cover min-h-[400px]"
                             src={dataSingleAds[SingleAdsImage].images[0]}
                             alt={dataSingleAds[SingleAdsImage].title}
+                          
                           />
                           <div className="absolute flex flex-col md:top-8/12 left-0 bottom-1">
                             <h1

@@ -54,8 +54,8 @@ useEffect(() => {
         <div className="mt-5 text-base cursor-pointer" onClick={props.button}>Mobiles</div>
         </Link>
       </div> */}
-      <div className="bg-[#fff] text-[#111] p-5 mt-2">
-        <div className="font-bold text-xl">{t("Categories")}</div>
+      <div className="bg-[#fff] text-[#111] p-5 mt-2 ">
+        <div className="font-bold text-xl ">{t("Categories")}</div>
         {categories.map((category) => (
           
           <div className="flex flex-row mt-2" key={category._id}>

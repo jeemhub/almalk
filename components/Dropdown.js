@@ -17,13 +17,13 @@ function classNames(...classes) {
 export default function User_drop_down({ session , children}) {
   const { t, i18n } = useTranslation();
   return (
-    <div className="z-40 hover:bg-opacity-70">
+    <div className="z-50 hover:bg-opacity-70">
     <Menu as="div" className="ml-auto relative">
       <div>
         <Menu.Button>
           {/* pc login icon */}
           <div className="hidden tablet:block link">
-        <p>
+        <p >
               {session ? `Hello, ${session.user.name}` : 'Hello, sign in'}
               
             </p>
