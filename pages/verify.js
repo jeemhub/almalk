@@ -6,6 +6,8 @@ import Loader from "../components/Loader";
 const Verify = () => {
   const { t, i18n } = useTranslation();
   const [otp, setOtp] = useState("");
+  const [otpError, setOtperror] = useState(null);
+
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -13,52 +15,57 @@ const Verify = () => {
   const router = useRouter();
 
   const handelSubmit = (event) => {
-    
-    console.log(email, otp);
     event.preventDefault();
-    setLoading(true)
-    fetch(`${process.env.API_URL}/verify`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: JSON.parse(localStorage.getItem("email")),
-        otp: parseInt(otp, 10),
-      }),
-    })
-      .then((response) => {
-      console.log(response.status);
+    if(otp ==""){
+      setOtperror("Please Enter A value")
+    }else {
       
-      if(response.status==200){
-        router.push('/signin');
-        localStorage.removeItem('name');
-        localStorage.removeItem('email');
-        localStorage.removeItem('role');
-        localStorage.removeItem('inviteCode');
-      }
-      return response.json();
-  })
-      .then((data) => {
-        if(data){
-          if (data.message != null) {
-            setLoading(false)
-          
-            setError(data.message);
-            console.log(data.message);
-            console.log("error", error);
-          }
-        }
-        setLoading(false)
-
-        
+      setLoading(true)
+      fetch(`${process.env.API_URL}/verify`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: JSON.parse(localStorage.getItem("email")),
+          otp: parseInt(otp, 10),
+        }),
       })
-      .catch((error) => {
-        //setError(data.error);
-        console.error("Error:", error);
-        setLoading(false)
+        .then((response) => {
+        console.log(response.status);
+        
+        if(response.status==200){
+          router.push('/signin');
+          localStorage.removeItem('name');
+          localStorage.removeItem('email');
+          localStorage.removeItem('role');
+          localStorage.removeItem('inviteCode');
+        }
+        return response.json();
+    })
+        .then((data) => {
+          if(data){
+            if (data.message != null) {
+              setLoading(false)
+            
+              setError(data.message);
+              console.log(data.message);
+              console.log("error", error);
+            }
+          }
+          setLoading(false)
+  
+          
+        })
+        .catch((error) => {
+          //setError(data.error);
+          console.error("Error:", error);
+          setLoading(false)
+  
+        });
 
-      });
+    }
+
   };
 
   const handelResend = () => {};
@@ -86,15 +93,22 @@ const Verify = () => {
                     )}
               <label className="block mb-1  font-semibold">
                 {t("ToverifyyouremailwehavesentaOneTimePassword")} (OTP) {t("to")}
-                {email} <button className="text-blue-600" onClick={() => router.push("/signup")} >(Change Email)</button> {" "}
+                {email} 
               </label>
+              <button className="text-blue-600 mt-0 mb-3" onClick={() => router.push("/signup")} >(Change Email)</button> {" "}
               <input
                 type="number"
-                className="border w-full border-gray-500 p-2 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                className={otpError ? 'border w-full border-red-500 p-2 rounded-md  focus:border-red-500 focus:shadow-md focus:outline-none text-left':'border w-full border-gray-500 p-2 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left'}
                 name="Verifying"
                 value={otp}
-                onInput={(e) => setOtp(e.target.value)}
+                onInput={(e) => {
+                  setOtp(e.target.value)
+                  setOtperror(null)
+                }}
               />
+              {otpError && (
+                <span className="text-red-500 text-xs">{otpError}</span>
+              )}
             </div>
           </div>
           <button

@@ -6,6 +6,10 @@ export default function ConfirmResetPassword() {
   const { t, i18n } = useTranslation();
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
+  const [passwordError, setPasswordError] = useState(null);
+  const [otpError, setOtpError] = useState("");
+
+
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -13,42 +17,50 @@ export default function ConfirmResetPassword() {
 
   const handelSubmit = (event) => {
     event.preventDefault();
-    setLoading(true)
-    fetch(
-      `${process.env.API_URL}/reset/${parseInt(
-        otp,
-        10
-      )}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: JSON.parse(localStorage.getItem("email")),
-          password: password,
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error != null) {
-          setError(data.error);
-          console.log(data.error);
-          setLoading(false)
-
-        } else {
-          console.log("Success:", data);
-          router.push("/signin");
+    if(otp == ""){
+      setOtpError("Please Enter an OTP that send via email");
+    }
+    if(password == ""){
+      setPasswordError("Please Enter The New Password");
+    } else {
+      setLoading(true)
+      fetch(
+        `${process.env.API_URL}/reset/${parseInt(
+          otp,
+          10
+        )}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: JSON.parse(localStorage.getItem("email")),
+            password: password,
+          }),
         }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error != null) {
+            setError(data.error);
+            console.log(data.error);
+            setLoading(false)
+  
+          } else {
+            console.log("Success:", data);
+            router.push("/signin");
+          }
+  
+        })
+        .catch((error) => {
+          //setError(data.error);
+          setError(data.error);
+  
+          console.error("Error:", error);
+        });
+    }
 
-      })
-      .catch((error) => {
-        //setError(data.error);
-        setError(data.error);
-
-        console.error("Error:", error);
-      });
   };
 
   const handelResend = (event) => {
@@ -109,12 +121,18 @@ export default function ConfirmResetPassword() {
 
                     <input
                       type="number"
-                      className="border w-full border-gray-500 p-2 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
-                      name="Verifying"
+                      className={`border w-full ${otpError ? 'border-red-600':'border-gray-500'}  p-2 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left`}
+                      name="otp"
                       value={otp}
-                      onInput={(e) => setOtp(e.target.value)}
+                      onInput={(e) => {
+                        setOtp(e.target.value)
+                        setOtpError(null)
+                      }}
                     /* placeholder="Your Name " */
                     />
+                    {otpError && (
+                <span className="text-red-500 text-xs">{otpError}</span>
+              )}
                   </div>
                   <div>
                     <label className="block mb-1  font-semibold">
@@ -123,17 +141,23 @@ export default function ConfirmResetPassword() {
 
                     <input
                       type="password"
-                      className="border w-full border-gray-500 p-2 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                      className={`border w-full ${passwordError ? 'border-red-600':'border-gray-500'}  p-2 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left`}
                       name="password"
                       value={password}
-                      onInput={(e) => setPassword(e.target.value)}
+                      onInput={(e) => {
+                        setPassword(e.target.value)
+                        setPasswordError(null)
+                      }}
                     /* placeholder="Your Name " */
                     />
+                    {passwordError && (
+                <span className="text-red-500 text-xs">{passwordError}</span>
+              )}
                   </div>
                 </div>
                 <button
                   type="submit"
-                  className="mt-4 mb-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] font-semibold py-3 rounded-md  tracking-wide"
+                  className="mt-4 mb-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c88521] font-semibold py-3 rounded-md text-white tracking-wide"
                 >
                   {t("Continue")}
                 </button>
