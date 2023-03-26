@@ -30,12 +30,9 @@ export const login = createAsyncThunk(
 
             });
             const data = await res.json();
-            console.log(data)
-            let token = data.token;
-            localStorage.setItem("token", token)
-
             return data;
           } catch (error) {
+            
             return rejectWithValue(error.message);
           }
 
@@ -61,7 +58,6 @@ const userSlice = createSlice({
             if (action.payload.passwordincorrect != null) {
                 state.error = action.payload.passwordincorrect;
                 state.isLoading = false;
-                console.log(action.payload.error);
                 console.log("error", action.payload);
               }
               else if (action.payload.message) {
@@ -77,7 +73,6 @@ const userSlice = createSlice({
                 state.isLogged = false
                 state.userToken = action.payload.token 
                 Cookies.set("loggedin", JSON.stringify(action.payload.token));
-                localStorage.setItem("token", JSON.stringify(action.payload.token));
                 console.log("action.payload",action.payload)
                 state.status = true
                 
@@ -87,6 +82,7 @@ const userSlice = createSlice({
         [login.rejected] : (state,action) => {
             state.isLoading = false;
             state.error = action.payload
+            console.log("Error in rejected")
 
         },
 

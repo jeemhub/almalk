@@ -142,7 +142,7 @@ function Adsproduct({ data }) {
 
                         {/* Product details  */}
 
-                        <div className='w-[50%] mobile:mt-3 mobile:w-[95%] mobile:mx-auto flex-col'>
+                        <div className='w-[50%] tablet:flex-row flex-col'>
                             <div>
                                 <h1 className='text-lg font-bold text-[#039] mb-2'>{data.title}</h1>
                             </div>
@@ -352,9 +352,9 @@ function Adsproduct({ data }) {
 
 
 
-                <div className='w-[50%] sm:flex sm:justify-between mobile:w-full mobile:flex-col mobile:self-center mobile:my-1 bg-white flex self-start'>
+                <div className='w-[100%]  sm:flex sm:justify-between mobile:w-full mobile:flex-col mobile:self-center mobile:my-1 bg-white flex self-start'>
                     {/* Product Imfo */}
-                    <div className='w-[50%] mobile:mt-3 mobile:w-[95%] mobile:mx-auto flex-col'>
+                    <div className='w-[50%] mobile:mt-3 mobile:w-[95%] mobile:mx-auto px-4 flex-col'>
                         <div>
                             <h1 className='text-lg font-bold text-[#039] mb-2'>{data.title}</h1>
                         </div>
@@ -442,7 +442,7 @@ function Adsproduct({ data }) {
 
                     </div>
                     <div className=' flex-col ml-2 mobile:mt-5 mobile:ml-0 mobile:w-full w-[50%]'>
-                        <div className='w-[100%]  h-fit  rounded-sm p-2'>
+                        <div className='w-[100%] border-[1px] h-fit  rounded-sm p-2'>
                             <div className="bg-[#dfdede] w-full h-full justify-center items-center p-3 flex-col">
                                 <div className='flex justify-between items-center pb-[9px] border-solid border-b-[2px] border-[#ccc]'>
 

@@ -23,7 +23,7 @@ function Header() {
   const { data: session } = useSession();
   const router = useRouter();
   const items = useSelector(selectItems);
-  const {userToken } = useSelector((state) => state.user);
+  const { userToken } = useSelector((state) => state.user);
 
   const [sideBar, setSideBar] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -100,18 +100,27 @@ function Header() {
               placeholder="Search Amazon"
             />
             <SearchIcon
-              className="h-12 p-4 bg-[#febd69] hover:bg-[#F3A847] rounded-r-md"
+              className="h-12 p-4 bg-[#febd69] text-white hover:bg-[#F3A847] rounded-r-md"
               onClick={handleSearch}
             />
           </div>
           {userToken ? (
             <>
-              <button
+              {/* <button
                 onClick={() => router.push("/additem")}
-                className="h-12 p-2 bg-[#febd69] ml-5 hover:bg-[#F3A847] rounded-md hidden tablet:flex"
+                className="h-12 p-2 bg-[#febd69] ml-5 text-white text-center hover:bg-[#F3A847] rounded-md hidden tablet:flex"
               >
                 {t("additem")}+
+              </button> */}
+              <button
+                onClick={() => router.push("/additem")}
+                className=" items-center justify-center hidden tablet:flex bg-[#febd69] hover:bg-[#F3A847] text-white font-bold py-3 px-4 rounded">
+                <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M10 18a1 1 0 0 1-1-1V3a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1zM18 10a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1z" />
+                </svg>
+                <span>Add Item</span>
               </button>
+
             </>
           ) : (
             <></>
@@ -150,31 +159,31 @@ function Header() {
               </button>
             )}
             {userToken ? (
-                <Dropdown>
-                   <div
-                className="relative link flex items-center"
-                onClick={handelLogout}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className=" h-10"
+              <Dropdown>
+                <div
+                  className="relative link flex items-center"
+                  onClick={handelLogout}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
-                  />
-                </svg>
-                <p className="font-extrabold md:text-sm md:inline ml-1">
-                  {t("signout")}
-                </p>
-              </div>
-                </Dropdown>
-              ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className=" h-10"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+                    />
+                  </svg>
+                  <p className="font-extrabold md:text-sm md:inline ml-1">
+                    {t("signout")}
+                  </p>
+                </div>
+              </Dropdown>
+            ) : (
               <div
                 className="relative link flex items-center"
                 onClick={() => router.push("/signin")}
@@ -226,18 +235,27 @@ function Header() {
               onKeyUp={handleKeyUp}
             />
             <SearchIcon
-              className="h-[44px] p-2 bg-[#febd69] hover:bg-[#F3A847] rounded-r-md"
+              className="h-[44px] p-2 bg-[#febd69] text-white hover:bg-[#F3A847] rounded-r-md"
               onClick={handleSearch}
             />
 
             {userToken ? (
               <>
-                <button
+                {/* <button
                   onClick={() => router.push("/additem")}
                   className="h-[44px] p-2 bg-[#febd69] ml-2 hover:bg-[#F3A847] rounded-md"
                 >
                   {t("additem")}+
+                </button> */}
+                <button
+                  onClick={() => router.push("/additem")}
+                  className="flex items-center justify-center h-[44px]  bg-[#febd69] hover:bg-[#F3A847] text-white font-bold py-2 px-4 ml-2 rounded">
+                  <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10 18a1 1 0 0 1-1-1V3a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1zM18 10a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1z" />
+                  </svg>
+                  <span>Add Item</span>
                 </button>
+
               </>
             ) : (
               <></>
