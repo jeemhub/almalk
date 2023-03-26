@@ -82,7 +82,7 @@ function Header() {
             <Image
               onClick={() => router.push("/")}
               src="/Images/amazon.webp"
-              className="cursor-pointer ml-10"
+              className="cursor-pointer ml-10 object-cover rounded-full"
               height={24}
               width={80}
               alt="amazon"
