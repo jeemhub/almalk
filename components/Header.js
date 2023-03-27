@@ -17,6 +17,7 @@ import TintBackground from "./TintBackground";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import Dropdown from './Dropdown'
+import LoadingOverlay from './LoadingOverlay';
 function Header() {
   const { t, i18n } = useTranslation();
 
@@ -62,9 +63,35 @@ function Header() {
     }
   };
 
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    const handleStart = () => {
+      setIsLoading(true)
+    }
+
+    const handleComplete = () => {
+      setIsLoading(false)
+    }
+
+    router.events.on('routeChangeStart', handleStart)
+    router.events.on('routeChangeComplete', handleComplete)
+    router.events.on('routeChangeError', handleComplete)
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart)
+      router.events.off('routeChangeComplete', handleComplete)
+      router.events.off('routeChangeError', handleComplete)
+    }
+  }, [])
+
   return (
     <>
       <header>
+        {isLoading &&
+        <LoadingOverlay />
+        }
         {/* Top nav */}
         <div className="flex items-center bg-[#232F3E] sm:bg-[#121921] p-1 flex-grow py-2">
           <p className="absolute -mt-2 ml-2 tablet:hidden items-center text-white">
@@ -78,11 +105,11 @@ function Header() {
             />
             <TintBackground act={sideBar} button={() => setSideBar(!sideBar)} />
           </div>
-          <div className="ml-20 tablet:ml-2 tablet:link mt-1 flex items-center flex-grow tablet:flex-grow-0 justify-center">
+          <div className="ml-20 tablet:ml-2 p- tablet:link mt-1 flex items-center flex-grow tablet:flex-grow-0 justify-center">
             <Image
               onClick={() => router.push("/")}
               src="/Images/amazon.webp"
-              className="cursor-pointer ml-10 object-cover rounded-full"
+              className="cursor-pointer ml-10  object-cover rounded-full "
               height={24}
               width={80}
               alt="amazon"
@@ -100,7 +127,7 @@ function Header() {
               placeholder="Search Amazon"
             />
             <SearchIcon
-              className="h-12 p-4 bg-[#febd69] text-white hover:bg-[#F3A847] rounded-r-md"
+              className="h-12 p-4 bg-[#f2e719] text-white hover:bg-[#b8ae00] rounded-r-md"
               onClick={handleSearch}
             />
           </div>
@@ -108,13 +135,13 @@ function Header() {
             <>
               {/* <button
                 onClick={() => router.push("/additem")}
-                className="h-12 p-2 bg-[#febd69] ml-5 text-white text-center hover:bg-[#F3A847] rounded-md hidden tablet:flex"
+                className="h-12 p-2 bg-[#f2e719] ml-5 text-white text-center hover:bg-[#b8ae00] rounded-md hidden tablet:flex"
               >
                 {t("additem")}+
               </button> */}
               <button
                 onClick={() => router.push("/additem")}
-                className=" items-center justify-center hidden tablet:flex bg-[#febd69] hover:bg-[#F3A847] text-white font-bold py-3 px-4 rounded">
+                className=" items-center justify-center hidden tablet:flex bg-[#f2e719] hover:bg-[#b8ae00] text-white font-bold py-3 px-4 rounded">
                 <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M10 18a1 1 0 0 1-1-1V3a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1zM18 10a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1z" />
                 </svg>
@@ -235,7 +262,7 @@ function Header() {
               onKeyUp={handleKeyUp}
             />
             <SearchIcon
-              className="h-[44px] p-2 bg-[#febd69] text-white hover:bg-[#F3A847] rounded-r-md"
+              className="h-[44px] p-2 bg-[#f2e719] text-white hover:bg-[#b8ae00] rounded-r-md"
               onClick={handleSearch}
             />
 
@@ -243,13 +270,13 @@ function Header() {
               <>
                 {/* <button
                   onClick={() => router.push("/additem")}
-                  className="h-[44px] p-2 bg-[#febd69] ml-2 hover:bg-[#F3A847] rounded-md"
+                  className="h-[44px] p-2 bg-[#f2e719] ml-2 hover:bg-[#b8ae00] rounded-md"
                 >
                   {t("additem")}+
                 </button> */}
                 <button
                   onClick={() => router.push("/additem")}
-                  className="flex items-center justify-center h-[44px]  bg-[#febd69] hover:bg-[#F3A847] text-white font-bold py-2 px-4 ml-2 rounded">
+                  className="flex items-center justify-center h-[44px]  bg-[#f2e719] hover:bg-[#b8ae00] text-white font-bold py-2 px-4 ml-2 rounded">
                   <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10 18a1 1 0 0 1-1-1V3a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1zM18 10a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1z" />
                   </svg>

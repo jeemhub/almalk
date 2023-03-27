@@ -124,7 +124,7 @@ export default function SignIn() {
                   </div>
                   <button
                     type="submit"
-                    className="mt-4 w-full bg-[#DB9E43] border-gray-500 hover:bg-[#c98e37] text-white font-semibold py-3 rounded-md  tracking-wide"
+                    className="mt-4 w-full bg-[#f2e719] border-gray-500 hover:bg-[#b8ae00] text-white font-semibold py-3 rounded-md  tracking-wide"
                   >
                     {t("Continue")}
                   </button>

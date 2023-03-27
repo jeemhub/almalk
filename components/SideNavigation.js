@@ -56,6 +56,8 @@ useEffect(() => {
       </div> */}
       <div className="bg-[#fff] text-[#111] p-5 mt-2 ">
         <div className="font-bold text-xl ">{t("Categories")}</div>
+        <div className='overflow-y-scroll overflow-x-hidden scrollbar max-h-96'>
+
         {categories.map((category) => (
           
           <div className="flex flex-row mt-2" key={category._id}>
@@ -70,8 +72,9 @@ useEffect(() => {
         </Link>
           </div>
         
-      ))}
+        ))}
         
+        </div>
         
         
       </div>
