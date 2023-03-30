@@ -68,8 +68,15 @@ export default function ResetPassword() {
                 </h1>
 
                 <div>
-                  <label className="block mb-1  font-semibold">
-                    {t("Entertheemailaddressormobilephonenumberassociatedwithyouraccount")}{" "}
+                  <label className="block mb-1  font-semibold text-center ">
+                    {/* {t("Entertheemailaddressormobilephonenumberassociatedwithyouraccount")} */}
+                   {t("Enter ")}
+                   {t("the email address")}
+                   <br/>
+                   {t("or ")}
+                   {t("mobile phone number")}
+                   
+                   {t("associated with your account")}
                   </label>
 
                   <input

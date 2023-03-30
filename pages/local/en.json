@@ -72,7 +72,7 @@
     "Resend":"Resend",
     "Password":"Password",
 
-    "Entertheemailaddressormobilephonenumberassociatedwithyouraccount.":"Enter the email address or mobile phone number associated with  your account.",
+    "Entertheemailaddressormobilephonenumberassociatedwithyouraccount.":"xEnter the email address or mobile <br/> phone number associated with  your account.",
     "PasswordAssistance":"Password assistance",
     "MobileNumberOrEmail":"Mobile Number Or Email",
     "Forgotyourpassword":"Forgot your password?",
@@ -116,5 +116,10 @@
   "Help Center": "Help Center",
   "Conditions": "Conditions",
   "Privacy Policy": "Privacy Policy",
-  "Contact us": "Contact us"
+  "Contact us": "Contact us",
+  "Enter ":"Enter ",
+  "the email address":"the email address ",
+  "or ":"or ",
+  "mobile phone number":"mobile phone number ",
+  "associated with your account":"associated with your account"
 }
