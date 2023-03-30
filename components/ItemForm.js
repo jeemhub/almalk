@@ -100,7 +100,7 @@ const ItemForm = () => {
             router.push("/signin");
         }
         const geCategories = async () => {
-            const response = await fetch(`${process.env.API_URL}/categories`);
+            const response = await fetch(`http://ap.almalk.org:3000/categories`);
             const data = await response.clone().json();
             setCategoryList(data);
         };
@@ -213,7 +213,7 @@ const ItemForm = () => {
                                 {t("productname")}
                             </label>
                             <input
-                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.title ? " border-red-500" : ""
+                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.title ? " border-red-500" : ""
                                     }`}
                                 id="title"
                                 type="text"
@@ -233,7 +233,7 @@ const ItemForm = () => {
                             </label>
 
                             <CurrencyInput
-                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.price ? " border-red-500" : ""
+                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.price ? " border-red-500" : ""
                                 }`}
                                 id="price"
                                 defaultValue={price}
@@ -243,7 +243,7 @@ const ItemForm = () => {
 
                                 />
                             {/* <input
-                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.price ? " border-red-500" : ""
+                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.price ? " border-red-500" : ""
                                     }`}
                                 id="price"
                                 type="number"
@@ -271,7 +271,7 @@ const ItemForm = () => {
                                 {t("Currency")}
                             </label>
                             <select
-                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.currency ? " border-red-500" : ""
+                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.currency ? " border-red-500" : ""
                                     }`}
                                 id="currency"
                                 value={currency}
@@ -298,7 +298,7 @@ const ItemForm = () => {
                                 {t("Status")}
                             </label>
                             <select
-                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.status ? " border-red-500" : ""
+                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.status ? " border-red-500" : ""
                                     }`}
                                 id="status"
                                 value={status}
@@ -324,7 +324,7 @@ const ItemForm = () => {
                                 {t("Location")}
                             </label>
                             <input
-                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.location ? " border-red-500" : ""
+                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.location ? " border-red-500" : ""
                                     }`}
                                 id="location"
                                 type="text"
@@ -343,7 +343,7 @@ const ItemForm = () => {
                                 {t("Phone Number")}
                             </label>
                             <input
-                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.title ? " border-red-500" : ""
+                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.title ? " border-red-500" : ""
                                     }`}
                                 id="phone"
                                 type="text"
@@ -378,7 +378,7 @@ const ItemForm = () => {
                             {t("Category")}
                         </label>
                         <select
-                            className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.currency ? " border-red-500" : ""
+                            className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.currency ? " border-red-500" : ""
                                 }`}
                             id="category"
                             value={category}
@@ -417,7 +417,7 @@ const ItemForm = () => {
                                             {t(`${cat}`)}
                                         </label>
                                         <input
-                                            className={`border w-full border-gray-500 p-3 rounded-md focus:border-[#E77600] focus:shadow-md focus:outline-none text-left`}
+                                            className={`border w-full border-gray-500 p-3 rounded-md focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left`}
                                             id={cat}
                                             type="text"
                                             name={cat}
@@ -444,7 +444,7 @@ const ItemForm = () => {
                             {t("details")}
                         </label>
                         <textarea
-                            className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left${errors.details ? " border-red-500" : ""
+                            className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left${errors.details ? " border-red-500" : ""
                                 }`}
                             id="details"
                             value={details}
@@ -463,7 +463,7 @@ const ItemForm = () => {
                                 {t("Images")}
                             </label>
                             <input
-                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left${errors.images ? " border-red-500" : ""
+                                className={`border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left${errors.images ? " border-red-500" : ""
                                     }`}
                                 id="images"
                                 type="file"

@@ -151,11 +151,11 @@ export default function SignUp() {
                     type="text"
                     className={
                       touched.name
-                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.name
+                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.name
                           ? `${styles.invalid}`
                           : `${styles.valid}`
                         } `
-                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left"
                     }
                     name="name"
 /*                  placeholder="Your Name " 
@@ -172,9 +172,9 @@ export default function SignUp() {
                     type="text"
                     className={
                       touched.email
-                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.email ? `${styles.invalid}` : `${styles.valid}`
+                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.email ? `${styles.invalid}` : `${styles.valid}`
                         } `
-                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left"
                     }
                     name="email"
                   /* placeholder="Your Name " */
@@ -191,11 +191,11 @@ export default function SignUp() {
                     type={showPassword ? 'text' : 'password'}
                     className={
                       touched.password
-                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password
+                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.password
                           ? `${styles.invalid}`
                           : `${styles.valid}`
                         } `
-                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left"
                     }
                     name="password"
                   /* placeholder="Your Name " */
@@ -220,11 +220,11 @@ export default function SignUp() {
                     type={showPassword ? 'text' : 'password'}
                     className={
                       touched.password2
-                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password2
+                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.password2
                           ? `${styles.invalid}`
                           : `${styles.valid}`
                         } `
-                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left"
                     }
                     name="password2"
 
@@ -236,7 +236,7 @@ export default function SignUp() {
                 </div>
                 <div>
                   <label className="block mb-1 font-semibold ">{t("Role")}</label>
-                  <Field as="select" className="border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left" name="role">
+                  <Field as="select" className="border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left" name="role">
                     <option></option>
 
                     <option value="company">{t("company")}</option>
@@ -252,8 +252,8 @@ export default function SignUp() {
                     type="number"
                     className={
                       touched.inviteCode
-                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left `
-                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left `
+                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left"
                     }
                     name="inviteCode"
 /*                  placeholder="Your Name " 

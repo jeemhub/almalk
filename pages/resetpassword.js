@@ -74,7 +74,7 @@ export default function ResetPassword() {
 
                   <input
                     type="email"
-                    className={`border w-full  p-2 rounded-md  focus:border-[#E77600] ${emailError? 'border-red-500':'border-gray-500'} focus:shadow-md focus:outline-none text-left`}
+                    className={`border w-full  p-2 rounded-md hover:bg-[#b8ae00]  focus:border-[#f2e719] ${emailError? 'border-red-500':'border-gray-500'} focus:shadow-md focus:outline-none text-left`}
                     name="email"
                     value={email}
                     onInput={(e) => {
@@ -90,7 +90,7 @@ export default function ResetPassword() {
               </div>
               <button
                 type="submit"
-                className="mt-4 mb-4 w-full  bg-[#DB9E43] text-white border-gray-500 hover:bg-[#c88521] font-semibold py-3 rounded-md  tracking-wide"
+                className="mt-4 mb-4 w-full hover:bg-[#b8ae00] bg-[#f2e719] text-white border-gray-500  font-semibold py-3 rounded-md  tracking-wide"
               >
                 {t("Continue")}
               </button>
