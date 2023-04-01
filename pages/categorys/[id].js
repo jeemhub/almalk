@@ -63,19 +63,51 @@ useEffect(() => {
         <div className="text-center text-2xl text-gray-500">{t("Loading")}</div>
       </div>
     ) : (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
-      {items.map(item => (
-        <div key={item._id} className="bg-white rounded-lg shadow-lg p-6" onClick={()=> router.push(`/adsproduct/${item._id}`)}>
-          <img className="h-48 w-full object-cover object-center" src={item.images[0]} alt={item.title} />
-          <h2 className="mt-2 text-lg font-medium leading-tight text-gray-800"> <a href={`/adsproduct/${item._id}`}>{item.title}</a></h2>
-          <p className="mt-2 text-sm font-medium text-gray-700 truncate">{item.details}</p>
-          <p className="mt-2 text-sm font-medium text-indigo-500">{item.price} {item.currency}</p>
-          
-        </div>
-      ))}
-     
+        <>
+        <div className="w-full overflow-x-auto">
+      <table className="w-full">
+        <thead>
+          <tr>
+            <th className="bg-gray-200 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Image
+            </th>
+            <th className="bg-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Title
+            </th>
+            <th className="bg-gray-200 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Details
+            </th>
+            <th className="bg-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Price
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, index) => (
+            <tr
+            onClick={()=> router.push(`/adsproduct/${item._id}`)}
+            key={item._id}
+              className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
+            >
+              <td className="px-6 py-4 whitespace-nowrap">
+                <img
+                src={item.images[0]}
+                alt={item.title}
+                  className="h-12 w-12 object-contain"
+                />
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap"><a href={`/adsproduct/${item._id}`}>{item.title}</a></td>
+              <td className="px-6 py-4 whitespace-nowrap">
+              {item.details}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">{item.price} {item.currency}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    )}
+        </>
+        )}
     <div className='flex mt-8 mb-10'>
       <div className="flex space-x-3 mx-auto">
         <button

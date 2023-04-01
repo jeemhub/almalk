@@ -33,7 +33,7 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
           content="Bullish is the premier platform for buying and selling products. Browse our wide selection of products and find the perfect item for you."
           key="desc"
         />
-        <link rel="icon" href="/Images/amazon.webp"></link>
+        <link rel="icon" href="/Images/IMG_20230401_222812_625.png"></link>
       </Head>
 
       {/* <Header /> */}

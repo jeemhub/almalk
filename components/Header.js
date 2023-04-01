@@ -106,14 +106,15 @@ function Header() {
             <TintBackground act={sideBar} button={() => setSideBar(!sideBar)} />
           </div>
           <div className="ml-20 tablet:ml-2 p- tablet:link mt-1 flex items-center flex-grow tablet:flex-grow-0 justify-center">
-            <Image
+            {/* <Image
               onClick={() => router.push("/")}
               src="/Images/amazon.webp"
               className="cursor-pointer ml-10  object-cover rounded-full "
               height={24}
               width={80}
               alt="amazon"
-            />
+            /> */}
+            <h1  onClick={() => router.push("/")} className='bg-[#f1b51f] text-[#1c505e] font-bold p-2 rounded-md text-xl'>Almalk.org</h1>
           </div>
           {/* pc search bar */}
           <div className="hidden tablet:mt-0 tablet:flex items-center h-12 rounded-md flex-grow cursor-pointer px-5">
