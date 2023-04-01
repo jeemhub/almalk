@@ -54,7 +54,7 @@ export default function User_drop_down({ session , children}) {
               <a
                 href="/usersettings"
                 className={classNames(
-                  active ? "bg-[#f2e719]" : "",
+                  active ? "bg-[#f1b51f]" : "",
                   "px-6 py-2 text-sm text-black flex items-center font-bold"
                 )}
               >
@@ -68,7 +68,7 @@ export default function User_drop_down({ session , children}) {
               <a
                 href='/'
                 className={classNames(
-                  active ? "bg-[#f2e719]" : "",
+                  active ? "bg-[#f1b51f]" : "",
                   "block px-4 py-2 text-sm text-black"
                 )}
               >

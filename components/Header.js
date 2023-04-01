@@ -93,7 +93,7 @@ function Header() {
         <LoadingOverlay />
         }
         {/* Top nav */}
-        <div className="flex items-center bg-[#232F3E] sm:bg-[#121921] p-1 flex-grow py-2">
+        <div className="flex items-center bg-[#1c505e] sm:bg-[#1c505e] p-1 flex-grow py-2">
           <p className="absolute -mt-2 ml-2 tablet:hidden items-center text-white">
             <MenuIcon onClick={() => setSideBar(!sideBar)} className="h-8" />
           </p>
@@ -127,7 +127,7 @@ function Header() {
               placeholder="Search Amazon"
             />
             <SearchIcon
-              className="h-12 p-4 bg-[#f2e719] text-white hover:bg-[#b8ae00] rounded-r-md"
+              className="h-12 p-4 bg-[#f1b51f] text-white hover:bg-[#b8ae00] rounded-r-md"
               onClick={handleSearch}
             />
           </div>
@@ -135,13 +135,13 @@ function Header() {
             <>
               {/* <button
                 onClick={() => router.push("/additem")}
-                className="h-12 p-2 bg-[#f2e719] ml-5 text-white text-center hover:bg-[#b8ae00] rounded-md hidden tablet:flex"
+                className="h-12 p-2 bg-[#f1b51f] ml-5 text-white text-center hover:bg-[#b8ae00] rounded-md hidden tablet:flex"
               >
                 {t("additem")}+
               </button> */}
               <button
                 onClick={() => router.push("/additem")}
-                className=" items-center justify-center hidden tablet:flex bg-[#f2e719] hover:bg-[#b8ae00] text-white font-bold py-3 px-4 rounded">
+                className=" items-center justify-center hidden tablet:flex bg-[#f1b51f] hover:bg-[#b8ae00] text-white font-bold py-3 px-4 rounded">
                 <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M10 18a1 1 0 0 1-1-1V3a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1zM18 10a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1z" />
                 </svg>
@@ -250,7 +250,7 @@ function Header() {
           )}
         </div>
         {/* mobile search */}
-        <div className="bg-[#232F3E]">
+        <div className="bg-[#1c505e]">
           <div className="flex w-[95%] mx-auto items-center h-[44px] rounded-md flex-grow cursor-pointer tablet:hidden">
             <input
               className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
@@ -262,7 +262,7 @@ function Header() {
               onKeyUp={handleKeyUp}
             />
             <SearchIcon
-              className="h-[44px] p-2 bg-[#f2e719] text-white hover:bg-[#b8ae00] rounded-r-md"
+              className="h-[44px] p-2 bg-[#f1b51f] text-white hover:bg-[#b8ae00] rounded-r-md"
               onClick={handleSearch}
             />
 
@@ -270,13 +270,13 @@ function Header() {
               <>
                 {/* <button
                   onClick={() => router.push("/additem")}
-                  className="h-[44px] p-2 bg-[#f2e719] ml-2 hover:bg-[#b8ae00] rounded-md"
+                  className="h-[44px] p-2 bg-[#f1b51f] ml-2 hover:bg-[#b8ae00] rounded-md"
                 >
                   {t("additem")}+
                 </button> */}
                 <button
                   onClick={() => router.push("/additem")}
-                  className="flex items-center justify-center h-[44px]  bg-[#f2e719] hover:bg-[#b8ae00] text-white font-bold py-2 px-4 ml-2 rounded">
+                  className="flex items-center justify-center h-[44px]  bg-[#f1b51f] hover:bg-[#b8ae00] text-white font-bold py-2 px-4 ml-2 rounded">
                   <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10 18a1 1 0 0 1-1-1V3a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1zM18 10a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1z" />
                   </svg>
@@ -316,7 +316,7 @@ function Header() {
           )}
         </div>
         {/* bottom nav */}
-        <div className="flex items-center space-x-8 p-2 pl-2 font-semibold md:text-lg text-sm bg-[#232F3E] text-white h-12 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center space-x-8 p-2 pl-2 font-semibold md:text-lg text-sm bg-[#1c505e] text-white h-12 overflow-x-auto scrollbar-hide">
           <p
             onClick={() => setSideBar(!sideBar)}
             className="link hidden tablet:flex items-center"

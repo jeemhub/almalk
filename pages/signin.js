@@ -79,11 +79,11 @@ export default function SignIn() {
                         type="email"
                         className={
                           touched.email
-                            ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.email
+                            ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left ${errors.email
                               ? `${styles.invalid}`
                               : `${styles.valid}`
                             } `
-                            : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left"
+                            : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left"
                         }
                         name="email"
                       /* placeholder="Your Name " */
@@ -100,11 +100,11 @@ export default function SignIn() {
                         type={showPassword ? 'text' : 'password'}
                         className={
                           touched.password
-                            ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left ${errors.password
+                            ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left ${errors.password
                               ? `${styles.invalid}`
                               : `${styles.valid}`
                             } `
-                            : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left"
+                            : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left"
                         }
                         name="password"
                       /* placeholder="Your Name " */
@@ -124,7 +124,7 @@ export default function SignIn() {
                   </div>
                   <button
                     type="submit"
-                    className="mt-4 w-full bg-[#f2e719] border-gray-500 hover:bg-[#b8ae00] text-white font-semibold py-3 rounded-md  tracking-wide"
+                    className="mt-4 w-full bg-[#f1b51f] border-gray-500 hover:bg-[#b8ae00] text-white font-semibold py-3 rounded-md  tracking-wide"
                   >
                     {t("Continue")}
                   </button>

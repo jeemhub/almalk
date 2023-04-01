@@ -54,7 +54,7 @@ export default function Share_drop_down() {
               <a
                 href="#"
                 className={classNames(
-                  active ? "bg-[#f2e719]" : "",
+                  active ? "bg-[#f1b51f]" : "",
                   "flex px-4 py-2 text-sm text-black"
                 )} onClick={copy}
               >
@@ -67,7 +67,7 @@ export default function Share_drop_down() {
               <a
                 href="#"
                 className={classNames(
-                  active ? "bg-[#f2e719]" : "",
+                  active ? "bg-[#f1b51f]" : "",
                   "block px-4 py-2 text-sm text-black"
                 )}
               >
@@ -80,7 +80,7 @@ export default function Share_drop_down() {
               <a
                 href="#"
                 className={classNames(
-                  active ? "bg-[#f2e719]" : "",
+                  active ? "bg-[#f1b51f]" : "",
                   "block px-4 py-2 text-sm text-black"
                 )}
               >

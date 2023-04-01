@@ -98,7 +98,7 @@ const Verify = () => {
               <button className="text-blue-600 mt-0 mb-3" onClick={() => router.push("/signup")} >(Change Email)</button> {" "}
               <input
                 type="number"
-                className={otpError ? 'border w-full border-red-500 p-2 rounded-md  focus:border-red-500 focus:shadow-md focus:outline-none text-left':'border w-full border-gray-500 p-2 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left'}
+                className={otpError ? 'border w-full border-red-500 p-2 rounded-md  focus:border-red-500 focus:shadow-md focus:outline-none text-left':'border w-full border-gray-500 p-2 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left'}
                 name="Verifying"
                 value={otp}
                 onInput={(e) => {
@@ -113,7 +113,7 @@ const Verify = () => {
           </div>
           <button
             type="submit"
-            className="mt-4 mb-4 w-full hover:bg-[#b8ae00] bg-[#f2e719] focus:border-[#f2e719] border-gray-500  text-white font-semibold py-3 rounded-md  tracking-wide"
+            className="mt-4 mb-4 w-full hover:bg-[#b8ae00] bg-[#f1b51f] focus:border-[#f1b51f] border-gray-500  text-white font-semibold py-3 rounded-md  tracking-wide"
           >
             {t("CreateAccount")}
           </button>

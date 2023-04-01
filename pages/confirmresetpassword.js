@@ -121,7 +121,7 @@ export default function ConfirmResetPassword() {
 
                     <input
                       type="number"
-                      className={`border w-full ${otpError ? 'border-red-600':'border-gray-500'}  p-2 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left`}
+                      className={`border w-full ${otpError ? 'border-red-600':'border-gray-500'}  p-2 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left`}
                       name="otp"
                       value={otp}
                       onInput={(e) => {
@@ -141,7 +141,7 @@ export default function ConfirmResetPassword() {
 
                     <input
                       type="password"
-                      className={`border w-full ${passwordError ? 'border-red-600':'border-gray-500'}  p-2 rounded-md  focus:border-[#f2e719] focus:shadow-md focus:outline-none text-left`}
+                      className={`border w-full ${passwordError ? 'border-red-600':'border-gray-500'}  p-2 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left`}
                       name="password"
                       value={password}
                       onInput={(e) => {
@@ -157,7 +157,7 @@ export default function ConfirmResetPassword() {
                 </div>
                 <button
                   type="submit"
-                  className="mt-4 mb-4 w-full bg-[#f2e719] border-gray-500 hover:bg-[#b8ae00]  font-semibold py-3 rounded-md text-white tracking-wide"
+                  className="mt-4 mb-4 w-full bg-[#f1b51f] border-gray-500 hover:bg-[#b8ae00]  font-semibold py-3 rounded-md text-white tracking-wide"
                 >
                   {t("Continue")}
                 </button>

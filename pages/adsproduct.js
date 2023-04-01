@@ -87,7 +87,7 @@ function Adsproduct({ images }) {
 
               {/* Start Owner */}
 
-            <div className='flex text-[#f2e719] hover:text-[#b8ae00] cursor-pointer text-xs font-bold mt-2' onClick={()=> (router.push({
+            <div className='flex text-[#f1b51f] hover:text-[#b8ae00] cursor-pointer text-xs font-bold mt-2' onClick={()=> (router.push({
               pathname: `/categorys/[cat]`,
               query: {
                 cat : router.query.title,
