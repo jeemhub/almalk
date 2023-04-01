@@ -124,7 +124,7 @@ function Header() {
                 setSearchText(e.currentTarget.value);
               }}
               onKeyUp={handleKeyUp}
-              placeholder="Search Amazon"
+              placeholder="Search Almalk"
             />
             <SearchIcon
               className="h-12 p-4 bg-[#f1b51f] text-white hover:bg-[#b8ae00] rounded-r-md"
@@ -255,7 +255,7 @@ function Header() {
             <input
               className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
               type="text"
-              placeholder="Search Amazon"
+              placeholder="Search Almalk"
               onChange={(e) => {
                 setSearchText(e.currentTarget.value);
               }}

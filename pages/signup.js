@@ -131,7 +131,9 @@ export default function SignUp() {
                 src="http://www.synointcdn.com/wp-content/uploads/2019/04/Amazon-Logo-PNG.png"
                 alt=""
               /> */}
-              <h1 className="text-center text-6xl font-semibold">Logo</h1>
+                 <div className="text-center text-6xl font-semibold flex justify-center items-center">
+                  <img className='w-20 text-center' alt='logo' src='/Images/logowithoutbg.png'/>
+                </div>
               <div className="space-y-4">
                 <h1 className="text-center text-2xl mt-2 font-semibold ">
                   {t("Register")}

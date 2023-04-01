@@ -55,12 +55,14 @@ export default function SignIn() {
             <Loader />
           </>) : (<>
             <Form className="mobile:my-auto my-auto ">
-              <div className="bg-white  mobile:bg-white  px-10 py-8 rounded-xl w-screen shadow-md mobile:rounded-2xl mobile:w-[100%]  mobile:bg-inherit mobile:mx-auto max-w-sm">
-                <h1 className="text-center text-6xl font-semibold">Logo</h1>
+              <div className="bg-white  mobile:bg-white  px-10 py-8 rounded-xl w-screen shadow-md mobile:rounded-2xl mobile:w-[100%] mobile:bg-inherit mobile:mx-auto max-w-sm">
+                <div className="text-center text-6xl font-semibold flex justify-center items-center">
+                  <img className='w-20 text-center' alt='logo' src='/Images/logowithoutbg.png'/>
+                </div>
 
                 <div className="space-y-4">
                   <h1 className="text-center text-2xl font-semibold my-4">
-                    {t("signout")}
+                    {t("signin")}
                   </h1>
                   <div className="my-4">
                     {error && (
