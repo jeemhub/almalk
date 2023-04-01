@@ -265,7 +265,7 @@ export default function SignUp() {
               </div>
               <button
                 type="submit"
-                className="mt-4 w-full bg-[#f1b51f] border-gray-500 hover:bg-[#b8ae00] text-white font-semibold py-3 rounded-md  tracking-wide"
+                className="mt-4 w-full bg-[#1c505e] border-gray-500 hover:bg-white text-[#f1b51f] hover:text-[#1c505e] hover:border-2 hover:border-[#1c505e]  font-semibold py-3 rounded-md  tracking-wide"
               >
                 {t("Continue")}
               </button>

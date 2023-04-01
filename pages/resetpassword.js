@@ -97,7 +97,7 @@ export default function ResetPassword() {
               </div>
               <button
                 type="submit"
-                className="mt-4 mb-4 w-full hover:bg-[#b8ae00] bg-[#f1b51f] text-white border-gray-500  font-semibold py-3 rounded-md  tracking-wide"
+                className="mt-4 mb-4 w-full bg-[#1c505e] border-gray-500 hover:bg-white text-[#f1b51f] hover:text-[#1c505e] hover:border-2 hover:border-[#1c505e]   font-semibold py-3 rounded-md  tracking-wide"
               >
                 {t("Continue")}
               </button>

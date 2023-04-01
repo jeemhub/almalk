@@ -515,7 +515,7 @@ const ItemForm = () => {
                     </div>
 
                     <button
-                        className="bg-[#f1b51f] hover:bg-[#b8ae00] mobile:w-full mobile:mx-auto text-white font-medium py-3 ml-4 px-4 rounded"
+                        className="bg-[#f1b51f] hover:bg-[#b8ae00] mobile:w-full mobile:mx-auto text-[#1c505e] font-bold   py-3 ml-4 px-4 rounded"
                         type="submit"
                     >
                         {t("Publish")}
