@@ -5,7 +5,16 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          yellow: '#1c505e',
+        },
+        secondary: {
+          yellow: '#f1b51f',
+        }
+      }
+    },
     screens: {
       'mobile': {'max': '480px','min': '320px'},
       

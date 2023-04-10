@@ -17,6 +17,7 @@ import TintBackground from "./TintBackground";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import Dropdown from './Dropdown'
+import Link from "next/link";
 import LoadingOverlay from './LoadingOverlay';
 function Header() {
   const { t, i18n } = useTranslation();
@@ -105,7 +106,7 @@ function Header() {
             />
             <TintBackground act={sideBar} button={() => setSideBar(!sideBar)} />
           </div>
-          <div className="ml-20 tablet:ml-2 p- tablet:link mt-1 flex items-center flex-grow tablet:flex-grow-0 justify-center">
+          <div className="ml-20 tablet:ml-2 p- cursor-pointer mt-1 flex items-center flex-grow tablet:flex-grow-0 justify-center">
             {/* <Image
               onClick={() => router.push("/")}
               src="/Images/amazon.webp"
@@ -213,7 +214,7 @@ function Header() {
               </Dropdown>
             ) : (
               <div
-                className="relative link flex items-center"
+                className="relative  flex items-center"
                 onClick={() => router.push("/signin")}
               >
                 <UserCircleIcon className="h-10" />
@@ -330,6 +331,9 @@ function Header() {
           <p className="link">{t("Registry")}</p>
           <p className="link">{t("giftcards")}</p>
           <p className="link">{t("sell")}</p>
+          <Link href='/SupportPage'>
+          <button className="link">Support</button>
+          </Link>
         </div>
       </header>
     </>

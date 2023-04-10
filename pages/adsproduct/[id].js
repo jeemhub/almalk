@@ -123,9 +123,21 @@ function Adsproduct({ data }) {
                 </div>
                 <div className="flex h-full space-x-5 mx-auto mt-10">
                     {/* image gallery */}
-                    <div className="flex-auto ml-3 w-[650px]">
+                    <div className="flex-auto ml-3 w-[650px] relative ">
+                    
                         <ImageGallery items={Imagespc} showFullscreenButton={false} renderItem={renderCustomItem}
                             showPlayButton={false} />
+                        <h1 className='absolute text-black opacity-75 text-6xl inset-x-0 top-0 pt-10 left-1/2 font-medium z-30 pointer-events-none'>
+                        Almalk
+                        Almalk 
+                        Almalk
+                        Almalk
+                        Almalk
+                        Almalk
+                        Almalk
+                    
+                        </h1>
+                    
                     </div>
                     {/* share button */}
                     <div className="flex-auto w-14 h-14 z-40">
@@ -331,7 +343,7 @@ function Adsproduct({ data }) {
                             <Carousel className="z-35" responsive={responsive}>
                                 {images.map((image, index) => (
                                     <div
-                                        className=" w-full  h-[350px]    "
+                                        className=" w-full  h-[350px] relative    "
                                         key={index}
                                     >
                                         <Image
@@ -341,6 +353,23 @@ function Adsproduct({ data }) {
                                             objectPosition="center"
                                             alt={image}
                                         ></Image>
+                                           <h1 className='absolute text-black opacity-75 text-4xl inset-x-0 top-0 pt-20 left-1/2 font-bold z-30 pointer-events-none md:hidden w-20'>
+                        Almalk
+                        Almalk 
+                        Almalk
+                        Almalk
+                    
+                       
+                    
+                        </h1>
+                                           <h1 className='absolute text-black opacity-75 text-4xl inset-x-0 top-0 pt-20 left-1/2 font-bold z-30 pointer-events-none hidden md:block w-20'>
+                                           Almalk
+                        Almalk 
+                        Almalk
+                        Almalk
+                       
+                    
+                        </h1>
                                     </div>
                                 ))}
                             </Carousel>
