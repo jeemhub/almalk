@@ -127,14 +127,9 @@ function Adsproduct({ data }) {
                     
                         <ImageGallery items={Imagespc} showFullscreenButton={false} renderItem={renderCustomItem}
                             showPlayButton={false} />
-                        <h1 className='absolute text-black opacity-75 text-6xl inset-x-0 top-0 pt-10 left-1/2 font-medium z-30 pointer-events-none'>
+                        <h1 className='absolute text-white opacity-50 text-9xl inset-x-0 top-1/2 pt-10 left-0 px-2 py-2 font-medium z-30 pointer-events-none'>
                         Almalk
-                        Almalk 
-                        Almalk
-                        Almalk
-                        Almalk
-                        Almalk
-                        Almalk
+                        
                     
                         </h1>
                     
@@ -353,22 +348,12 @@ function Adsproduct({ data }) {
                                             objectPosition="center"
                                             alt={image}
                                         ></Image>
-                                           <h1 className='absolute text-black opacity-75 text-4xl inset-x-0 top-0 pt-20 left-1/2 font-bold z-30 pointer-events-none md:hidden w-20'>
+                                           <h1 className='absolute text-white opacity-50 text-6xl inset-x-0 top-0 pt-20 left-0 font-bold z-30 pointer-events-none md:hidden w-20'>
                         Almalk
-                        Almalk 
-                        Almalk
-                        Almalk
-                    
-                       
-                    
                         </h1>
-                                           <h1 className='absolute text-black opacity-75 text-4xl inset-x-0 top-0 pt-20 left-1/2 font-bold z-30 pointer-events-none hidden md:block w-20'>
+                                           <h1 className='absolute text-white opacity-50 text-7xl inset-x-0 top-0 pt-20 left-1/2 font-bold z-30 pointer-events-none hidden md:block w-20'>
                                            Almalk
-                        Almalk 
-                        Almalk
-                        Almalk
-                       
-                    
+                   
                         </h1>
                                     </div>
                                 ))}
