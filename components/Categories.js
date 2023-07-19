@@ -27,7 +27,7 @@ const ItemSlider = () => {
                                 </div>
                                 <div className="relative group flex justify-center items-center h-full w-full">
                                     <img className="object-center object-cover h-full w-full" src="https://plus.unsplash.com/premium_photo-1683758343999-0975ec01d0cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGV2aWNlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60" alt="watch-image" />
-                                    <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-base font-medium leading-none text-gray-800 py-3 w-36 bg-white">اججهزة</button>
+                                    <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-base font-medium leading-none text-gray-800 py-3 w-36 bg-white">اجهزة</button>
                                     <div className="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50" />
                                 </div>
                             </div>
