@@ -192,7 +192,7 @@ function Header() {
                 onClick={() => router.push("/additem")}
                 className=" items-center justify-center hidden tablet:flex bg-[#f1b51f] hover:bg-[#b8ae00] text-[#1c505e] font-bold py-3 px-4 rounded h-16">
                 <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M10 18a1 1 0 0 1-1-1V3a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1zM18 10a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1z" />
+                  <path fillRule="evenodd" d="M10 18a1 1 0 0 1-1-1V3a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1zM18 10a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1z" />
                 </svg>
                 <span>Add Item</span>
               </button>
@@ -317,7 +317,7 @@ function Header() {
                   onClick={() => router.push("/additem")}
                   className="flex items-center justify-center h-[44px]  bg-[#f1b51f] hover:bg-[#b8ae00] text-white font-bold py-2 px-4 ml-2 rounded">
                   <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10 18a1 1 0 0 1-1-1V3a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1zM18 10a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1z" />
+                    <path fillRule="evenodd" d="M10 18a1 1 0 0 1-1-1V3a1 1 0 1 1 2 0v14a1 1 0 0 1-1 1zM18 10a1 1 0 0 1-1 1H3a1 1 0 1 1 0-2h14a1 1 0 0 1 1 1z" />
                   </svg>
                   <span>Add Item</span>
                 </button>

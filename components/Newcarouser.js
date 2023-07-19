@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import Image from 'next/image';
 import { useState ,useEffect } from "react";
@@ -95,11 +96,15 @@ const ProductSlider = () => {
         <div key={product.id} className="p-2">
           <div className="bg-white rounded-lg shadow p-4">
             <div className="relative h-48 rounded-md">
+              {/* // eslint-disable-next-line @next/next/no-img-element, @next/next/no-img-element, @next/next/no-img-element */}
               <img
                 src={product.imageUrl}
                 alt={product.title}
+                // eslint-disable-next-line react/no-unknown-property
                 layout="fill"
+                // eslint-disable-next-line react/no-unknown-property
                 objectFit="cover"
+                // eslint-disable-next-line react/no-unknown-property
                 objectPosition="center"
               />
             </div>
@@ -118,8 +123,11 @@ const ProductSlider = () => {
               <img
                 src={product.imageUrl}
                 alt={product.title}
+                // eslint-disable-next-line react/no-unknown-property
                 layout="fill"
+                // eslint-disable-next-line react/no-unknown-property
                 objectFit="cover"
+                // eslint-disable-next-line react/no-unknown-property
                 objectPosition="center"
               />
             </div>
@@ -138,8 +146,11 @@ const ProductSlider = () => {
               <img
                 src={product.imageUrl}
                 alt={product.title}
+                // eslint-disable-next-line react/no-unknown-property
                 layout="fill"
+                // eslint-disable-next-line react/no-unknown-property
                 objectFit="cover"
+                // eslint-disable-next-line react/no-unknown-property
                 objectPosition="center"
               />
             </div>
