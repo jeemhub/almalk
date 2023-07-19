@@ -7,7 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["fakestoreapi.com","localhost","m.media-amazon.com","images-na.ssl-images-amazon.com", "codellab.s3.amazonaws.com"],
+    domains: ["fakestoreapi.com","localhost","m.media-amazon.com","images-na.ssl-images-amazon.com", "codellab.s3.amazonaws.com",'127.0.0.1'],
   },
 
   env: {

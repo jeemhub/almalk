@@ -44,11 +44,11 @@ export default function ConfirmResetPassword() {
         .then((data) => {
           if (data.error != null) {
             setError(data.error);
-            console.log(data.error);
+             //console.log(data.error);
             setLoading(false)
   
           } else {
-            console.log("Success:", data);
+             //console.log("Success:", data);
             router.push("/signin");
           }
   
@@ -78,10 +78,10 @@ export default function ConfirmResetPassword() {
       .then((data) => {
         if (data.error != null) {
           setError(data.message);
-          console.log(data.message);
-          console.log("error", error);
+           //console.log(data.message);
+           //console.log("error", error);
         }
-        console.log("Success:", data);
+         //console.log("Success:", data);
         //router.push("/signin");
       })
       .catch((error) => {

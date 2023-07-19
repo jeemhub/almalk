@@ -1,31 +1,80 @@
 import Head from "next/head";
 import Header from "../components/Header";
 import Banner from "../components/Banner";
+import Newcarouser from "../components/Newcarouser";
 import Productfeed from "../components/Productfeed";
 import Homeproducts from "../components/Homeproducts";
 import Signin from "../components/Signin";
 import Onecateg from "./../components/Onecateg";
 import Productslider from "./../components/Productslider";
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useTranslation } from 'react-i18next';
-
-export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) {
+import Categories from '../components/Categories'
+import Slider from '../components/Slider'
+import Subscribe from '../components/Subscribe'
+export default function Home() {
   const { t, i18n } = useTranslation();
   //console.log(electroniccatnolim);
   var SingleAdsImage = 0;
   const router = useRouter();
 
-  function Goto(id, data) {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].title == id) {
-        router.push(`/singleads/${data[i]._id}`);
-      }
+  // function Goto(id, data) {
+  //   for (let i = 0; i < data.length; i++) {
+  //     if (data[i].title == id) {
+  //       router.push(`/singleads/${data[i]._id}`);
+  //     }
+  //   }
+  // }
+  const [ads, setAds] = useState('');
+  const clearAllCookies = () => {
+    const cookies = document.cookie.split(';');
+  
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i];
+      const eqPos = cookie.indexOf('=');
+      const cookieName = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     }
-  }
+  };
+  useEffect(() => {
+    clearAllCookies();
+    fetchAds();
+  }, []);
+
+  const fetchAds = async () => {
+    try {
+      const response = await fetch(
+        `https://almalik-application.onrender.com/api/ads`
+      );
+      const data = await response.json();
+     if(data){
+
+       const adsWithImages = await Promise.all(
+         data.map(async (ad) => {
+              const imageResponse = await fetch(
+                  `https://almalik-application.onrender.com/api/ads/ad/images/${ad.id}`
+                  );
+                  const image = await imageResponse.json();
+                  return { ad, imageUrl: image[0]?.url || null };
+                })
+              );
+              const filteredData = filterVipAds(adsWithImages);
+              setAds(filteredData);
+      }
+    } catch (error) {
+      console.error('Error fetching ads:', error);
+    }
+  };
+  const filterVipAds = (data) => {
+    const vipAdsData = data.filter((item) => item.ad.type === 'VIP');
+    return vipAdsData;
+  };
+
   return (
     <div className="bg-gray-100">
+
       <Head>
         <title>Almalek</title>
         <meta
@@ -40,7 +89,11 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
 
       <main className="max-w-screen-2xl mx-auto">
         {/* Banner */}
-        <Banner bannerdata={bannerdata.vipAds} />
+        {ads && <Banner bannerdata={ads} />}
+        <Categories/>
+        {/* <Slider/> */}
+        <Newcarouser/>
+        <Subscribe/>
         {/* home products */}
         {/* mobile banner cat */}
         {/* <div className='tablet:hidden flex flex-nowrap overflow-x-scroll gap-0 scrollbar-hide z-40 -mt-[50px] md:-mt-[150px]'>
@@ -84,7 +137,7 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
         {/* pc slide cat */}
 
         {/*slide items */}
-        <div>
+        {/* <div>
           {electroniccatnolim.map((categoryData, index) => {
             if (categoryData.items.length > 0) {
               //console.log(dataSingleAds[SingleAdsImage]?._id);
@@ -154,7 +207,7 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
               return <></>;
             }
           })}
-        </div>
+        </div> */}
         {/* <Productslider electroniccat={electroniccatnolim} title={"Highest rating all the time"} /> */}
 
         {/* pc cat */}
@@ -169,26 +222,29 @@ export default function Home({ electroniccatnolim, dataSingleAds, bannerdata }) 
 }
 
 export const getServerSideProps = async (context) => {
-  const electroniccatnolim = await fetch(
-    `${process.env.API_URL}/home`
-  ).then((res) => res.json());
+  // const electroniccatnolim = await fetch(
+  //   `${process.env.API_URL}/home`
+  // ).then((res) => res.json());
 
-  const resSingleAds = await fetch(
-   `${process.env.API_URL}/diamond-ads`
-  );
+  // const resSingleAds = await fetch(
+  //  `${process.env.API_URL}/diamond-ads`
+  // );
 
-  const bannerdata = await fetch(
-    `${process.env.API_URL}/vip-ads`
-    ).then((res) => res.json());
+  // const bannerdata = await fetch(
+  //   `${process.env.API_URL}/vip-ads`
+  //   ).then((res) => res.json());
 
-  const dataSingleAds = await resSingleAds.json();
+  // const dataSingleAds = await resSingleAds.json();
   //console.log("dataSingleAds",dataSingleAds)
+  // const ADs=await fetch('https://almalik.onrender.com/api/ad').then((res)=>res.json());
+
 
   return {
     props: {
-      electroniccatnolim,
-      dataSingleAds: dataSingleAds.diamondAds,
-      bannerdata,
+      // ADs
+      // electroniccatnolim,
+      // dataSingleAds: dataSingleAds.diamondAds,
+      // bannerdata,
     },
     
   };

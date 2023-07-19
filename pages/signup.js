@@ -1,272 +1,124 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import styles from "../styles/Contactform.module.css";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
+import { useState } from 'react';
 import { useTranslation } from "react-i18next";
-import React, { useEffect, useState } from "react";
-import * as Yup from "yup";
-import { useSelector } from 'react-redux';
 import Loader from '../components/Loader';
-//import { Route, Routes, useNavigate } from 'react-router-dom';
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
-export default function SignUp() {
-  const [error, setError] = useState(null)
-  const [showPassword, setShowPassword] = useState(false);
-  const { userToken, isLoading } = useSelector((state) => state.user);
-  const [loading, setLoading] = useState(false);
+export default function Testsignup() {
+    const router=useRouter()
+    
+    const { t, i18n } = useTranslation();
+    const [loader , setLoader]=useState(false);
+    const [error , setError]=useState(false);
+    const [serverMSG,setServerMSG]=useState('');
+    const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    re_password:'',
+    username: '',
+  });
 
-  const { t, i18n } = useTranslation();
-  const router = useRouter();
-  const ErrorSchema = Yup.object().shape({
-    name: Yup.string()
-      .required("Please Enter Your Full Name")
-      .min(5, "too Short")
-      .max(100, "Too Long"),
-
-    inviteCode: Yup.number()
-      .integer()
-      .typeError('inviteCode must be a number')
-      .positive('inviteCode must be a positive number')
-    ,
-
-    email: Yup.string()
-      .required("Please Enter Your Email Address")
-      .matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/, "Please enter a valid email address"),
-    role: Yup.string()
-      .required("Please Select a Role"),
-
-    password: Yup.string()
-      .required("Please enter your password")
-      .min(8, "Password Must be at least 8 characters")
-      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-
-    password2: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "password does not match",
-
-    ),
-  })
-
-  useEffect(() => {
-    if (userToken) {
-      router.push("/");
-    }
-  }, []);
-
-  const initEmail = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('email')) : '';
-  const initName = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('name')) : '';
-  const initInvitecode = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('inviteCode')) : '';
-  const initRole = typeof window !== "undefined" ? JSON.parse(localStorage.getItem('role')) : '';
-
-
-  console.log(typeof (initEmail))
-  const handleToggleClick = () => {
-    setShowPassword(!showPassword);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  return (
-
-    <Formik
-      initialValues={{
-        name: initName,
-        email: initEmail,
-        password: "",
-        password2: "",
-        role: initRole,
-        inviteCode: initInvitecode,
-
-      }}
-      validationSchema={ErrorSchema}
-      onSubmit={(value) => {
-        setLoading(true)
-
-        fetch(`${process.env.API_URL}/signup/email`, {
-          method: 'POST',
-          headers: {
-
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(value),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.error != null) {
-              setLoading(false)
-              setError(data.error);
-              console.log(data.error);
-              console.log("error", error)
-
-            } else {
-              localStorage.setItem("email", JSON.stringify(value.email));
-              localStorage.setItem("name", JSON.stringify(value.name));
-              localStorage.setItem("role", JSON.stringify(value.role));
-              localStorage.setItem("inviteCode", JSON.stringify(value.inviteCode));
-              router.push('/verify')
-              se
+  const sendData = async () => {
+        setError(false);
+        setServerMSG('');
+        setLoader(true);
+        try {
+           //console.log("formData")
+           //console.log(formData)
+            const response = await fetch('https://almalik-application.onrender.com/api/users/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if(response){
+                setLoader(false);
             }
-
-
-            console.log('Success:', data);
-          })
-          .catch((error) => {
-            setLoading(false);
-
-            setError("error");
-          });
-
-      }}
-    >
-
-
-
-      {({ errors, touched }) => (
-        <>
-          {loading ? (<>
-            <Loader />
-          </>) : (<>
-            <Form className=' bg-white mt-4 px-10 py-8 shadow-md mb-[50px] mobile:mt-[80px] rounded-xl sm:mx-auto w-[60%] mobile:mx-auto mx-auto 2xl:w-[30%] mobile:w-[90%] '  >
-              {/*           <img
-                className="h-14 mb-4 mx-auto"
-                src="http://www.synointcdn.com/wp-content/uploads/2019/04/Amazon-Logo-PNG.png"
-                alt=""
-              /> */}
-                 <div className="text-center text-6xl font-semibold flex justify-center items-center">
-                  <img className='w-20 text-center' alt='logo' src='/Images/logowithoutbg.png'/>
-                </div>
-              <div className="space-y-4">
-                <h1 className="text-center text-2xl mt-2 font-semibold ">
-                  {t("Register")}
-                </h1>
-                {error && (
-                  <div
-                    className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
-                    role="alert"
-                  >
-                    <span className="font-medium"> {error}</span>
-                  </div>
-                )}
-                <div>
-                  <label className="block mb-1  font-semibold">{t("YourName")}</label>
-
-                  <Field
-                    type="text"
-                    className={
-                      touched.name
-                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left ${errors.name
-                          ? `${styles.invalid}`
-                          : `${styles.valid}`
-                        } `
-                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left"
-                    }
-                    name="name"
-/*                  placeholder="Your Name " 
- */              />
-                  {touched.name && errors.name && (
-                    <p className="text-red-700  text-xs">{errors.name}</p>
-                  )}
-                </div>
-                <div>
-                  <label className="block mb-1  font-semibold">
+            var data=await response.json();
+            // Handle the response as needed
+             //console.log('Data sent successfully!', data);
+                Cookies.set("id", data.id);
+                Cookies.set("username", data.username);
+                Cookies.set("email", data.email);
+                router.push('/signin')
+            
+        } catch (error) {
+            console.error('Error sending data:', error);
+        }
+  };
+if(loader){
+    return(<Loader/>)
+}
+  return (
+    <div className="h-screen w-full flex flex-col justify-center items-center my-16 ">
+        <div className="flex flex-col p-12 items-center justify-center rounded-md shadow-md bg-white relative md:w-2/6">
+                 <div className="text-center text-6xl font-semibold flex justify-center items-center   ">
+                   <img className='w-20 text-center' alt='logo' src='/Images/logowithoutbg.png'/>
+                 </div>
+                 {error?(<h1 className='rounded-md p-4 bg-red-400 text-red-700 font-bold w-full text-center'>{serverMSG}</h1>):(<></>)}
+        <label className="block mb-1  font-semibold self-start">{t("YourName")}</label>
+        <input
+        className="focus:outline-none foucus:shadow-sm focus:border-[#f1b51f] p-4 border-solid  border rounded-md mb-4 w-full"
+        type="text"
+        name="username"
+        value={formData.username}
+        onChange={handleInputChange}
+        placeholder="Name"
+      />
+          <label className="block mb-1  font-semibold self-start">
                     {t("MobileNumberOrEmail")}
-                  </label>
-                  <Field
-                    type="text"
-                    className={
-                      touched.email
-                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left ${errors.email ? `${styles.invalid}` : `${styles.valid}`
-                        } `
-                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left"
-                    }
-                    name="email"
-                  /* placeholder="Your Name " */
-                  />
-                  {touched.email && errors.email && (
-                    <p className="text-red-700  text-xs">{errors.email}</p>
-                  )}
-                </div>
-                <div className="relative">
-                  <label className="block mb-1  font-semibold">
+         </label>
+      <input
+      className="focus:outline-none foucus:shadow-sm focus:border-[#f1b51f] p-4 border-solid  border rounded-md mb-4 w-full"
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleInputChange}
+        placeholder="Email"
+      />
+        <label className="block mb-1  font-semibold self-start">
                     {t("Password")}
                   </label>
-                  <Field
-                    type={showPassword ? 'text' : 'password'}
-                    className={
-                      touched.password
-                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left ${errors.password
-                          ? `${styles.invalid}`
-                          : `${styles.valid}`
-                        } `
-                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left"
-                    }
-                    name="password"
-                  /* placeholder="Your Name " */
-                  />
-                  <button
-                    type="button"
-                    onClick={handleToggleClick}
-                    className="absolute top-[63%] right-[10px] transform -translate-y-[50%] bg-transparent border-none cursor-pointer"
-
-                  >
-                    {showPassword ? <RiEyeLine /> : < RiEyeOffLine />}
-                  </button>
-                  {touched.password && errors.password && (
-                    <p className="text-red-700  text-xs">{errors.password}</p>
-                  )}
-                </div>
-                <div>
-                  <label className="block mb-1 font-semibold">
-                    {t("ReEnterPassword")}
+      <input
+      className="focus:outline-none foucus:shadow-sm focus:border-[#f1b51f] p-4 border-solid  border rounded-md mb-4 w-full"
+        type="password"
+        name="password"
+        value={formData.password}
+        onChange={handleInputChange}
+        placeholder="Password"
+      />
+        <label className="block mb-1  font-semibold self-start">
+                  rewrite password
                   </label>
-                  <Field
-                    type={showPassword ? 'text' : 'password'}
-                    className={
-                      touched.password2
-                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left ${errors.password2
-                          ? `${styles.invalid}`
-                          : `${styles.valid}`
-                        } `
-                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left"
-                    }
-                    name="password2"
-
-                  />
-
-                  {touched.password2 && errors.password2 && (
-                    <p className="text-red-700  text-xs">{errors.password2}</p>
-                  )}
-                </div>
-                <div>
-                  <label className="block mb-1 font-semibold ">{t("Role")}</label>
-                  <Field as="select" className="border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left" name="role">
-                    <option></option>
-
-                    <option value="company">{t("company")}</option>
-                    <option value="regular">{t("regular")}</option>
-                  </Field>
-                  {touched.role && errors.role && (
-                    <p className="text-red-700  text-xs">{errors.role}</p>
-                  )}
-                </div>
-                <label className="block mb-1  font-semibold">{t("Invite Code ")}</label>
-                <div>
-                  <Field
-                    type="number"
-                    className={
-                      touched.inviteCode
-                        ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left `
-                        : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#f1b51f] focus:shadow-md focus:outline-none text-left"
-                    }
-                    name="inviteCode"
-/*                  placeholder="Your Name " 
-*/              />
-                  {touched.inviteCode && errors.inviteCode && (
-                    <p className="text-red-700  text-xs">{errors.inviteCode}</p>
-                  )}
-                </div>
-              </div>
-              <button
-                type="submit"
+      <input
+      className="focus:outline-none foucus:shadow-sm focus:border-[#f1b51f] p-4 border-solid  border rounded-md mb-4 w-full"
+        type="password"
+        name="re_password"
+        value={formData.re_password}
+        onChange={handleInputChange}
+        placeholder="rewrite Password"
+      />
+      <label className="block mb-1  font-semibold self-start">{t("Invite Code ")}</label>
+      <input
+      className="focus:outline-none foucus:shadow-sm focus:border-[#f1b51f] p-4 border-solid  border rounded-md mb-4 w-full"
+        type="text"
+        name="inviteCode"
+        // value={formData.inviteCode}
+        // onChange={handleInputChange}
+        placeholder="Invite Code"
+      />
+   
+      <button
+         onClick={sendData}
                 className="mt-4 w-full bg-[#1c505e] border-gray-500 hover:bg-white text-[#f1b51f] hover:text-[#1c505e] hover:border-2 hover:border-[#1c505e]  font-semibold py-3 rounded-md  tracking-wide"
               >
                 {t("Continue")}
@@ -327,26 +179,10 @@ export default function SignUp() {
                   {t("ContinueWithFacebook")}
                 </span>
               </button>
-
-              <p className="my-2 text-center">
-                {t("AlreadyHaveAnAccount")}
-                <Link
-                  href="/signin"
-                  className="text-[#0000EE] hover:no-underline hover:text-[#c45500]"
-                >
-                  <a className='text-blue-700'>{t("signin")}</a>
-                </Link>
-              </p>
-            </Form>
-          </>)}
-        </>
-
-      )}
-
-
-
-
-
-    </Formik>
+            
+      </div>
+     
+    </div>
   );
+
 }

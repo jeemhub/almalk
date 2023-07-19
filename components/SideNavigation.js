@@ -14,13 +14,13 @@ export default function SideNavigation(props) {
     if (typeof window !== 'undefined') {
         document.querySelector("body").style.overflow = props.act?"hidden":"";
       } else {
-        console.log('You are on the server')
+         //console.log('You are on the server')
       }
       
       const router = useRouter()
 const [categories, setCategories] = useState([]);
 useEffect(() => {
-  fetch("https://app.almalk.org:3000/categories")
+  fetch("https://almalik-application.onrender.com/api/ads/ad-categories/")
       .then((response) => response.json())
       .then((data) => setCategories(data));
   }, []);
@@ -60,13 +60,13 @@ useEffect(() => {
 
         {categories.map((category) => (
           
-          <div className="flex flex-row mt-2" key={category._id}>
-          <Link key={category._id} href={{
+          <div className="flex flex-row mt-2" key={category.id}>
+          <Link key={category.id} href={{
             pathname: '/categorys/[cat]',
             query: { cat: `${category.name}` },
           }} className="flex flex-row">
         <div onClick={props.button} className="flex flex-row cursor-pointer"> 
-        <img src={category.image[0]} alt={category.name} className="w-10 h-10 object-contain bg-slate-200 rounded-lg" />
+        {/* <img src={category.image[0]} alt={category.name} className="w-10 h-10 object-contain bg-slate-200 rounded-lg" /> */}
         <div className="text-base cursor-pointer text-center ml-3 my-auto">{category.name}</div>
         </div>
         </Link>

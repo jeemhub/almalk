@@ -33,10 +33,10 @@ export default function ResetPassword() {
           if (data.message != null) {
             setLoading(false)
             setError(data.message);
-            console.log(data.message);
-            console.log("error", error);
+             //console.log(data.message);
+             //console.log("error", error);
           }
-          console.log("Success:", data);
+           //console.log("Success:", data);
           localStorage.setItem("email", JSON.stringify(email))
 
           router.push("/confirmresetpassword");

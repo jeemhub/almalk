@@ -1,4 +1,6 @@
 import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import profileimage from "../public/Images/profileimage.png";
 import Image from "next/image";
@@ -13,8 +15,10 @@ export default function Profile() {
   const router = useRouter();
   const { t, i18n } = useTranslation();
 
-  const token = Cookies.get("loggedin");
-  const [userdata, setuserdata] = useState();
+  const token = useSelector((state) => state.auth.token);
+  const userId = useSelector((state) => state.auth.userId);
+  const profile = useSelector((state) => state.auth.profile);
+  const [userdata, setuserdata] = useState({});
   const [file, setFile] = useState(null);
   const [loading, setloading] = useState(false);
  
@@ -35,15 +39,15 @@ export default function Profile() {
      const form = new FormData();
     form.append('picture', file);
     setFile(null)
-     const response = await fetch(`${process.env.API_URL}/user/picture`, {
-      method: 'POST',
-      headers: {
-        'x-access-token': JSON.parse(token),
-      },
-      body: form,
-    });
-    const data=await response.json();
-    console.log(data)
+    //  const response = await fetch(`${process.env.API_URL}/user/picture`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'x-access-token': JSON.parse(token),
+    //   },
+    //   body: form,
+    // });
+    // const data=await response.json();
+    //  //console.log(data)
     setloading(false)
     router.reload(window.location.pathname);
   };
@@ -85,32 +89,36 @@ export default function Profile() {
     
   }
   useEffect(() => {
+     //console.log(profile)
   
-    if (token) {
-      const getdata = async () => {
-        const res = await fetch("http://ap.almalk.org:3000/user", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "x-access-token": JSON.parse(token),
-          },
-        });
-        const data = await res.json();
-        setuserdata(data);
-        
-      };
-      getdata();
+    // if (token) {
+    //   const getdata = async () => {
+    //     const res = await fetch(`https://almalik-application.onrender.com/api/profiles/${userId}`, {
+    //       method: "GET",
+    //       credentials: 'include',
+    //     });
+    //     const data = await res.json();
+    //     setuserdata(data.data);
+    //      //console.log("response data : " )
+    //      //console.log(data.data)
+    //      //console.log("useState userdata : ")
+    //      //console.log(userdata)
+    //     const decodedToken = jwt.decode(Cookies.get("token"));
+    //      //console.log('decode token')
+    //      //console.log(decodedToken)
+    //   };
+    //   getdata();
       
-    } else {
-      router.push("/signin");
-    }
+    // } else {
+    //   router.push("/signin");
+    // }
 
-  }, [token]);
+  }, [profile]);
 
   return (
     <>
 
-      <div className="mx-auto max-w-md  sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
+      <div className="mx-auto max-w-md  sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl min-h-screen">
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-8 md:space-y-0 md:space-x-8 my-8">
           <div className="flex-shrink-0 relative ">
         {loading &&
@@ -157,39 +165,44 @@ export default function Profile() {
 
           {/* mobile */}
           <div className="flex-grow self-start pl-10 md:hidden">
-            <h1 className="text-3xl md:text-4xl font-bold">{userdata && userdata.name}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold">{profile && userdata.first_name}{profile && userdata.last_name}</h1>
+     
             <p className="text-gray-500 text-sm md:text-lg">
-              {userdata ? userdata.email : "email"}
+              {profile ? `Phone : ${profile.phone_number}` : ""}
             </p>
             <p className="text-gray-500 text-sm md:text-lg">
-              {userdata ? `Balance : ${userdata.balance}` : ""}
+              {profile ? `address : ${profile.address}` : ""}
             </p>
             <p className="text-gray-500 text-sm md:text-lg">
-              {userdata
-                ? `smallAdsRemaining : ${userdata.smallAdsRemaining}`
+              {profile ? `city : ${profile.city}` : ""}
+            </p>
+            <p className="text-gray-500 text-sm md:text-lg">
+              {profile
+                ? `store credit : ${profile.store_credit}`
                 : ""}
             </p>
-            <p className="text-gray-500 text-sm md:text-lg">
-              {userdata ? `role : ${userdata.role}` : ""}
-            </p>
+        
           </div>
           {/* pc */}
           <div className="flex-grow hidden md:block">
-            <h1 className="text-3xl md:text-4xl font-bold">{userdata && userdata.name}</h1>
+            <h1 className="text-3xl md:text-4xl font-bold m-4 ">{profile && profile.first_name + profile.last_name}</h1>
+            <div className='bg-white rounded h-auto w-auto shadow-xl p-4 m-4 '>
             <p className="text-gray-500 text-sm md:text-lg">
-              {userdata ? userdata.email : "email"}
+              {profile ? `Phone : ${profile.phone_number}` : ""}
             </p>
             <p className="text-gray-500 text-sm md:text-lg">
-              {userdata ? `Balance : ${userdata.balance}` : ""}
+              {profile ? `city : ${profile.city}` : ""}
             </p>
             <p className="text-gray-500 text-sm md:text-lg">
-              {userdata
-                ? `smallAdsRemaining : ${userdata.smallAdsRemaining}`
+              {profile ? `address : ${profile.address}` : ""}
+            </p>
+            <p className="text-gray-500 text-sm md:text-lg">
+              {profile
+                ? `store credit : ${profile.store_credit}`
                 : ""}
             </p>
-            <p className="text-gray-500 text-sm md:text-lg">
-              {userdata ? `role : ${userdata.role}` : ""}
-            </p>
+            </div>
+     
           </div>
         </div>
       </div>

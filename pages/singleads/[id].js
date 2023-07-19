@@ -21,7 +21,24 @@ export default (props) => {
             }
         }
     }
-    var slider=getById(router.query.id,props.Slider)
+    const [data, setData] = useState([]);
+
+ 
+    async function fetchData() {
+        try {
+          const response = await fetch(`https://almalik-application.onrender.com/api/ads/${router.query.id}`);
+          const jsonData = await response.json();
+          setData(jsonData);
+          const imageResponse = await fetch(
+            `https://almalik-application.onrender.com/api/ads/ad/images/${jsonData.id}`
+            );
+            const image = await imageResponse.json();
+            setImagespc(image)
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+    // var slider=getById(router.query.id,props.Slider)
     const { t, i18n } = useTranslation();
     const [images, setImages] = useState([])
     const [ownerName, setOwnerName] = useState(null)
@@ -29,35 +46,40 @@ export default (props) => {
     const [Imagespc, setImagespc] = useState([]);
 
     let options = { month: "long", day: "numeric", year: "numeric" };
+    // useEffect(() => {
+    //     fetchData();
+    //     setImages(slider.images);
+    //     const imagespc = slider.images.map((image) => ({
+    //         original: image,
+    //         thumbnail: image,
+    //     }));
+    //     setImagespc(imagespc);
+
+    //     fetch(`${process.env.API_URL}/user/profile/${slider.owner}`)
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error("Network response was not ok");
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(slider => {
+    //             if (slider.name) {
+    //                 setOwnerName(slider.name);
+    //             }
+    //             if (slider.picture) {
+    //                 setOwnerPicture(slider.picture);
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error("Error:", error);
+    //         });
+    // }, [slider.images]);
+
     useEffect(() => {
-        setImages(slider.images);
-        const imagespc = slider.images.map((image) => ({
-            original: image,
-            thumbnail: image,
-        }));
-        setImagespc(imagespc);
-
-        fetch(`${process.env.API_URL}/user/profile/${slider.owner}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then(slider => {
-                if (slider.name) {
-                    setOwnerName(slider.name);
-                }
-                if (slider.picture) {
-                    setOwnerPicture(slider.picture);
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
-    }, [slider.images]);
-
-
+      fetchData();
+      
+    }, []);
+  
     const [activeTab, setActiveTab] = useState(0);
 
     const handleTabClick = (index) => {
@@ -69,7 +91,7 @@ export default (props) => {
         return (
             <div className="image-gallery-image w-full h-[528px]">
                 <img
-                    src={item.original}
+                    src='/Images/1.webp'
                     alt={"images"}
                     className="object-contain w-full h-full"
                 />
@@ -101,16 +123,7 @@ export default (props) => {
         <div className="bg-[#e5e7eb] tablet:bg-white">
             <Head>
                 <title>Almalek</title>
-                <meta
-                    name="description"
-                    content={router.query.title}
-                    key="desc"
-                />
-                <meta
-                    name="description"
-                    content={router.query.details}
-                    key="desc2"
-                />
+     
             </Head>
             {/* <Header /> */}
             {/* banner ads */}
@@ -126,7 +139,7 @@ export default (props) => {
 
 
 
-                        {slider.details}
+                        {data.details}
 
                     </h1>
                 </div>
@@ -153,14 +166,14 @@ export default (props) => {
 
                         <div className='w-[50%] mobile:mt-3 mobile:w-[95%] mobile:mx-auto flex-col'>
                             <div>
-                                <h1 className='text-lg font-bold text-[#039] mb-2'>{slider.title}</h1>
+                                <h1 className='text-lg font-bold text-[#039] mb-2'>{data.title}</h1>
                             </div>
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                                 <div className='font-medium text-sm  w-[50%]'>
                                     item ID
                                 </div>
                                 <div className='text-red-500 w-[50%]'>
-                                    {slider.itemNumber}
+                                    {data.number}
                                 </div>
                             </div>
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
@@ -168,7 +181,7 @@ export default (props) => {
                                     Price
                                 </div>
                                 <div className='text-red-500 w-[50%]'>
-                                    {slider.price}  {slider.currency}
+                                    {data.price}  {data.currency}
                                 </div>
                             </div>
                             <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
@@ -176,7 +189,7 @@ export default (props) => {
                                     Location
                                 </div>
                                 <div className='text-slate-800 text-xs w-[50%]'>
-                                    {slider.location}
+                                    {data.location ?  data.location : <h1>No location</h1>}
 
                                 </div>
                             </div>
@@ -186,7 +199,7 @@ export default (props) => {
                                     published time
                                 </div>
                                 <div className='text-slate-800 text-xs w-[50%]'>
-                                    {new Date(slider.createdAt).toLocaleDateString("en-US", options)}
+                                    {new Date(data.created_at).toLocaleDateString("en-US", options)}
 
                                 </div>
                             </div>
@@ -198,7 +211,7 @@ export default (props) => {
                                     Type
                                 </div>
                                 <div className='text-slate-800 text-xs w-[50%]'>
-                                    {slider.type}
+                                    {data.type}
 
                                 </div>
                             </div>
@@ -208,14 +221,14 @@ export default (props) => {
                                     Status
                                 </div>
                                 <div className='text-slate-800 text-xs w-[50%]'>
-                                    {slider.status}
+                                    {data.item_status}
 
                                 </div>
                             </div>
 
-                            {slider.requiredFields && (
+                            {data.requiredFields && (
                                 <>
-                                    {slider.requiredFields.map((field) => {
+                                    {data.requiredFields.map((field) => {
                                         return (
                                             <>
                                                 {field.fieldValue ? (
@@ -247,6 +260,7 @@ export default (props) => {
                             <div className='w-[100%]  h-fit  border-[1px] p-2'>
                                 <div className="bg-[#efefef] w-full h-full justify-center items-center p-3 flex-col">
                                     <div className='flex justify-between items-center pb-[9px] border-solid border-b-[2px] border-[#ccc]'>
+                                        
                                         {ownerPicture ? (
                                             <>
                                                 <img src={`https://codellab.s3.amazonaws.com/${ownerPicture}`} className='w-[108] h-[40px] flex-2' alt={ownerPicture} />
@@ -265,7 +279,7 @@ export default (props) => {
                                         <h4 className='border-solid border-r-[1px] border-[#ccc] text-xs text-[#039] mr-2 pr-2' onClick={() => (router.push({
                                             pathname: `/useritems/[cat]`,
                                             query: {
-                                                cat: slider.owner,
+                                                cat: data.owner,
                                             }
                                         }))}><a href='#'>All Ads</a></h4>
 
@@ -273,7 +287,7 @@ export default (props) => {
                                     </div>
                                     <div className='bg-[#fff] rounded-md shadow-sm border-[1px] flex-col border-solid border-[c0c0c0] p-2 mt-2'>
                                         <div className='mb-1 flex'>
-                                            <span className='font-bold'>Phone Number</span> <span className='ml-8 text-sm '>{slider.phone}</span>
+                                            <span className='font-bold'>Phone Number</span> <span className='ml-8 text-sm '>{data.phone}</span>
                                         </div>
                                         {/* <div className='mb-1 flex'>
                                             <span className='font-bold'>Work</span> <span className='ml-10 text-sm '>0 (541) 131 23 53</span>
@@ -326,7 +340,7 @@ export default (props) => {
                     {/* title */}
                     <div className="ml-2 flex">
                         <div className="my-auto mx-auto text-left font-medium text-lg">
-                            {slider.details}
+                            {data.details}
                             {/* {router.query.title} */}
                         </div>
                     </div>
@@ -338,20 +352,23 @@ export default (props) => {
                         </div>
                         <div className="h-full mt-3">
                             <Carousel className="z-35" responsive={responsive}>
-                                {images.map((image, index) => (
+                                {/* {images.map((image, index) => ( */}
                                     <div
-                                        className=" w-full  h-[350px]    "
-                                        key={index}
+                                        className=" w-full  h-full bg-red-600"
+                                        // key={index}
                                     >
-                                        <Image
-                                            src={image}
+                                        
+                                        <img
+                                            src='https://images.unsplash.com/photo-1515463138280-67d1dcbf317f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNwbGFzaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60'
                                             layout="fill"
                                             objectFit="contain"
                                             objectPosition="center"
-                                            alt={image}
-                                        ></Image>
+                                            alt='....'
+                                            width={200}
+                                            height={200}
+                                        ></img>
                                     </div>
-                                ))}
+                                {/* ))} */}
                             </Carousel>
                         </div>
                     </div>
@@ -365,14 +382,14 @@ export default (props) => {
                     {/* Product Imfo */}
                     <div className='w-[50%] mobile:mt-3 mobile:w-[95%] mobile:mx-auto flex-col'>
                         <div>
-                            <h1 className='text-lg font-bold text-[#039] mb-2'>{slider.title}</h1>
+                            <h1 className='text-lg font-bold text-[#039] mb-2'>{data.title}</h1>
                         </div>
                         <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
                             <div className='font-medium text-sm  w-[50%]'>
                                 Price
                             </div>
                             <div className='text-red-500 w-[50%]'>
-                                {slider.price}  {slider.currency}
+                                {data.price}  {data.currency}
                             </div>
                         </div>
                         <div className='flex justify-between py-1 border-dotted border-b-[1px]'>
@@ -380,7 +397,7 @@ export default (props) => {
                                 Location
                             </div>
                             <div className='text-slate-800 text-xs w-[50%]'>
-                                {slider.location}
+                                {data.location}
 
                             </div>
                         </div>
@@ -389,7 +406,7 @@ export default (props) => {
                                 published time
                             </div>
                             <div className='text-slate-800 text-xs w-[50%]'>
-                                {new Date(slider.createdAt).toLocaleDateString("en-US", options)}
+                                {new Date(data.createdAt).toLocaleDateString("en-US", options)}
 
 
                             </div>
@@ -402,7 +419,7 @@ export default (props) => {
                                 Type
                             </div>
                             <div className='text-slate-800 text-xs w-[50%]'>
-                                {slider.type}
+                                {data.type}
 
                             </div>
                         </div>
@@ -412,7 +429,7 @@ export default (props) => {
                                 Status
                             </div>
                             <div className='text-slate-800 text-xs w-[50%]'>
-                                {slider.status}
+                                {data.status}
 
                             </div>
                         </div>
@@ -420,9 +437,9 @@ export default (props) => {
 
 
 
-                        {slider.requiredFields && (
+                        {data.requiredFields && (
                             <>
-                                {slider.requiredFields.map((field) => {
+                                {data.requiredFields.map((field) => {
                                     return (
                                         <>
                                             {field.fieldValue ? (<>
@@ -458,7 +475,6 @@ export default (props) => {
                                     {ownerPicture ? (
                                         <>
                                             <img src={`https://codellab.s3.amazonaws.com/${ownerPicture}`} className='w-[108] h-[40px] flex-2' />
-
                                         </>
                                     ) : (
                                         <>
@@ -466,22 +482,18 @@ export default (props) => {
                                         </>
                                     )}
                                     <a href='#' className='text-[#00339f] flex-1 ml-4'>{ownerName}</a>
-
                                 </div>
-
                                 <div className='flex mt-2'>
                                     <h4 className='border-solid border-r-[1px] border-[#ccc] text-xs text-[#039] mr-2 pr-2' onClick={() => (router.push({
                                         pathname: `/useritems/[cat]`,
                                         query: {
-                                            cat: slider.owner,
+                                            cat: data.owner,
                                         }
                                     }))}><a href='#'>All Ads</a></h4>
-
-
                                 </div>
                                 <div className='bg-[#fff] rounded-md shadow-sm border-[1px] flex-col border-solid border-[c0c0c0] p-2 mt-2'>
                                     <div className='mb-1 flex'>
-                                        <span className='font-bold'>Phone Number</span> <span className='ml-8 text-sm '>{slider.phone}</span>
+                                        <span className='font-bold'>Phone Number</span> <span className='ml-8 text-sm '>{data.phone}</span>
                                     </div>
                                     {/* <div className='mb-1 flex'>
                                         <span className='font-bold'>Work</span> <span className='ml-10 text-sm '>0 (541) 131 23 53</span>
@@ -490,7 +502,7 @@ export default (props) => {
                                 <h3 className='text-center text-xs mt-2  text-[#039]'><a href='#'>Send Message</a></h3>
                             </div>
                         </div>
-
+    
                         <div className='w-[100%] h-fit  border-[1px] p-2 mt-2'>
                             <div className="bg-[#dfdede] w-full h-full justify-center items-center p-3 flex-col">
                                 <div className='flex justify-between items-center pb-[9px] border-solid border-b-[2px] border-[#ccc]'>
@@ -539,8 +551,8 @@ export default (props) => {
 
                         </div>
                         <div className='bg-white py-5 mt-5 mobile:mt-0 pl-5 mobile:px-2 border-[1px] solid border-t-0 w-ful '>
-                            <h1 className='text-center text-xl'>
-                                {slider.details}
+                            <h1 className='text-start text-xl'>
+                                {data.description}
                             </h1>
 
                             {/* <h1 className='text-center text-red-500'>
@@ -565,14 +577,14 @@ export default (props) => {
         </div>
     );
 }
-    export async function getServerSideProps(context) {
+// export async function getServerSideProps(context) {
        
-        const resSlider=await fetch(`${process.env.API_URL}/diamond-ads`);
-        const itemsSlider=await resSlider.json();
-       
-      return {
-        props: {
-          Slider:itemsSlider.diamondAds,
-        }, // will be passed to the page component as props
-      }
-    }
+//     const resSlider=await fetch(`https://almalik.onrender.com/api/ad`);
+//     const itemsSlider=await resSlider.json();
+   
+//   return {
+//     props: {
+//       Slider:itemsSlider.data.ads,
+//     }, // will be passed to the page component as props
+//   }
+// }

@@ -12,7 +12,7 @@ const ItemList = ({}) => {
   const router = useRouter();
   const ids = router.query.id;
   // const cat = router.query.cat
-console.log('ids :',ids)
+ //console.log('ids :',ids)
 useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
@@ -21,9 +21,9 @@ useEffect(() => {
       // setItems(response.data);
       const res=await fetch(`http://ap.almalk.org:3000/items/category/${ids}/${page}`);
       const data=await res.json()
-      console.log('data :',data)
+       //console.log('data :',data)
       setItems(data);
-      console.log('items :',items)
+       //console.log('items :',items)
     }
     // if (cat) {
     //   const get_user = await axios.get(`${process.env.API_URL}/items/user/63f66fdcdbeb74a1c13c8e1a`)

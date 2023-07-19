@@ -19,12 +19,12 @@ const Footer = () => {
 					<h3 className="mb-6 text-sm font-semibold text-zinc-300 uppercase dark:text-white">Resources</h3>
 					<ul className='text-zinc-300'>
 						<li className="mb-4">
-							<Link href="#2" target="_blank"
-								className="text-gray-600 hover:underline dark:text-gray-400">Flowbite</Link>
+							<Link href="/footer/aboutUs" target="_blank"
+								className="text-gray-600 hover:underline dark:text-gray-400">معلومات عنا</Link>
 						</li>
 						<li>
-							<Link href="#3" target="_blank" rel="nofollow"
-								className="text-gray-600 hover:underline dark:text-gray-400">Tailwind CSS</Link>
+							<Link href="/footer/accountSuspension" target="_blank" rel="nofollow"
+								className="text-gray-600 hover:underline dark:text-gray-400">تعليق الحسابات</Link>
 						</li>
 					</ul>
 				</div>
@@ -32,12 +32,13 @@ const Footer = () => {
 					<h3 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h3>
 					<ul className='text-zinc-300'>
 						<li className="mb-4">
-							<Link href="#2" target="_blank"
-								className="text-gray-600 hover:underline dark:text-gray-400">Flowbite</Link>
+							<Link href="/footer/contentPolicy" target="_blank"
+								className="text-gray-600 hover:underline dark:text-gray-400"> سياسة محتوى</Link>
 						</li>
 						<li>
-							<Link href="#3" target="_blank" rel="nofollow"
-								className="text-gray-600 hover:underline dark:text-gray-400">Tailwind CSS</Link>
+							<Link href="/footer/personalDataProtection" target="_blank" rel="nofollow"
+								className="text-gray-600 hover:underline dark:text-gray-400">حماية البيانات الشخصية          
+								</Link>
 						</li>
 					</ul>
 				</div>
@@ -45,12 +46,12 @@ const Footer = () => {
 					<h3 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h3>
 					<ul className='text-zinc-300'>
 						<li className="mb-4">
-							<Link href="#2" target="_blank"
-								className="text-zinc-300 hover:underline dark:text-zinc-300">Flowbite</Link>
+							<Link href="/footer/publicationRules" target="_blank"
+								className="text-zinc-300 hover:underline dark:text-zinc-300">قواعد الاعلان</Link>
 						</li>
 						<li>
-							<Link href="#3" target="_blank" rel="nofollow"
-								className="text-gray-600 hover:underline dark:text-gray-400">Tailwind CSS</Link>
+							<Link href="/footer/termsOfUse" target="_blank" rel="nofollow"
+								className="text-gray-600 hover:underline dark:text-gray-400">شروط الاستخدام</Link>
 						</li>
 					</ul>
 				</div>
@@ -59,11 +60,11 @@ const Footer = () => {
 					<ul className='text-zinc-300'>
 						<li className="mb-4">
 							<Link href="#4" target="_blank"
-								className="text-gray-600 hover:underline dark:text-gray-400">Github</Link>
+								className="text-gray-600 hover:underline dark:text-gray-400">instagram</Link>
 						</li>
 						<li>
 							<Link href="#5" target="_blank"
-								className="text-gray-600 hover:underline dark:text-gray-400">Discord</Link>
+								className="text-gray-600 hover:underline dark:text-gray-400">facebook</Link>
 						</li>
 					</ul>
 				</div>

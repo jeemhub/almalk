@@ -1,26 +1,18 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Header from "../../components/Header";
-import { useTranslation } from 'react-i18next';
-import Singleads from '../../components/Singleads';
+import { useState, useEffect } from 'react';
+import Singleads from '../components/Singleads';
 
-// eslint-disable-next-line import/no-anonymous-default-export, react/display-name
-export default () => {
-  const router=useRouter()
-  var text = router.query.text;
-  const [ads, setAds] = useState('');
-  
+const AdsPage = () => {
+  const [ads, setAds] = useState([]);
+
   useEffect(() => {
     const fetchAds = async () => {
       try {
         const response = await fetch(
-          `https://almalik-application.onrender.com/api/ads/search/?term=${text}`
+          'https://almalik-application.onrender.com/api/ads/search/?term=Laptop'
         );
         const data = await response.json();
-         //console.log(data);
-      
-          const adsWithImages = await Promise.all(
-            data.result.map(async (ad) => {
+        const adsWithImages = await Promise.all(
+          data.result.map(async (ad) => {
             const imageResponse = await fetch(
               `https://almalik-application.onrender.com/api/ads/ad/images/${ad.id}`
             );
@@ -28,10 +20,7 @@ export default () => {
             return { ad, imageUrl: image[0]?.url || null };
           })
         );
-      
-
         setAds(adsWithImages);
-         //console.log('ads')
          //console.log(ads)
       } catch (error) {
         console.error('Error fetching ads:', error);
@@ -40,12 +29,11 @@ export default () => {
 
     fetchAds();
   
-  }, [text]);
+  }, []);
 
   return (
-    <div className='w-full'>
-    
-    {ads != ''?
+    <div>
+      <h1>Ads</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6">
       {ads.map(({ ad, imageUrl }) => (
         // <div key={ad.id}>
@@ -64,17 +52,8 @@ export default () => {
       />
       ))}
       </div>
-    :<div className='w-full h-screen flex items-center justify-center font-bold text-4xl'> <h1>No Ads</h1></div>}
     </div>
   );
 };
-// export const getServerSideProps = async (context) => {
-//   const text = context.query.text;
-//   const res = await fetch(`http://almalk.org:3000/search/${text}`);
-//   const data = await res.json();
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
+
+export default AdsPage;

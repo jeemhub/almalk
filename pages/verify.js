@@ -21,23 +21,23 @@ const Verify = () => {
     }else {
       
       setLoading(true)
-      fetch(`${process.env.API_URL}/verify`, {
+      fetch(`https://almalik.onrender.com/api/auth/user/signup/email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: JSON.parse(localStorage.getItem("email")),
+          id: JSON.parse(localStorage.getItem("id")),
           otp: parseInt(otp, 10),
         }),
       })
         .then((response) => {
-        console.log(response.status);
+         //console.log(response.status);
         
         if(response.status==200){
           router.push('/signin');
           localStorage.removeItem('name');
-          localStorage.removeItem('email');
+          localStorage.removeItem('id');
           localStorage.removeItem('role');
           localStorage.removeItem('inviteCode');
         }
@@ -49,8 +49,8 @@ const Verify = () => {
               setLoading(false)
             
               setError(data.message);
-              console.log(data.message);
-              console.log("error", error);
+               //console.log(data.message);
+               //console.log("error", error);
             }
           }
           setLoading(false)
